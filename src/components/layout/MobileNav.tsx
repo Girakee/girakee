@@ -1,68 +1,12 @@
-import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { mainNav, megaMenus } from '../../data/navigation'
 import { useNav } from '../../context/NavContext'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import HamburgerButton from './HamburgerButton'
 import GirakeeLogo from '../ui/GirakeeLogo'
-
-const primaryLinks = mainNav.filter((item) => !item.mega)
-
-function AccordionSection({
-  title,
-  items,
-}: {
-  title: string
-  items: { label: string; path: string }[]
-}) {
-  const [open, setOpen] = useState(false)
-  const location = useLocation()
-
-  return (
-    <div className="border-b border-white/[0.06]">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-4 text-left touch-manipulation min-h-[52px]"
-        aria-expanded={open}
-      >
-        <span className="text-sm font-medium text-white/90">{title}</span>
-        <ChevronDown
-          size={16}
-          strokeWidth={1.5}
-          className={`text-white/30 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="pb-3 space-y-0">
-              {items.map((item) => (
-                <Link
-                  key={item.path + item.label}
-                  to={item.path}
-                  className={`block py-2.5 px-1 text-sm transition-colors ${
-                    location.pathname === item.path ? 'text-white' : 'text-white/45 hover:text-white/80'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
-}
+import { company } from '../../data/company'
 
 export default function MobileNav() {
   const { mobileOpen, setMobileOpen } = useNav()
@@ -101,14 +45,48 @@ export default function MobileNav() {
             <nav className="flex-1 overflow-y-auto overscroll-contain px-5 py-5">
               <p className="eyebrow eyebrow-dark mb-4 text-[0.625rem]">Menu</p>
 
-              <div className="mb-2">
-                {primaryLinks.map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={shouldAnimate ? { opacity: 0, x: 12 } : false}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: reduced ? 0 : i * 0.03 }}
-                  >
+              {mainNav.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={shouldAnimate ? { opacity: 0, x: 12 } : false}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: reduced ? 0 : i * 0.03 }}
+                >
+                  {item.mega ? (
+                    <div className="py-4 border-b border-white/[0.06]">
+                      <p className="text-left text-sm font-bold text-white mb-3">{item.label}</p>
+                      {megaMenus[item.mega].groups ? (
+                        megaMenus[item.mega].groups!.map((group) => (
+                          <div key={group.title} className="mb-4 last:mb-0">
+                            <p className="text-left text-xs font-bold text-white/80 mb-1.5">{group.title}</p>
+                            {group.items.map((link) => (
+                              <Link
+                                key={link.path + link.label}
+                                to={link.path}
+                                className={`block py-2 text-sm ${
+                                  location.pathname === link.path ? 'text-white' : 'text-white/45 hover:text-white/80'
+                                }`}
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        ))
+                      ) : (
+                        (megaMenus[item.mega].items ?? []).map((link) => (
+                          <Link
+                            key={link.path + link.label}
+                            to={link.path}
+                            className={`block py-2 text-sm ${
+                              location.pathname === link.path ? 'text-white' : 'text-white/45 hover:text-white/80'
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        ))
+                      )}
+                    </div>
+                  ) : (
                     <Link
                       to={item.path}
                       className={`flex items-center justify-between py-3.5 border-b border-white/[0.06] min-h-[48px] ${
@@ -118,37 +96,21 @@ export default function MobileNav() {
                       <span className="text-sm font-medium">{item.label}</span>
                       <ArrowRight size={13} strokeWidth={1.5} className="opacity-25" />
                     </Link>
-                  </motion.div>
-                ))}
-              </div>
-
-              <p className="eyebrow eyebrow-dark mt-5 mb-2 text-[0.625rem]">Solutions</p>
-              {megaMenus.solutions.groups?.map((group) => {
-                const nested = group.items.filter((item) => item.children?.length)
-                const flat = group.items.filter((item) => !item.children?.length)
-                return (
-                  <div key={group.title}>
-                    <AccordionSection title={group.title} items={flat} />
-                    {nested.map((item) => (
-                      <AccordionSection
-                        key={item.path}
-                        title={item.label}
-                        items={[{ label: 'Overview', path: item.path }, ...(item.children ?? [])]}
-                      />
-                    ))}
-                  </div>
-                )
-              })}
-              <p className="eyebrow eyebrow-dark mt-5 mb-2 text-[0.625rem]">Products</p>
-              <AccordionSection title="Products" items={megaMenus.products.items ?? []} />
+                  )}
+                </motion.div>
+              ))}
             </nav>
 
-            <div className="shrink-0 p-5 border-t border-white/[0.06] safe-bottom">
-              <Link
-                to="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="btn-primary w-full"
+            <div className="shrink-0 p-5 border-t border-white/[0.06] safe-bottom space-y-2">
+              <a
+                href={company.meetingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary w-full"
               >
+                Schedule a meeting
+              </a>
+              <Link to="/contact" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
                 Talk to an Expert
                 <ArrowRight size={15} strokeWidth={1.75} />
               </Link>

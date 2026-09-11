@@ -19,21 +19,20 @@ interface ServiceLandingPageProps {
 
 const relatedMap: Record<string, string[]> = {
   'web-mobile': ['ui-ux', 'cloud-devops', 'software-testing'],
-  'ai-ml': ['computer-vision', 'data-analytics', 'intelligent-qa'],
-  'computer-vision': ['ai-ml', 'intelligent-qa', 'software-testing'],
+  'ai-ml': ['intelligent-qa', 'data-analytics', 'software-testing'],
   'cloud-devops': ['cybersecurity', 'web-mobile', 'data-analytics'],
   'cybersecurity': ['cloud-devops', 'software-testing', 'ai-ml'],
   'ui-ux': ['web-mobile', 'software-testing', 'data-analytics'],
   'software-testing': ['intelligent-qa', 'web-mobile', 'cybersecurity'],
-  'intelligent-qa': ['computer-vision', 'software-testing', 'ai-ml'],
+  'intelligent-qa': ['software-testing', 'ai-ml', 'data-analytics'],
   'data-analytics': ['ai-ml', 'cloud-devops', 'web-mobile'],
   'staff-augmentation': ['dedicated-teams', 'contract-to-hire', 'it-recruitment'],
   'dedicated-teams': ['staff-augmentation', 'contract-to-hire', 'web-mobile'],
   'contract-to-hire': ['staff-augmentation', 'it-recruitment', 'dedicated-teams'],
   'it-recruitment': ['staff-augmentation', 'contract-to-hire', 'dedicated-teams'],
-  internship: ['corporate-training', 'technical-bootcamps', 'staff-augmentation'],
-  'corporate-training': ['internship', 'technical-bootcamps', 'dedicated-teams'],
-  'technical-bootcamps': ['internship', 'corporate-training', 'staff-augmentation'],
+  internship: ['corporate-training', 'on-job-training', 'staff-augmentation'],
+  'corporate-training': ['internship', 'on-job-training', 'dedicated-teams'],
+  'on-job-training': ['internship', 'corporate-training', 'staff-augmentation'],
 }
 
 export function getServiceById(id: string): Service | undefined {

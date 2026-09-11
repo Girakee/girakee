@@ -11,21 +11,21 @@ const pillars = [
     title: 'Software Services',
     path: '/services',
     description:
-      'Product engineering, AI, computer vision, cloud, security, design, QA, and data platforms built for production.',
+      'Product engineering, AI, cloud, security, design, QA, and data platforms built for production.',
     items: softwareServices,
   },
   {
     title: 'Manpower Solutions',
     path: '/manpower-solutions',
     description:
-      'Staff augmentation, dedicated teams, contract-to-hire, IT recruitment, and engagement models from Bengaluru.',
+      'Recruitment, contract to hire, managed services, and time and material from Bengaluru.',
     items: manpowerServices,
   },
   {
     title: 'Training & Internships',
     path: '/training',
     description:
-      'Six-month OJT internships, corporate workshops, technical bootcamps, and careers with Girakee.',
+      'Internship, corporate training, and on job training with Girakee engineers.',
     items: trainingServices,
   },
 ]
@@ -34,12 +34,12 @@ export default function SolutionsPage() {
   return (
     <>
       <SEO
-        title="Solutions"
-        description="Girakee solutions: software services, manpower solutions, and training and internships from Bengaluru."
+        title="Services"
+        description="Girakee services: software services, manpower solutions, and training and internships from Bengaluru."
         path="/solutions"
       />
       <PageHero
-        label="Solutions"
+        label="Services"
         title="Software. Manpower. Training."
         subtitle="Three practices under one delivery company. Pick a line, then a sub-service with defined work and an owner in Bengaluru."
         scene="orbit"
@@ -61,27 +61,6 @@ export default function SolutionsPage() {
                         </Link>
                       </li>
                     ))}
-                    {pillar.path === '/services' && (
-                      <li>
-                        <Link to="/products/digital-employees" className="text-sm text-white/55 hover:text-cyan transition-colors">
-                          AI Digital Employee
-                        </Link>
-                      </li>
-                    )}
-                    {pillar.path === '/training' && (
-                      <li>
-                        <Link to="/careers" className="text-sm text-white/55 hover:text-cyan transition-colors">
-                          Careers
-                        </Link>
-                      </li>
-                    )}
-                    {pillar.path === '/manpower-solutions' && (
-                      <li>
-                        <Link to="/engagement-models" className="text-sm text-white/55 hover:text-cyan transition-colors">
-                          Engagement Models
-                        </Link>
-                      </li>
-                    )}
                   </ul>
                   <Link to={pillar.path} className="inline-flex items-center gap-2 text-sm text-cyan">
                     Open {pillar.title}

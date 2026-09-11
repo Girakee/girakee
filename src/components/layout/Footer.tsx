@@ -6,10 +6,9 @@ import { company, offices } from '../../data/company'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const footerColumns = {
-  Solutions: [
-    { label: 'Solutions Overview', path: '/solutions' },
+  Services: [
+    { label: 'Services Overview', path: '/solutions' },
     { label: 'Software Services', path: '/services' },
-    { label: 'AI Digital Employee', path: '/products/digital-employees' },
     { label: 'Manpower Solutions', path: '/manpower-solutions' },
     { label: 'Training & Internships', path: '/training' },
   ],

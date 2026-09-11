@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { useNav } from '../../context/NavContext'
+import { company } from '../../data/company'
 
 const HIDDEN_ROUTES = ['/contact']
 
@@ -23,11 +24,19 @@ export default function FloatingCTA() {
           transition={transition({ duration: 0.25 })}
           className="fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t border-white/[0.08] bg-navy-deep/95 backdrop-blur-md"
         >
-          <div className="page-px py-3 safe-bottom">
+          <div className="page-px py-3 safe-bottom flex flex-col gap-2">
             <Link to="/contact" className="btn-primary w-full" aria-label="Talk to an Expert">
               Talk to an Expert
               <ArrowRight size={15} strokeWidth={1.75} />
             </Link>
+            <a
+              href={company.meetingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary w-full"
+            >
+              Schedule a meeting
+            </a>
           </div>
         </motion.div>
       )}

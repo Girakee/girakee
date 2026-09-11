@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import { services } from '../../data/services'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
+import { company } from '../../data/company'
 
 interface FormData {
   name: string
@@ -141,9 +142,19 @@ export default function ContactForm() {
         <textarea id="message" required rows={5} value={form.message} onChange={(e) => update('message', e.target.value)} className={`${inputClass('message')} resize-none min-h-[120px]`} aria-invalid={!!errors.message} />
         {errors.message && <p className="text-red-500 text-xs mt-1" role="alert">{errors.message}</p>}
       </div>
-      <button type="submit" className="btn-primary w-full touch-manipulation">
-        Start a Conversation
-      </button>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <button type="submit" className="btn-primary w-full touch-manipulation">
+          Start a Conversation
+        </button>
+        <a
+          href={company.meetingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-secondary w-full touch-manipulation"
+        >
+          Request a meeting
+        </a>
+      </div>
     </form>
   )
 }

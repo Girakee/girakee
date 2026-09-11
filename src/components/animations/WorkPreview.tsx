@@ -434,7 +434,6 @@ function WorkshopPreview() {
 const PREVIEWS: Record<string, () => ReactElement> = {
   'web-mobile': WebPreview,
   'ai-ml': AiPreview,
-  'computer-vision': VisionPreview,
   'cloud-devops': CloudPreview,
   cybersecurity: SecurityPreview,
   'ui-ux': DesignPreview,
@@ -447,7 +446,7 @@ const PREVIEWS: Record<string, () => ReactElement> = {
   'it-recruitment': TalentPreview,
   internship: TrainingPreview,
   'corporate-training': WorkshopPreview,
-  'technical-bootcamps': TrainingPreview,
+  'on-job-training': TrainingPreview,
 }
 
 export default function WorkPreview({ serviceId }: { serviceId: string }) {

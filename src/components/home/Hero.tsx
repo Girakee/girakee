@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import HeroVisualization from './HeroVisualization'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
+import { company } from '../../data/company'
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -60,12 +61,22 @@ export default function Hero() {
 
             <motion.div {...reveal(0.45)} className="flex flex-col sm:flex-row gap-3 mb-10 lg:mb-14">
               {!isMobile && (
-                <Link to="/contact" className="btn-primary">
-                  Talk to an Expert
-                  <ArrowRight size={15} strokeWidth={1.75} />
-                </Link>
+                <>
+                  <Link to="/contact" className="btn-primary">
+                    Talk to an Expert
+                    <ArrowRight size={15} strokeWidth={1.75} />
+                  </Link>
+                  <a
+                    href={company.meetingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full sm:w-auto"
+                  >
+                    Schedule a meeting
+                  </a>
+                </>
               )}
-              <Link to="/services" className="btn-secondary w-full sm:w-auto">
+              <Link to="/solutions" className="btn-secondary w-full sm:w-auto">
                 Explore Services
                 <ArrowRight size={15} strokeWidth={1.75} className="opacity-50" />
               </Link>

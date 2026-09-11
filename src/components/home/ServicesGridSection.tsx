@@ -17,7 +17,7 @@ const pillars = [
     label: '02',
     title: 'Manpower Solutions',
     description:
-      'Staff augmentation, dedicated teams, contract-to-hire, and IT recruitment from Bengaluru.',
+      'Recruitment, contract to hire, managed services, and time and material from Bengaluru.',
     path: '/manpower-solutions',
     items: manpowerServices,
   },
@@ -25,7 +25,7 @@ const pillars = [
     label: '03',
     title: 'Training & Internships',
     description:
-      'Six-month OJT internships, corporate workshops, and technical bootcamps on live work.',
+      'Internship, corporate training, and on job training on live work.',
     path: '/training',
     items: trainingServices,
   },

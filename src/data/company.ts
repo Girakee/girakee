@@ -7,6 +7,8 @@ export const company = {
   phone: '+91-9731848149',
   phoneTel: '+919731848149',
   website: 'https://www.girakee.com',
+  meetingUrl:
+    'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meeting%20with%20Girakee&details=Request%20a%20meeting%20with%20Girakee%20Software%20Services.&add=connect@girakee.com',
 }
 
 export const heroMessaging = {

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import TextReveal from '../animations/TextReveal'
 import SlideUp from '../animations/SlideUp'
+import { company } from '../../data/company'
 
 export default function FinalCTASection() {
   return (
@@ -22,10 +23,20 @@ export default function FinalCTASection() {
         </SlideUp>
 
         <SlideUp delay={0.18}>
-          <Link to="/contact" className="btn-primary w-full sm:w-auto">
-            Start a Conversation
-            <ArrowRight size={15} strokeWidth={1.75} />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link to="/contact" className="btn-primary w-full sm:w-auto">
+              Start a Conversation
+              <ArrowRight size={15} strokeWidth={1.75} />
+            </Link>
+            <a
+              href={company.meetingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary w-full sm:w-auto"
+            >
+              Request a meeting
+            </a>
+          </div>
         </SlideUp>
       </div>
     </section>

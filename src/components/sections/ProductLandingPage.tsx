@@ -11,7 +11,7 @@ import { getProductById, products } from '../../data/products'
 
 const previewMap: Record<string, string> = {
   'drawing-validation': 'intelligent-qa',
-  'visual-inspection': 'computer-vision',
+  'visual-inspection': 'intelligent-qa',
   'document-intelligence': 'data-analytics',
   'process-automation': 'ai-ml',
   'quality-engine': 'software-testing',

@@ -13,11 +13,11 @@ export default function ServicesPage() {
   return (
     <CategoryLandingPage
       seoTitle="Software Services"
-      seoDescription="Web and mobile apps, AI and ML, computer vision, cloud, cybersecurity, UI/UX, QA, and data analytics from Girakee."
+      seoDescription="Web and mobile apps, AI and ML, cloud, cybersecurity, UI/UX, QA, intelligent QA, and data analytics from Girakee."
       path="/services"
       label="Software Services"
       title="Engineering Software That Powers Business"
-      subtitle="Nine software capabilities delivered by practitioners who build production systems in Bengaluru for clients worldwide."
+      subtitle="Eight software capabilities delivered by practitioners who build production systems in Bengaluru for clients worldwide."
       scene="orbit"
       introTitle="A Software Company Built for Production"
       intro={[
@@ -27,9 +27,6 @@ export default function ServicesPage() {
       methodology={methodology}
       services={softwareServices}
       showPromise
-      extraTitle="AI Digital Employee"
-      extraIntro="AI Digital Employees for every major industry sit in Software Services. Open the hub, then an industry page."
-      extraLinks={[{ label: 'AI Digital Employee', path: '/products/digital-employees' }]}
     />
   )
 }

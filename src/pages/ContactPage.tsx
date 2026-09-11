@@ -48,6 +48,21 @@ export default function ContactPage() {
                 </a>
               </div>
 
+              <div className="p-5 holographic-panel mb-8 max-w-md">
+                <h2 className="text-sm font-semibold text-white mb-2">Schedule a meeting</h2>
+                <p className="text-xs text-white/45 leading-relaxed mb-4">
+                  Prefer a calendar slot? Request a meeting and we will confirm a time with you.
+                </p>
+                <a
+                  href={company.meetingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan font-medium hover:text-cyan-bright transition-colors"
+                >
+                  Request a meeting
+                </a>
+              </div>
+
               <div className="space-y-5 sm:space-y-6">
                 <a href="mailto:connect@girakee.com" className="flex items-center gap-4 group touch-manipulation">
                   <div className="p-3 border border-white/[0.08] group-hover:border-cyan/30 transition-colors shrink-0">

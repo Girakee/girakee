@@ -48,9 +48,9 @@ export default function ProductsPage() {
             </span>
           </Link>
           <p className="mt-8 text-sm text-white/40">
-            Looking for industry Digital Employees?{' '}
-            <Link to="/products/digital-employees" className="text-cyan hover:text-white transition-colors">
-              AI Digital Employee is in Software Services
+            Need software, manpower, or training?{' '}
+            <Link to="/solutions" className="text-cyan hover:text-white transition-colors">
+              Open Services
             </Link>
             .
           </p>

@@ -7,6 +7,7 @@ import HamburgerButton from './HamburgerButton'
 import MobileNav from './MobileNav'
 import MagneticButton from '../ui/MagneticButton'
 import GirakeeLogo from '../ui/GirakeeLogo'
+import { company } from '../../data/company'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { useNav } from '../../context/NavContext'
 
@@ -107,7 +108,15 @@ export default function Navbar() {
             })}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href={company.meetingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-[0.75rem] font-medium tracking-wide transition-colors duration-200 ${mutedColor}`}
+            >
+              Schedule a meeting
+            </a>
             <MagneticButton to="/contact">Talk to an Expert</MagneticButton>
           </div>
 
