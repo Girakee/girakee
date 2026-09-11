@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 
 const PERSONAS = [
-  { id: 'talent', label: 'Talent', role: 'Global Teams', x: 11, color: '#a855f7', path: '/talent-outsourcing' },
+  { id: 'talent', label: 'Talent', role: 'Global Teams', x: 11, color: '#a855f7', path: '/manpower-solutions' },
   { id: 'coder', label: 'Engineer', role: 'Web & Mobile', x: 26, color: '#08AFC7', path: '/web-mobile-development' },
   { id: 'designer', label: 'Designer', role: 'UI / UX', x: 50, color: '#16C6DA', path: '/ui-ux-design' },
   { id: 'scientist', label: 'Scientist', role: 'AI & ML', x: 70, color: '#3b82f6', path: '/ai-engineering' },

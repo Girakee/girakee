@@ -394,18 +394,18 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
 }
 
 export default function PremiumScene({ scene, size = 'page', className = '' }: PremiumSceneProps) {
-  const { shouldLoop, isMobile } = useMotionConfig()
+  const { shouldAnimate, isMobile } = useMotionConfig()
 
   if (scene === 'hero') return null
 
   const Scene = SCENE_MAP[scene] ?? OrbitScene
-  const loop = shouldLoop
+  const loop = shouldAnimate
 
   return (
     <SceneWrapper size={size} className={className}>
       <div className={`absolute inset-0 grid-bg ${isMobile ? 'opacity-35' : 'opacity-50'}`} />
       <Scene loop={loop} />
-      {loop && !isMobile && (
+      {loop && (
         <>
           <motion.div
             className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent"

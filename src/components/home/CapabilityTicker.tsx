@@ -7,7 +7,9 @@ const capabilities = [
   'UI/UX Design',
   'Software Testing',
   'Data Analytics',
-  'Talent Outsourcing',
+  'Staff Augmentation',
+  'Dedicated Teams',
+  'Internship & OJT',
   'Corporate Training',
 ]
 

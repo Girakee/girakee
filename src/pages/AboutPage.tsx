@@ -4,12 +4,14 @@ import TextReveal from '../components/animations/TextReveal'
 import SlideUp from '../components/animations/SlideUp'
 import { StaggerChildren, StaggerItem } from '../components/animations/StaggerChildren'
 import FinalCTASection from '../components/home/FinalCTASection'
+import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 
 const timeline = [
-  { year: 'Foundation', title: 'Bengaluru Roots', description: 'Founded in Rajajinagar, Bengaluru — the heart of India\'s technology ecosystem.' },
+  { year: 'Foundation', title: 'Bengaluru Roots', description: 'Founded in Rajajinagar, Bengaluru, the heart of India\'s technology ecosystem.' },
   { year: 'Mission', title: 'Digital India', description: 'Passionate about accelerating the Digital India mission with world-class engineering.' },
   { year: 'Growth', title: 'Global Reach', description: 'Expanding delivery to clients across the US, UK, Middle East, and European Union.' },
-  { year: 'Today', title: 'AI-First Engineering', description: 'Building production AI systems — computer vision, intelligent QA, and automation.' },
+  { year: 'Today', title: 'AI-First Engineering', description: 'Building production AI systems: computer vision, intelligent QA, and automation.' },
 ]
 
 const philosophy = [
@@ -19,12 +21,30 @@ const philosophy = [
   { title: 'Continuous Learning', description: 'Our team stays at the frontier of AI, cloud, and software engineering.' },
 ]
 
+const practices = [
+  {
+    title: 'Software Services',
+    description: 'Web and mobile products, AI, computer vision, cloud, security, design, QA, and data platforms.',
+    path: '/services',
+  },
+  {
+    title: 'Manpower Solutions',
+    description: 'Staff augmentation, dedicated teams, contract-to-hire, and IT recruitment from Bengaluru.',
+    path: '/manpower-solutions',
+  },
+  {
+    title: 'Training & Internships',
+    description: 'Six-month OJT internships, corporate workshops, and bootcamps on live industry projects.',
+    path: '/training',
+  },
+]
+
 export default function AboutPage() {
   return (
     <>
       <SEO
         title="About Us"
-        description="Girakee Software Services — Global Excellence, Indian Innovation. Bengaluru-based AI engineering company with global delivery."
+        description="Girakee Software Services. Global Excellence, Indian Innovation. Bengaluru-based AI engineering company with global delivery."
         path="/about"
       />
       <PageHero
@@ -56,7 +76,7 @@ export default function AboutPage() {
                   Engineering the Future with AI
                 </p>
                 <p className="text-white/50 leading-relaxed">
-                  To deliver jaw-dropping quality at unbeatable prices — building integrated
+                  To deliver jaw-dropping quality at unbeatable prices, building integrated
                   AI, cloud, and security solutions that drive intelligent efficiency and
                   protect your assets.
                 </p>
@@ -107,13 +127,36 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-navy-dark section-py page-px">
+        <div className="max-w-7xl mx-auto">
+          <TextReveal text="What We Do" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-10 sm:mb-16" />
+          <StaggerChildren className="grid md:grid-cols-3 gap-6">
+            {practices.map((item) => (
+              <StaggerItem key={item.title}>
+                <Link
+                  to={item.path}
+                  className="group block p-8 border border-white/10 hover:border-cyan/30 transition-colors h-full holographic-panel"
+                >
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors">{item.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed mb-6">{item.description}</p>
+                  <span className="inline-flex items-center gap-2 text-sm text-cyan">
+                    Explore
+                    <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+        </div>
+      </section>
+
+      <section className="bg-navy-deep section-py page-px">
         <div className="max-w-4xl mx-auto text-center">
           <TextReveal text="Why Girakee" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-6 sm:mb-8" />
           <SlideUp>
             <p className="text-white/55 leading-relaxed text-lg">
               We combine top-tier Indian engineering talent with a deep commitment to
               delivering services that are not just high-quality, but remarkably affordable.
-              From AI engineering to cloud infrastructure — we are your long-term technology
+              From AI engineering to cloud infrastructure, we are your long-term technology
               partner, not just a vendor.
             </p>
           </SlideUp>

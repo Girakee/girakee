@@ -11,7 +11,7 @@ export const AMBER = '#f59e0b'
 export const RED = '#ef4444'
 
 export function HudFrame({ children, label, status }: { children: ReactNode; label: string; status?: string }) {
-  const { shouldAnimate, shouldLoop } = useMotionConfig()
+  const { shouldAnimate } = useMotionConfig()
   return (
     <div className="relative w-full h-full bg-[#050d18] overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40" />
@@ -29,13 +29,6 @@ export function HudFrame({ children, label, status }: { children: ReactNode; lab
           </motion.span>
         )}
       </div>
-      {shouldLoop && shouldAnimate && (
-        <motion.div
-          className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan/80 to-transparent z-20 shadow-[0_0_14px_rgba(8,175,199,0.5)]"
-          animate={{ top: ['10%', '90%', '10%'] }}
-          transition={{ repeat: Infinity, duration: 4.5, ease: 'linear' }}
-        />
-      )}
       <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
         <defs>
           <filter id="ls-glow">

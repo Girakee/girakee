@@ -51,10 +51,11 @@ export default function Hero() {
 
             <motion.p
               {...reveal(0.35)}
-              className="text-body text-body-dark max-w-md mb-8 sm:mb-10"
+              className="text-body text-body-dark max-w-lg mb-8 sm:mb-10"
             >
-              Production AI systems, intelligent automation, cloud infrastructure,
-              and custom software — engineered in Bengaluru, delivered worldwide.
+              Bengaluru engineers who ship web and mobile products, production AI,
+              cloud platforms, and the teams behind them. Software services, manpower
+              solutions, and training, delivered to clients in the US, UK, EU, and Middle East.
             </motion.p>
 
             <motion.div {...reveal(0.45)} className="flex flex-col sm:flex-row gap-3 mb-10 lg:mb-14">

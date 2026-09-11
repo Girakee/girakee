@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
@@ -12,9 +13,19 @@ interface PageHeroProps {
   subtitle?: string
   scene?: SceneType
   showScene?: boolean
+  sceneContent?: ReactNode
+  showScan?: boolean
 }
 
-export default function PageHero({ label, title, subtitle, scene, showScene = true }: PageHeroProps) {
+export default function PageHero({
+  label,
+  title,
+  subtitle,
+  scene,
+  showScene = true,
+  sceneContent,
+  showScan = true,
+}: PageHeroProps) {
   const location = useLocation()
   const { reduced, shouldAnimate, transition } = useMotionConfig()
   const activeScene = scene ?? getSceneForRoute(location.pathname)
@@ -49,26 +60,33 @@ export default function PageHero({ label, title, subtitle, scene, showScene = tr
           </div>
 
           {showScene && (
-            <motion.div
-              {...reveal(0.18)}
-              className="relative min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] border border-cyan/25 overflow-hidden holographic-panel shadow-[0_0_80px_rgba(8,175,199,0.1)]"
-            >
-              <span className="absolute top-3 left-3 w-5 h-5 border-t border-l border-cyan/50 z-20" />
-              <span className="absolute top-3 right-3 w-5 h-5 border-t border-r border-cyan/50 z-20" />
-              <span className="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-cyan/50 z-20" />
-              <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-cyan/50 z-20" />
+            <motion.div {...reveal(0.18)}>
+              <motion.div
+                className="relative min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] border border-cyan/25 overflow-hidden holographic-panel shadow-[0_0_80px_rgba(8,175,199,0.1)]"
+                animate={shouldAnimate ? { y: [0, -10, 0, 8, 0] } : undefined}
+                transition={shouldAnimate ? { repeat: Infinity, duration: 9, ease: 'easeInOut' } : undefined}
+              >
+                <span className="absolute top-3 left-3 w-5 h-5 border-t border-l border-cyan/50 z-20" />
+                <span className="absolute top-3 right-3 w-5 h-5 border-t border-r border-cyan/50 z-20" />
+                <span className="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-cyan/50 z-20" />
+                <span className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-cyan/50 z-20" />
 
-              <HeroPageScene scene={activeScene} className="absolute inset-0 h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px]" />
+                <div className="absolute inset-0 h-full min-h-[240px] sm:min-h-[280px] lg:min-h-[320px]">
+                  {sceneContent ?? <HeroPageScene scene={activeScene} className="w-full h-full" />}
+                </div>
 
-              {shouldAnimate && (
-                <motion.div
-                  className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan/70 to-transparent z-20 pointer-events-none shadow-[0_0_12px_rgba(8,175,199,0.5)]"
-                  animate={{ top: ['8%', '92%', '8%'] }}
-                  transition={{ repeat: Infinity, duration: 4.5, ease: 'linear' }}
-                />
-              )}
+                {shouldAnimate && showScan && !sceneContent && (
+                  <motion.div
+                    className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan/70 to-transparent z-20 pointer-events-none shadow-[0_0_12px_rgba(8,175,199,0.5)]"
+                    animate={{ top: ['8%', '92%', '8%'] }}
+                    transition={{ repeat: Infinity, duration: 4.5, ease: 'linear' }}
+                  />
+                )}
 
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050d18] to-transparent pointer-events-none z-10" />
+                {!sceneContent && (
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050d18] to-transparent pointer-events-none z-10" />
+                )}
+              </motion.div>
             </motion.div>
           )}
         </div>

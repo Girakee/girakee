@@ -29,7 +29,7 @@ export default function InternshipPromoSection() {
               {internshipMessaging.registerLabel}
               <ArrowRight size={15} strokeWidth={1.75} />
             </Link>
-            <Link to="/training" className="btn-secondary inline-flex">
+            <Link to="/internship" className="btn-secondary inline-flex">
               {internshipMessaging.knowMoreLabel}
               <ArrowRight size={15} strokeWidth={1.75} className="opacity-50" />
             </Link>

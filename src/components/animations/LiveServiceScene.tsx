@@ -42,12 +42,12 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
 }
 
 export default function LiveServiceScene({ scene, className = '', compact = false }: LiveServiceSceneProps) {
-  const { shouldLoop } = useMotionConfig()
+  const { shouldAnimate } = useMotionConfig()
   const Scene = SCENE_MAP[scene] ?? RobotScene
 
   return (
     <div className={`relative overflow-hidden ${compact ? 'aspect-[16/10]' : 'aspect-[16/10] md:aspect-[2/1]'} ${className}`}>
-      <Scene loop={shouldLoop} />
+      <Scene loop={shouldAnimate} />
     </div>
   )
 }

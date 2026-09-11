@@ -17,7 +17,7 @@ export default function TechnologyPage() {
     <>
       <SEO
         title="Technology"
-        description="Full-stack technology ecosystem — 100+ languages, frameworks, and tools across AI, cloud, data, security, mobile, and DevOps."
+        description="Full-stack technology ecosystem. 100+ languages, frameworks, and tools across AI, cloud, data, security, mobile, and DevOps."
         path="/technology"
       />
       <PageHero

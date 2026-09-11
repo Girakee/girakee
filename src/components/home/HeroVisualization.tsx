@@ -203,15 +203,31 @@ export default function HeroVisualization({ scrollYProgress }: HeroVisualization
 
         {/* Nodes */}
         {NODES.map((node, i) => (
-          <g key={node.id}>
+          <motion.g
+            key={node.id}
+            animate={
+              shouldLoop
+                ? {
+                    x: [0, i % 2 === 0 ? 5 : -4, 0],
+                    y: [0, i % 3 === 0 ? -7 : 5, 0],
+                  }
+                : undefined
+            }
+            transition={{
+              repeat: Infinity,
+              duration: 6 + node.layer * 1.4,
+              delay: i * 0.18,
+              ease: 'easeInOut',
+            }}
+          >
             <motion.circle
               cx={node.x} cy={node.y} r={node.r * 4}
               fill="url(#node-glow)"
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: shouldLoop ? [0.3, 0.55, 0.3] : 0.4, scale: 1 }}
+              animate={{ opacity: shouldLoop ? [0.25, 0.55, 0.25] : 0.4, scale: 1 }}
               transition={{
-                opacity: shouldLoop ? { repeat: Infinity, duration: 3 + node.layer, delay: i * 0.1 } : { duration: 0 },
-                scale: { delay: shouldAnimate ? 1.2 + i * 0.06 : 0, duration: 0.5 },
+                opacity: shouldLoop ? { repeat: Infinity, duration: 3.5 + node.layer, delay: i * 0.1 } : { duration: 0 },
+                scale: { delay: shouldAnimate ? 0.8 + i * 0.05 : 0, duration: 0.5 },
               }}
             />
             <motion.circle
@@ -220,16 +236,10 @@ export default function HeroVisualization({ scrollYProgress }: HeroVisualization
               filter="url(#glow)"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.2 + i * 0.06, duration: 0.4 }}
+              transition={{ delay: 0.8 + i * 0.05, duration: 0.4 }}
             />
-            <motion.circle
-              cx={node.x} cy={node.y} r={1.5}
-              fill="#fff"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.8 }}
-              transition={{ delay: 1.4 + i * 0.06 }}
-            />
-          </g>
+            <circle cx={node.x} cy={node.y} r={1.5} fill="#fff" opacity="0.8" />
+          </motion.g>
         ))}
 
         {/* Particles */}
@@ -274,15 +284,6 @@ export default function HeroVisualization({ scrollYProgress }: HeroVisualization
           </motion.text>
         ))}
       </motion.svg>
-
-      {/* Scan line */}
-      {shouldLoop && (
-        <motion.div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan/40 to-transparent"
-          animate={{ top: ['20%', '80%', '20%'] }}
-          transition={{ repeat: Infinity, duration: 6, ease: 'linear' }}
-        />
-      )}
 
       {/* Vignette overlays */}
       <div className={`absolute inset-0 bg-gradient-to-r from-navy-deep ${isMobile ? 'via-navy-deep/90' : 'via-navy-deep/60'} to-transparent`} />

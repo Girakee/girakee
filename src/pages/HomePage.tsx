@@ -8,7 +8,7 @@ import AIEngineeringSection from '../components/home/AIEngineeringSection'
 import DrawingValidationSection from '../components/home/DrawingValidationSection'
 import HowAIWorksSection from '../components/home/HowAIWorksSection'
 import RobotAutomationSection from '../components/home/RobotAutomationSection'
-import ServicesGridSection from '../components/home/ServicesGridSection'
+import ServiceShowcaseSection from '../components/home/ServiceShowcaseSection'
 import WhyGirakeeSection from '../components/home/WhyGirakeeSection'
 import TechnologyEcosystemSection from '../components/home/TechnologyEcosystemSection'
 import EngagementSection from '../components/home/EngagementSection'
@@ -22,7 +22,7 @@ export default function HomePage() {
     <>
       <SEO
         title="Digital Transformation & Custom Software"
-        description="Girakee Software Services — Build With Quality & Love. Web/mobile apps, AI automation, cloud solutions, and cyber security from Bengaluru. Global delivery."
+        description="Girakee Software Services. Build With Quality & Love. Web/mobile apps, AI automation, cloud solutions, and cyber security from Bengaluru. Global delivery."
         path="/"
       />
       <Hero />
@@ -30,11 +30,11 @@ export default function HomePage() {
       <DigitalTransformationSection />
       <IntroSection />
       <CompanyPromiseSection />
+      <ServiceShowcaseSection />
       <AIEngineeringSection />
       <DrawingValidationSection />
       <HowAIWorksSection />
       <RobotAutomationSection />
-      <ServicesGridSection />
       <WhyGirakeeSection />
       <TechnologyEcosystemSection />
       <EngagementSection />

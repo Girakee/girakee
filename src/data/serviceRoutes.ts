@@ -70,17 +70,59 @@ export const serviceRoutes: ServiceRoute[] = [
       'Data pipelines, warehousing, dashboards, and business intelligence platforms from Girakee.',
   },
   {
-    path: '/talent-outsourcing',
-    serviceId: 'talent-outsourcing',
-    seoTitle: 'Talent Outsourcing',
+    path: '/staff-augmentation',
+    serviceId: 'staff-augmentation',
+    seoTitle: 'Staff Augmentation',
     seoDescription:
-      'Vetted engineers, dedicated teams, and flexible staff augmentation from Girakee Bengaluru.',
+      'Pre-vetted engineers who join your squads. Full-stack, AI, cloud, QA, and data talent from Girakee Bengaluru.',
+  },
+  {
+    path: '/dedicated-teams',
+    serviceId: 'dedicated-teams',
+    seoTitle: 'Dedicated Engineering Teams',
+    seoDescription:
+      'Cross-functional delivery pods that own a product or workstream for your roadmap, from Girakee.',
+  },
+  {
+    path: '/contract-to-hire',
+    serviceId: 'contract-to-hire',
+    seoTitle: 'Contract-to-Hire',
+    seoDescription:
+      'Evaluate engineers on live work before you hire. Contract first, convert when the fit is proven.',
+  },
+  {
+    path: '/it-recruitment',
+    serviceId: 'it-recruitment',
+    seoTitle: 'IT Recruitment',
+    seoDescription:
+      'Engineer-led permanent hiring for software, AI, cloud, and QA roles from Girakee.',
+  },
+  {
+    path: '/internship',
+    serviceId: 'internship',
+    seoTitle: 'Internship & On-the-Job Training',
+    seoDescription:
+      'Six-month internship on live industry projects with an experience letter from Girakee.',
+  },
+  {
+    path: '/corporate-training',
+    serviceId: 'corporate-training',
+    seoTitle: 'Corporate Training',
+    seoDescription:
+      'Practitioner-led workshops for engineering teams, customised to your stack, from Girakee.',
+  },
+  {
+    path: '/technical-bootcamps',
+    serviceId: 'technical-bootcamps',
+    seoTitle: 'Technical Bootcamps',
+    seoDescription:
+      'Intensive AI, full-stack, cloud, and computer vision bootcamps that end with a working project.',
   },
 ]
 
 export function getServicePath(serviceId: string): string {
   const route = serviceRoutes.find((r) => r.serviceId === serviceId)
   if (route) return route.path
-  if (serviceId === 'corporate-training') return '/training'
+  if (serviceId === 'talent-outsourcing') return '/staff-augmentation'
   return '/services'
 }

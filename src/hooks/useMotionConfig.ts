@@ -20,7 +20,7 @@ export function useMotionConfig() {
     shouldParallax: !reduced && !isMobile,
     shouldFloat: !reduced && !isMobile,
     shouldMagnetic: !reduced && !isMobile && !isCoarsePointer,
-    shouldLoop: !reduced && !isMobile,
+    shouldLoop: !reduced,
     viewport: VIEWPORT_DEFAULT,
     viewportTight: VIEWPORT_TIGHT,
     transition: (overrides?: Parameters<typeof transition>[1]) => transition(reduced, overrides),

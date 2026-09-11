@@ -58,7 +58,7 @@ export default function ContactForm() {
     }
     console.info('Contact form submission:', payload)
 
-    const subject = encodeURIComponent(`Inquiry from ${form.name}${form.company ? ` — ${form.company}` : ''}`)
+    const subject = encodeURIComponent(`Inquiry from ${form.name}${form.company ? ` (${form.company})` : ''}`)
     const body = encodeURIComponent(
       `Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`,
     )

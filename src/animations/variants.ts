@@ -10,12 +10,12 @@ export const fadeIn: Variants = {
 }
 
 export const slideUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: t },
 }
 
 export const slideUpSubtle: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 22 },
   visible: { opacity: 1, y: 0, transition: tSubtle },
 }
 
@@ -52,13 +52,18 @@ export const staggerContainer = (staggerChildren = 0.08, delayChildren = 0.05): 
 })
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: tSubtle },
 }
 
 export const pageEnter: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: DURATION.fast, ease: EASE_OUT } },
+  hidden: { opacity: 0, y: 28, scale: 0.992 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.65, ease: EASE_OUT },
+  },
 }
 
 export const overlayExit: Variants = {

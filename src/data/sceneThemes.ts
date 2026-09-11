@@ -27,12 +27,23 @@ export const routeScenes: Record<string, SceneType> = {
   '/software-testing': 'pipeline',
   '/intelligent-qa': 'qa-validation',
   '/data-analytics': 'data',
+  '/manpower-solutions': 'talent',
+  '/staff-augmentation': 'talent',
+  '/dedicated-teams': 'talent',
+  '/contract-to-hire': 'talent',
+  '/it-recruitment': 'talent',
   '/talent-outsourcing': 'talent',
-  '/solutions': 'network',
+  '/solutions': 'orbit',
+  '/products': 'vision',
+  '/products/digital-employees': 'neural',
+  '/products/rozgar-ai': 'talent',
   '/industries': 'orbit',
   '/technology': 'orbit',
   '/engagement-models': 'talent',
   '/training': 'terminal',
+  '/internship': 'terminal',
+  '/corporate-training': 'terminal',
+  '/technical-bootcamps': 'terminal',
   '/careers': 'network',
   '/contact': 'network',
 }
@@ -47,11 +58,17 @@ export const serviceScenes: Record<string, SceneType> = {
   'software-testing': 'pipeline',
   'intelligent-qa': 'qa-validation',
   'data-analytics': 'data',
-  'talent-outsourcing': 'talent',
+  'staff-augmentation': 'talent',
+  'dedicated-teams': 'talent',
+  'contract-to-hire': 'talent',
+  'it-recruitment': 'talent',
+  'internship': 'terminal',
   'corporate-training': 'terminal',
+  'technical-bootcamps': 'terminal',
 }
 
 export function getSceneForRoute(path: string): SceneType {
+  if (path.startsWith('/products/digital-employees')) return 'neural'
   return routeScenes[path] ?? 'orbit'
 }
 

@@ -27,8 +27,13 @@ const relatedMap: Record<string, string[]> = {
   'software-testing': ['intelligent-qa', 'web-mobile', 'cybersecurity'],
   'intelligent-qa': ['computer-vision', 'software-testing', 'ai-ml'],
   'data-analytics': ['ai-ml', 'cloud-devops', 'web-mobile'],
-  'talent-outsourcing': ['web-mobile', 'ai-ml', 'cloud-devops'],
-  'corporate-training': ['web-mobile', 'ai-ml', 'cloud-devops'],
+  'staff-augmentation': ['dedicated-teams', 'contract-to-hire', 'it-recruitment'],
+  'dedicated-teams': ['staff-augmentation', 'contract-to-hire', 'web-mobile'],
+  'contract-to-hire': ['staff-augmentation', 'it-recruitment', 'dedicated-teams'],
+  'it-recruitment': ['staff-augmentation', 'contract-to-hire', 'dedicated-teams'],
+  internship: ['corporate-training', 'technical-bootcamps', 'staff-augmentation'],
+  'corporate-training': ['internship', 'technical-bootcamps', 'dedicated-teams'],
+  'technical-bootcamps': ['internship', 'corporate-training', 'staff-augmentation'],
 }
 
 export function getServiceById(id: string): Service | undefined {
@@ -155,7 +160,7 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
               How We Engage
             </h2>
             <p className="text-sm text-white/45 max-w-2xl mb-10 leading-relaxed">
-              Every {service.shortTitle.toLowerCase()} engagement follows a structured delivery model —
+              Every {service.shortTitle.toLowerCase()} engagement follows a structured delivery model,
               from discovery through production handover. We work in agile sprints with transparent
               reporting, documented deliverables, and direct access to senior engineers in Bengaluru.
             </p>
@@ -208,10 +213,27 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
       <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
         <div className="max-w-[90rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="text-sm text-white/40">
-            Part of Girakee&apos;s full software engineering portfolio
+            {service.category === 'manpower'
+              ? 'Part of Girakee manpower solutions'
+              : service.category === 'training'
+                ? 'Part of Girakee training and internships'
+                : 'Part of Girakee software services'}
           </p>
-          <Link to="/services" className="btn-secondary inline-flex">
-            All Services
+          <Link
+            to={
+              service.category === 'manpower'
+                ? '/manpower-solutions'
+                : service.category === 'training'
+                  ? '/training'
+                  : '/services'
+            }
+            className="btn-secondary inline-flex"
+          >
+            {service.category === 'manpower'
+              ? 'All Manpower Solutions'
+              : service.category === 'training'
+                ? 'All Training Programs'
+                : 'All Software Services'}
             <ArrowRight size={15} strokeWidth={1.75} />
           </Link>
         </div>

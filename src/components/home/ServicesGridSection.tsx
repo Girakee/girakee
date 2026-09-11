@@ -1,81 +1,79 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { services } from '../../data/services'
 import EditorialHeading from './shared/EditorialHeading'
 import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren'
-import { getSceneForService } from '../../data/sceneThemes'
+import { softwareServices, manpowerServices, trainingServices } from '../../data/services'
 
-const sceneLabels: Record<string, string> = {
-  neural: 'AI / ML',
-  vision: 'Vision',
-  cloud: 'Cloud',
-  shield: 'Security',
-  data: 'Data',
-  devices: 'Web / Mobile',
-  wireframe: 'UI / UX',
-  pipeline: 'QA',
-  terminal: 'Training',
-  orbit: 'Tech',
-  network: 'Global',
-  talent: 'Talent',
-}
+const pillars = [
+  {
+    label: '01',
+    title: 'Software Services',
+    description:
+      'Product engineering, AI, cloud, security, design, quality, and data platforms built for production.',
+    path: '/services',
+    items: softwareServices,
+  },
+  {
+    label: '02',
+    title: 'Manpower Solutions',
+    description:
+      'Staff augmentation, dedicated teams, contract-to-hire, and IT recruitment from Bengaluru.',
+    path: '/manpower-solutions',
+    items: manpowerServices,
+  },
+  {
+    label: '03',
+    title: 'Training & Internships',
+    description:
+      'Six-month OJT internships, corporate workshops, and technical bootcamps on live work.',
+    path: '/training',
+    items: trainingServices,
+  },
+]
 
 export default function ServicesGridSection() {
   return (
     <section className="section-py bg-navy-dark page-px relative overflow-hidden">
       <div className="max-w-[90rem] mx-auto">
         <EditorialHeading
-          label="Full Service Portfolio"
-          title="Software Engineering Across the Stack"
-          subtitle="Every capability includes defined deliverables, a documented process, and production-grade engineering."
+          label="What We Offer"
+          title="Three Practices. Complete Delivery."
+          subtitle="Software, manpower, and training, each with defined sub-services, deliverables, and a documented way of working."
           dark
         />
 
-        <StaggerChildren className="divide-y divide-white/[0.06]">
-          {services.map((service, i) => {
-            const scene = getSceneForService(service.id)
-            return (
-              <StaggerItem key={service.id}>
-                <Link
-                  to={service.path}
-                  className="group flex items-start gap-5 py-7 md:py-8 touch-manipulation"
-                >
-                  <span className="text-xs font-mono text-cyan/30 w-8 shrink-0 pt-1">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <h3 className="text-base md:text-lg font-semibold text-white group-hover:text-cyan transition-colors">
-                        {service.title}
-                      </h3>
-                      <span className="hidden sm:inline text-[10px] font-mono text-cyan/40 border border-cyan/20 px-2 py-0.5">
-                        {sceneLabels[scene] ?? 'Tech'}
-                      </span>
-                    </div>
-                    <p className="text-sm text-body-dark leading-relaxed mb-2">
-                      {service.description}
-                    </p>
-                    <p className="text-xs text-white/30 line-clamp-2 md:line-clamp-none">
-                      {service.deliverables.slice(0, 3).join(' · ')}
-                    </p>
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    strokeWidth={1.5}
-                    className="text-white/20 group-hover:text-cyan shrink-0 transition-colors mt-1"
-                  />
+        <StaggerChildren className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+          {pillars.map((pillar) => (
+            <StaggerItem key={pillar.title}>
+              <div className="h-full holographic-panel p-6 md:p-8 flex flex-col">
+                <span className="text-xs font-mono text-cyan/50 mb-4">{pillar.label}</span>
+                <h3 className="text-xl font-semibold text-white mb-3">{pillar.title}</h3>
+                <p className="text-sm text-body-dark leading-relaxed mb-6">{pillar.description}</p>
+                <ul className="space-y-2 mb-8 flex-1">
+                  {pillar.items.map((service) => (
+                    <li key={service.id}>
+                      <Link
+                        to={service.path}
+                        className="group flex items-center justify-between gap-3 py-1.5 text-sm text-white/55 hover:text-cyan transition-colors"
+                      >
+                        <span>{service.shortTitle}</span>
+                        <ArrowUpRight
+                          size={13}
+                          strokeWidth={1.5}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link to={pillar.path} className="inline-flex items-center gap-2 text-sm text-cyan hover:text-cyan-bright">
+                  View {pillar.title}
+                  <ArrowUpRight size={14} strokeWidth={1.5} />
                 </Link>
-              </StaggerItem>
-            )
-          })}
+              </div>
+            </StaggerItem>
+          ))}
         </StaggerChildren>
-
-        <div className="mt-10">
-          <Link to="/services" className="btn-secondary">
-            View Full Service Details
-            <ArrowUpRight size={15} strokeWidth={1.5} />
-          </Link>
-        </div>
       </div>
     </section>
   )

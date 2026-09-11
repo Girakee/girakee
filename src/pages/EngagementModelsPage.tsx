@@ -17,7 +17,7 @@ export default function EngagementModelsPage() {
     <>
       <SEO
         title="Engagement Models"
-        description="Flexible partnership structures — Managed Services, Time & Material, Contract-to-Hire, and Corporate Training."
+        description="Flexible partnership structures. Managed Services, Time & Material, Contract-to-Hire, and Corporate Training."
         path="/engagement-models"
       />
       <PageHero

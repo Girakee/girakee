@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
-import { mainNav, servicesMenu, companyMenu } from '../../data/navigation'
+import { mainNav, megaMenus } from '../../data/navigation'
 import { useNav } from '../../context/NavContext'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import HamburgerButton from './HamburgerButton'
@@ -122,8 +122,25 @@ export default function MobileNav() {
                 ))}
               </div>
 
-              <AccordionSection title="Services" items={servicesMenu} />
-              <AccordionSection title="Company" items={companyMenu} />
+              <p className="eyebrow eyebrow-dark mt-5 mb-2 text-[0.625rem]">Solutions</p>
+              {megaMenus.solutions.groups?.map((group) => {
+                const nested = group.items.filter((item) => item.children?.length)
+                const flat = group.items.filter((item) => !item.children?.length)
+                return (
+                  <div key={group.title}>
+                    <AccordionSection title={group.title} items={flat} />
+                    {nested.map((item) => (
+                      <AccordionSection
+                        key={item.path}
+                        title={item.label}
+                        items={[{ label: 'Overview', path: item.path }, ...(item.children ?? [])]}
+                      />
+                    ))}
+                  </div>
+                )
+              })}
+              <p className="eyebrow eyebrow-dark mt-5 mb-2 text-[0.625rem]">Products</p>
+              <AccordionSection title="Products" items={megaMenus.products.items ?? []} />
             </nav>
 
             <div className="shrink-0 p-5 border-t border-white/[0.06] safe-bottom">

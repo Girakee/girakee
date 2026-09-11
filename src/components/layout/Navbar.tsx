@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { mainNav, servicesMenu, companyMenu } from '../../data/navigation'
+import { mainNav, megaMenus, megaContainsPath } from '../../data/navigation'
 import MegaMenu from './MegaMenu'
 import HamburgerButton from './HamburgerButton'
 import MobileNav from './MobileNav'
@@ -64,8 +64,13 @@ export default function Navbar() {
             </motion.div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-1">
-            {mainNav.map((item) => (
+          <div className="hidden lg:flex items-center gap-0.5">
+            {mainNav.map((item) => {
+              const childActive = Boolean(
+                item.mega && megaContainsPath(megaMenus[item.mega], location.pathname),
+              )
+              const isActive = location.pathname === item.path || childActive
+              return (
               <div
                 key={item.label}
                 className="relative"
@@ -74,29 +79,32 @@ export default function Navbar() {
               >
                 <Link
                   to={item.path}
-                  className={`relative px-3.5 py-2 text-[0.8125rem] font-medium tracking-wide transition-colors duration-200 ${mutedColor} ${
-                    location.pathname === item.path ? (showSolid ? 'text-text' : 'text-white') : ''
+                  className={`relative px-2.5 xl:px-3.5 py-2 text-[0.75rem] xl:text-[0.8125rem] font-medium tracking-wide transition-colors duration-200 ${mutedColor} ${
+                    isActive ? (showSolid ? 'text-text' : 'text-white') : ''
                   }`}
                 >
                   {item.label}
-                  {location.pathname === item.path && (
+                  {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute bottom-0 left-3.5 right-3.5 h-px bg-cyan"
+                      className="absolute bottom-0 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-px bg-cyan"
                       transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
                 </Link>
                 <AnimatePresence>
-                  {item.mega === 'services' && activeMega === 'services' && (
-                    <MegaMenu title="Services" items={servicesMenu} />
-                  )}
-                  {item.mega === 'company' && activeMega === 'company' && (
-                    <MegaMenu title="Company" items={companyMenu} />
+                  {item.mega && activeMega === item.mega && (
+                    <MegaMenu
+                      title={megaMenus[item.mega].title}
+                      items={megaMenus[item.mega].items}
+                      groups={megaMenus[item.mega].groups}
+                      align="left"
+                    />
                   )}
                 </AnimatePresence>
               </div>
-            ))}
+              )
+            })}
           </div>
 
           <div className="hidden lg:block">

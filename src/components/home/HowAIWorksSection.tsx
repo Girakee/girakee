@@ -26,7 +26,7 @@ export default function HowAIWorksSection() {
         <EditorialHeading
           label="AI Pipeline"
           title="How AI Works"
-          subtitle="From intelligence to automation — data flows through AI into production systems."
+          subtitle="From intelligence to automation. Data flows through AI into production systems."
           dark
         />
 

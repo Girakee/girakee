@@ -5,7 +5,7 @@ import ContentSection from '../components/ui/ContentSection'
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <SEO title="Privacy Policy" description="Girakee Software Services privacy policy — how we collect, use, and protect your information." path="/privacy-policy" />
+      <SEO title="Privacy Policy" description="Girakee Software Services privacy policy. How we collect, use, and protect your information." path="/privacy-policy" />
       <PageHero
         label="Legal"
         title="Privacy Policy"

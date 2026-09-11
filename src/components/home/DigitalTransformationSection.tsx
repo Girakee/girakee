@@ -1,5 +1,6 @@
 import ScrollReveal from '../animations/ScrollReveal'
-import { heroMessaging } from '../../data/company'
+import { homeMatter, heroMessaging } from '../../data/company'
+import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren'
 
 export default function DigitalTransformationSection() {
   return (
@@ -10,10 +11,25 @@ export default function DigitalTransformationSection() {
           <h2 className="editorial-display text-[clamp(1.75rem,4vw,3rem)] text-white mb-6 max-w-4xl leading-tight">
             {heroMessaging.headline}
           </h2>
-          <p className="text-body text-body-dark max-w-3xl leading-relaxed">
+          <p className="text-body text-body-dark max-w-3xl leading-relaxed mb-6">
             {heroMessaging.description}
           </p>
+          <p className="text-body text-body-dark max-w-3xl leading-relaxed">
+            {homeMatter.introBody}
+          </p>
         </ScrollReveal>
+
+        <StaggerChildren className="grid md:grid-cols-3 gap-6 mt-12 md:mt-16">
+          {homeMatter.howWeWork.map((item, i) => (
+            <StaggerItem key={item.title}>
+              <div className="h-full p-6 border border-white/[0.08] holographic-panel">
+                <span className="text-[10px] font-mono text-cyan/50 block mb-3">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{item.body}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
       </div>
     </section>
   )

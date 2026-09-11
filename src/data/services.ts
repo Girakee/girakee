@@ -1,3 +1,5 @@
+export type ServiceCategory = 'software' | 'manpower' | 'training'
+
 export interface Service {
   id: string
   title: string
@@ -12,21 +14,23 @@ export interface Service {
   process: string[]
   useCases: string[]
   businessValue: string[]
+  category: ServiceCategory
 }
 
 export const services: Service[] = [
   {
     id: 'web-mobile',
+    category: 'software',
     title: 'Web & Mobile App Development',
     shortTitle: 'Web & Mobile',
     description:
       'We build high-performance, custom web and mobile apps that enhance user engagement and digitize core business functions globally.',
     detailedOverview:
-      'From discovery workshops through production deployment, our engineering teams design and ship web platforms, native mobile applications, and progressive web apps. We work in agile sprints with continuous integration, code review, and architecture documentation — so your product scales cleanly as usage grows.',
+      'From discovery workshops through production deployment, our engineering teams design and ship web platforms, native mobile applications, and progressive web apps. We work in agile sprints with continuous integration, code review, and architecture documentation, so your product scales cleanly as usage grows.',
     technologies: ['React', 'Next.js', 'React Native', 'Flutter', 'TypeScript', 'Node.js', 'PostgreSQL', 'GraphQL'],
     path: '/web-mobile-development',
     overview:
-      'End-to-end product engineering for web and mobile — from architecture and APIs to polished, production-ready applications deployed at scale.',
+      'End-to-end product engineering for web and mobile, from architecture and APIs to polished, production-ready applications deployed at scale.',
     capabilities: [
       'Custom Web Applications',
       'iOS & Android Apps',
@@ -58,16 +62,17 @@ export const services: Service[] = [
   },
   {
     id: 'ai-ml',
+    category: 'software',
     title: 'Artificial Intelligence & ML',
     shortTitle: 'AI & ML',
     description:
       'Deploying predictive AI and RPA to automate workflows, we transform data into actionable insights, driving maximum operational efficiency.',
     detailedOverview:
-      'We engineer machine learning systems that survive production — not notebook prototypes. Our teams build data pipelines, train and evaluate models, deploy inference APIs, and implement monitoring for drift and performance. From classical ML to generative AI and agentic workflows, we integrate intelligence where it creates measurable operational value.',
+      'We engineer machine learning systems that survive production, not notebook prototypes. Our teams build data pipelines, train and evaluate models, deploy inference APIs, and implement monitoring for drift and performance. From classical ML to generative AI and agentic workflows, we integrate intelligence where it creates measurable operational value.',
     technologies: ['Python', 'PyTorch', 'TensorFlow', 'Hugging Face', 'LangChain', 'FastAPI', 'MLflow', 'Kubernetes'],
     path: '/ai-engineering',
     overview:
-      'Production AI systems — predictive models, intelligent automation, agentic workflows, and MLOps pipelines built for enterprise operations.',
+      'Production AI systems, predictive models, intelligent automation, agentic workflows, and MLOps pipelines built for enterprise operations.',
     capabilities: [
       'Machine Learning',
       'Generative AI',
@@ -99,12 +104,13 @@ export const services: Service[] = [
   },
   {
     id: 'computer-vision',
+    category: 'software',
     title: 'Computer Vision',
     shortTitle: 'Computer Vision',
     description:
       'Visual inspection, object detection, and engineering drawing analysis using production-grade vision pipelines.',
     detailedOverview:
-      'Our computer vision practice combines YOLO-based detection, custom OCR, and rule-based validation engines for engineering and manufacturing environments. We build end-to-end pipelines — from image ingestion and preprocessing through model inference, measurement extraction, and deterministic pass/fail validation against specifications.',
+      'Our computer vision practice combines YOLO-based detection, custom OCR, and rule-based validation engines for engineering and manufacturing environments. We build end-to-end pipelines, from image ingestion and preprocessing through model inference, measurement extraction, and deterministic pass/fail validation against specifications.',
     technologies: ['YOLOv8', 'YOLOv10', 'OpenCV', 'PyTorch', 'Custom OCR', 'FastAPI', 'ONNX'],
     path: '/computer-vision',
     overview:
@@ -140,12 +146,13 @@ export const services: Service[] = [
   },
   {
     id: 'cloud-devops',
+    category: 'software',
     title: 'Cloud & DevOps',
     shortTitle: 'Cloud & DevOps',
     description:
       'We deliver flexible, scalable cloud infrastructure (AWS/Azure/GCP) to ensure high availability and optimal cost management worldwide.',
     detailedOverview:
-      'We architect cloud-native systems on AWS, Azure, and GCP with infrastructure as code, container orchestration, and automated CI/CD. Our DevOps engineers implement observability stacks, disaster recovery patterns, and cost governance — so your platform stays reliable under load without runaway cloud spend.',
+      'We architect cloud-native systems on AWS, Azure, and GCP with infrastructure as code, container orchestration, and automated CI/CD. Our DevOps engineers implement observability stacks, disaster recovery patterns, and cost governance, so your platform stays reliable under load without runaway cloud spend.',
     technologies: ['AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Prometheus'],
     path: '/cloud-devops',
     overview:
@@ -181,16 +188,17 @@ export const services: Service[] = [
   },
   {
     id: 'cybersecurity',
+    category: 'software',
     title: 'Cybersecurity',
     shortTitle: 'Cybersecurity',
     description:
       'Integrated, AI-driven security defenses and Zero Trust architecture proactively safeguard your data, ensuring robust compliance and protection.',
     detailedOverview:
-      'Security is embedded across the software lifecycle — not bolted on at the end. We implement Zero Trust principles, identity and access management, secrets management, vulnerability assessment, and security automation within your cloud and application stack. Our approach aligns with common compliance frameworks while keeping systems practical to operate.',
+      'Security is embedded across the software lifecycle, not bolted on at the end. We implement Zero Trust principles, identity and access management, secrets management, vulnerability assessment, and security automation within your cloud and application stack. Our approach aligns with common compliance frameworks while keeping systems practical to operate.',
     technologies: ['Zero Trust', 'OAuth 2.0', 'Vault', 'SIEM', 'AWS Security', 'Azure Security', 'OWASP'],
     path: '/cybersecurity',
     overview:
-      'Security embedded across your stack — from architecture and identity to threat detection, compliance, and incident response.',
+      'Security embedded across your stack, from architecture and identity to threat detection, compliance, and incident response.',
     capabilities: [
       'Zero Trust Architecture',
       'Threat Detection & Response',
@@ -222,16 +230,17 @@ export const services: Service[] = [
   },
   {
     id: 'ui-ux',
+    category: 'software',
     title: 'UI/UX Design & Development',
     shortTitle: 'UI/UX',
     description:
       'Creating intuitive, aesthetically pleasing user interfaces that drive product adoption, maximize satisfaction, and improve conversion rates.',
     detailedOverview:
-      'Our design practice pairs user research with front-end engineering. We create wireframes, interactive prototypes, and design systems in Figma, then implement responsive, accessible interfaces in React. Every screen is tested for usability, consistency, and performance — bridging the gap between design intent and production code.',
+      'Our design practice pairs user research with front-end engineering. We create wireframes, interactive prototypes, and design systems in Figma, then implement responsive, accessible interfaces in React. Every screen is tested for usability, consistency, and performance, bridging the gap between design intent and production code.',
     technologies: ['Figma', 'React', 'Tailwind CSS', 'Design Systems', 'WCAG', 'Storybook'],
     path: '/ui-ux-design',
     overview:
-      'Research-driven design and front-end implementation — from wireframes and design systems to pixel-perfect, accessible interfaces.',
+      'Research-driven design and front-end implementation, from wireframes and design systems to pixel-perfect, accessible interfaces.',
     capabilities: [
       'User Research & Strategy',
       'Wireframing & Prototyping',
@@ -263,6 +272,7 @@ export const services: Service[] = [
   },
   {
     id: 'software-testing',
+    category: 'software',
     title: 'Software Testing & QA',
     shortTitle: 'Testing & QA',
     description:
@@ -272,7 +282,7 @@ export const services: Service[] = [
     technologies: ['Selenium', 'Cypress', 'Playwright', 'Jest', 'Pytest', 'Jenkins', 'k6', 'Postman'],
     path: '/software-testing',
     overview:
-      'Comprehensive quality engineering — manual and automated testing, performance validation, and continuous quality across the SDLC.',
+      'Comprehensive quality engineering, manual and automated testing, performance validation, and continuous quality across the SDLC.',
     capabilities: [
       'Test Automation',
       'Performance Testing',
@@ -304,16 +314,17 @@ export const services: Service[] = [
   },
   {
     id: 'intelligent-qa',
+    category: 'software',
     title: 'Intelligent QA',
     shortTitle: 'Intelligent QA',
     description:
       'AI-powered validation, automated rule engines, and intelligent quality assurance for complex engineering workflows.',
     detailedOverview:
-      'Intelligent QA goes beyond traditional testing — we combine computer vision, OCR, and deterministic rule engines to validate engineering drawings, technical documents, and complex data outputs at scale. Automated validation pipelines integrate with your existing workflows, providing pass/fail decisions with full audit trails.',
+      'Intelligent QA goes beyond traditional testing, we combine computer vision, OCR, and deterministic rule engines to validate engineering drawings, technical documents, and complex data outputs at scale. Automated validation pipelines integrate with your existing workflows, providing pass/fail decisions with full audit trails.',
     technologies: ['Python', 'YOLOv8', 'Custom OCR', 'Rule Engines', 'Jenkins', 'GitLab CI'],
     path: '/intelligent-qa',
     overview:
-      'Quality engineering enhanced by AI — from automated drawing validation to deterministic rule engines and intelligent test generation.',
+      'Quality engineering enhanced by AI, from automated drawing validation to deterministic rule engines and intelligent test generation.',
     capabilities: [
       'AI-Powered Validation',
       'Rule Engine Development',
@@ -345,12 +356,13 @@ export const services: Service[] = [
   },
   {
     id: 'data-analytics',
+    category: 'software',
     title: 'Data Analytics & BI',
     shortTitle: 'Data & BI',
     description:
       'Transforming raw data into strategic business intelligence using advanced visualization and reporting to guide smart decision-making.',
     detailedOverview:
-      'We build data platforms that turn operational data into actionable insight. From ETL/ELT pipelines and data warehousing on Snowflake, BigQuery, or Redshift to interactive dashboards in Tableau and Power BI — our data engineers ensure your teams can query, visualize, and trust their numbers.',
+      'We build data platforms that turn operational data into actionable insight. From ETL/ELT pipelines and data warehousing on Snowflake, BigQuery, or Redshift to interactive dashboards in Tableau and Power BI, our data engineers ensure your teams can query, visualize, and trust their numbers.',
     technologies: ['Python', 'SQL', 'Spark', 'Airflow', 'Tableau', 'Power BI', 'Snowflake', 'dbt'],
     path: '/data-analytics',
     overview:
@@ -385,85 +397,302 @@ export const services: Service[] = [
     ],
   },
   {
-    id: 'talent-outsourcing',
-    title: 'Talent Outsourcing',
-    shortTitle: 'Talent',
+    id: 'staff-augmentation',
+    category: 'manpower',
+    title: 'Staff Augmentation',
+    shortTitle: 'Staff Augmentation',
     description:
-      'Access highly skilled, vetted developers and IT professionals at unbeatable prices to scale your global team quickly.',
+      'Add pre-vetted engineers to your team within weeks. Full-stack, AI, cloud, QA, and data professionals who work inside your tools, sprints, and time zone overlap.',
     detailedOverview:
-      'Scale your engineering capacity with pre-vetted developers, QA engineers, DevOps specialists, and AI practitioners who integrate directly into your workflows. We provide staff augmentation, dedicated teams, and contract-to-hire models — with technical screening, timezone alignment, and ongoing performance management from Bengaluru.',
-    technologies: ['Full-Stack', 'AI/ML', 'Cloud', 'DevOps', 'Mobile', 'Data Engineering'],
-    path: '/talent-outsourcing',
+      'Girakee staff augmentation places screened engineers inside your existing squads. You keep product ownership and delivery rhythm. We handle sourcing, technical interviews, onboarding, and ongoing performance management from Bengaluru. Engineers join your Slack, Jira, Git, and standups as an extension of your team, not a separate vendor silo.',
+    technologies: ['Full-Stack', 'AI/ML', 'Cloud', 'DevOps', 'Mobile', 'QA', 'Data Engineering'],
+    path: '/staff-augmentation',
     overview:
-      'Flexible talent augmentation — dedicated engineers integrated into your workflows with rigorous technical vetting.',
+      'Flexible engineer augmentation with rigorous technical vetting, timezone overlap, and continuous performance support from Bengaluru.',
     capabilities: [
-      'Staff Augmentation',
-      'Dedicated Engineering Teams',
-      'Contract-to-Hire',
-      'Technical Screening',
-      'Global Delivery',
-      'Flexible Engagement',
+      'Full-stack developers',
+      'AI and ML engineers',
+      'Cloud and DevOps specialists',
+      'QA and test automation',
+      'Data engineers and analysts',
+      'UI/UX and mobile engineers',
     ],
     deliverables: [
-      'Vetted engineer profiles',
+      'Role-specific candidate shortlists',
       'Technical assessment reports',
       'Onboarding and integration plan',
       'Weekly progress reporting',
-      'Knowledge transfer documentation',
-      'Flexible scaling options',
+      'Replacement guarantee window',
+      'Knowledge transfer notes',
     ],
-    process: ['Requirements Brief', 'Candidate Screening', 'Team Onboarding', 'Sprint Integration', 'Ongoing Management'],
+    process: ['Role Brief', 'Technical Screening', 'Client Interviews', 'Onboarding', 'Sprint Integration'],
     useCases: [
-      'Rapid team scaling for product launches',
-      'Specialized AI or cloud expertise',
-      'Extended capacity for peak workloads',
-      'Dedicated offshore engineering pod',
+      'Scale a product squad for a launch window',
+      'Fill a specialist gap in AI, cloud, or QA',
+      'Cover peak delivery without permanent headcount',
+      'Extend an onshore team with Bengaluru overlap',
     ],
     businessValue: [
-      'Scale engineering capacity fast',
-      'Access specialized talent',
-      'Reduce hiring overhead',
+      'Add capacity in weeks, not quarters',
+      'Access specialist skills on demand',
+      'Reduce recruiting overhead and risk',
+    ],
+  },
+  {
+    id: 'dedicated-teams',
+    category: 'manpower',
+    title: 'Dedicated Engineering Teams',
+    shortTitle: 'Dedicated Teams',
+    description:
+      'A complete delivery pod with engineers, QA, and a delivery lead who own a product or workstream under your roadmap and SLAs.',
+    detailedOverview:
+      'A dedicated Girakee team is a standing squad aligned to one product, platform, or workstream. You get a delivery lead, engineers, and QA who already work together. We run sprint planning, demos, and reporting while you set priorities. This model suits companies that want outcome ownership without building a full local hiring pipeline.',
+    technologies: ['Product Delivery', 'Agile', 'Full-Stack', 'Cloud', 'QA', 'DevOps'],
+    path: '/dedicated-teams',
+    overview:
+      'Cross-functional pods that own delivery, quality, and communication for a defined product or engineering workstream.',
+    capabilities: [
+      'Cross-functional squads',
+      'Embedded delivery lead',
+      'Sprint planning and reporting',
+      'QA and release ownership',
+      'Architecture support',
+      'SLA-backed operations',
+    ],
+    deliverables: [
+      'Team composition and RACI',
+      'Delivery playbook and rituals',
+      'Sprint reports and burndown',
+      'Release notes and runbooks',
+      'Architecture and decision logs',
+      'Quarterly capacity plan',
+    ],
+    process: ['Scope Alignment', 'Team Assembly', 'Kickoff & Tooling', 'Sprint Delivery', 'Quarterly Review'],
+    useCases: [
+      'Own a product line from Bengaluru',
+      'Run a platform or integration workstream',
+      'Replace a fragmented contractor mix with one pod',
+      'Build a long-term offshore engineering centre',
+    ],
+    businessValue: [
+      'Predictable delivery capacity',
+      'One accountable team, not scattered contractors',
+      'Lower management load on your internal leads',
+    ],
+  },
+  {
+    id: 'contract-to-hire',
+    category: 'manpower',
+    title: 'Contract-to-Hire',
+    shortTitle: 'Contract-to-Hire',
+    description:
+      'Evaluate engineers on live work before you hire. Start on contract, convert top performers to your payroll when the fit is proven.',
+    detailedOverview:
+      'Contract-to-hire lets you validate skill, communication, and culture on real tickets before a permanent offer. Girakee sources and vets candidates, places them on your project for a defined trial, and supports a clean conversion when you are ready. You avoid resume-only hiring and we handle the commercial transition.',
+    technologies: ['Full-Stack', 'AI/ML', 'Cloud', 'QA', 'Data', 'Mobile'],
+    path: '/contract-to-hire',
+    overview:
+      'A lower-risk path to permanent hiring: contract engagement first, conversion when performance is proven on your codebase.',
+    capabilities: [
+      'Pre-vetted candidate pipeline',
+      'Defined trial periods',
+      'Performance reviews during contract',
+      'Seamless payroll conversion',
+      'Replacement during trial',
+      'Role-specific technical screens',
+    ],
+    deliverables: [
+      'Screened candidate pack',
+      'Trial success criteria',
+      'Monthly performance notes',
+      'Conversion commercial terms',
+      'Handover and IP checklist',
+      'Onboarding support into your HR process',
+    ],
+    process: ['Role Definition', 'Screening', 'Contract Placement', 'Performance Review', 'Conversion'],
+    useCases: [
+      'Hire senior engineers without a blind offer',
+      'Build a local team using a proven trial',
+      'Validate a new capability area before headcount',
+      'Reduce mis-hire risk on specialist roles',
+    ],
+    businessValue: [
+      'See real output before you hire',
+      'Lower mis-hire cost',
+      'Faster path from need to productive engineer',
+    ],
+  },
+  {
+    id: 'it-recruitment',
+    category: 'manpower',
+    title: 'IT Recruitment',
+    shortTitle: 'IT Recruitment',
+    description:
+      'Permanent hiring support for software, AI, cloud, and QA roles. We source, screen, and present only candidates who can do the work.',
+    detailedOverview:
+      'Girakee IT recruitment is built by engineers, not a generic staffing desk. We write practical screens, run live coding or system-design interviews, and present a short list with evidence. Roles span product engineering, AI, DevOps, data, and quality. You interview finalists. We coordinate offers, notice periods, and joining.',
+    technologies: ['Technical Screening', 'Full-Stack', 'AI/ML', 'Cloud', 'DevOps', 'QA'],
+    path: '/it-recruitment',
+    overview:
+      'Engineer-led permanent recruitment for technology roles, from sourcing through technical screening and offer support.',
+    capabilities: [
+      'Role and scorecard design',
+      'Active and passive sourcing',
+      'Live technical interviews',
+      'Culture and communication screens',
+      'Offer and joining coordination',
+      'Replacement support window',
+    ],
+    deliverables: [
+      'Hiring scorecard',
+      'Sourced candidate pipeline',
+      'Interview notes and score',
+      'Shortlist with evidence',
+      'Offer pack support',
+      'Joining and warranty terms',
+    ],
+    process: ['Intake Brief', 'Sourcing', 'Technical Screen', 'Client Interviews', 'Offer & Joining'],
+    useCases: [
+      'Fill a critical senior engineering seat',
+      'Stand up a new AI or platform team',
+      'Replace a failed agency search',
+      'Hire multiple roles against a quarter plan',
+    ],
+    businessValue: [
+      'Higher signal than CV screening alone',
+      'Shorter time-to-offer on technical roles',
+      'Fewer interviews wasted on weak fits',
+    ],
+  },
+  {
+    id: 'internship',
+    category: 'training',
+    title: 'Internship & On-the-Job Training',
+    shortTitle: 'Internship',
+    description:
+      'Six months on live industry projects. Write production code, sit in reviews, and graduate with an experience letter that documents real work.',
+    detailedOverview:
+      'The Girakee internship is on-the-job training, not a classroom course. Participants join live delivery teams in Bengaluru, contribute to production systems, and receive mentor feedback every sprint. Tracks cover AI and ML, computer vision, full-stack, cloud and DevOps, data, and cybersecurity. Completing the program includes an experience letter that records the projects and responsibilities you owned.',
+    technologies: ['Python', 'React', 'TypeScript', 'Cloud', 'AI/ML', 'Computer Vision'],
+    path: '/internship',
+    overview:
+      'A six-month OJT internship on live projects with senior mentors, code reviews, and a verifiable experience letter.',
+    capabilities: [
+      '6-month on-the-job training',
+      'Live industry project work',
+      'Sprint rituals and code review',
+      'Assigned senior mentor',
+      'Experience letter on completion',
+      'Tracks in AI, web, cloud, and data',
+    ],
+    deliverables: [
+      'Track assignment and learning plan',
+      'Live project tickets',
+      'Mentor feedback log',
+      'Code review participation',
+      'Skills assessment',
+      'Experience letter',
+    ],
+    process: ['Apply & Assess', 'Track Assignment', 'Team Onboarding', 'Mentored Delivery', 'Experience Letter'],
+    useCases: [
+      'Graduate engineers who need production hours',
+      'Career switchers entering software',
+      'Students seeking a serious internship, not shadowing',
+      'Companies sponsoring intern cohorts',
+    ],
+    businessValue: [
+      'Job-ready engineers, not theory-only graduates',
+      'Documented industry experience',
+      'Faster ramp into a first engineering role',
     ],
   },
   {
     id: 'corporate-training',
+    category: 'training',
     title: 'Corporate Training',
-    shortTitle: 'Training',
+    shortTitle: 'Corporate Training',
     description:
-      'Stop learning. Start shipping real code. Six months of on-the-job training on live industry projects with an experience letter.',
+      'Practitioner-led workshops for your existing team. Custom curriculum on AI, cloud, full-stack, QA, and delivery practices used in production.',
     detailedOverview:
-      'Our training programs are built by engineers who ship production systems daily. The flagship OJT program places participants on live industry projects for six months — writing real code, participating in code reviews, and delivering features alongside senior practitioners. Graduates receive an experience letter documenting their contributions.',
-    technologies: ['AI/ML', 'Full-Stack', 'Cloud', 'DevOps', 'Computer Vision', 'Python'],
-    path: '/training',
+      'Corporate training at Girakee is taught by engineers who ship systems, not professional trainers reading slides. We design a curriculum around your stack, codebase constraints, and skill gaps, then run workshops, labs, and capstone work on problems that look like your production environment. Programs can be delivered in Bengaluru, on-site, or remotely for global teams.',
+    technologies: ['AI/ML', 'Full-Stack', 'Cloud', 'DevOps', 'QA', 'Python'],
+    path: '/corporate-training',
     overview:
-      'Practitioner-led programs where engineers work on real production systems — not classroom theory. Graduate with verifiable industry experience.',
+      'Custom capability programs for engineering teams, built around your stack and delivered by practitioners.',
     capabilities: [
-      '6-Month On-The-Job Training',
-      'Live Industry Projects',
-      'Experience Letter',
-      'Corporate Workshops',
-      'Technical Bootcamps',
-      'Mentorship Programs',
+      'Custom curriculum design',
+      'Practitioner-led workshops',
+      'Hands-on labs on real stacks',
+      'Team capstone projects',
+      'Skills assessment',
+      'On-site or remote delivery',
     ],
     deliverables: [
-      'Structured curriculum plan',
-      'Live project assignments',
-      'Mentor feedback sessions',
-      'Code review participation',
-      'Experience letter on completion',
-      'Skills assessment report',
+      'Skills gap assessment',
+      'Curriculum and schedule',
+      'Lab environments',
+      'Workshop materials',
+      'Capstone review',
+      'Team capability report',
     ],
-    process: ['Enrollment & Assessment', 'Project Assignment', 'Mentored Development', 'Code Reviews', 'Certification'],
+    process: ['Needs Assessment', 'Curriculum Design', 'Workshops & Labs', 'Capstone', 'Assessment & Report'],
     useCases: [
-      'Graduate engineer upskilling',
-      'Corporate team capability building',
-      'Career transition into software engineering',
-      'AI and cloud specialization tracks',
+      'Upskill a team moving to AI or cloud',
+      'Standardize engineering practices across squads',
+      'Prepare a team for a platform migration',
+      'Build internal QA or DevOps capability',
     ],
     businessValue: [
-      'Build job-ready engineers',
-      'Accelerate team capability',
-      'Reduce ramp-up time',
+      'Raise team skill without a long hiring cycle',
+      'Training that maps to your actual stack',
+      'Shared language and practices across squads',
+    ],
+  },
+  {
+    id: 'technical-bootcamps',
+    category: 'training',
+    title: 'Technical Bootcamps',
+    shortTitle: 'Bootcamps',
+    description:
+      'Intensive, time-boxed programs in AI, full-stack, cloud, and computer vision. Ship a working project by the end of the cohort.',
+    detailedOverview:
+      'Girakee bootcamps are short, high-intensity programs for individuals and sponsored cohorts. Each track combines fundamentals, daily labs, and a capstone that must run, not just present. Instructors are delivery engineers. Cohorts stay small so every participant gets code review. Completers leave with a project, a skills report, and a path into internship or hiring conversations.',
+    technologies: ['Python', 'React', 'Node.js', 'AWS', 'Azure', 'PyTorch'],
+    path: '/technical-bootcamps',
+    overview:
+      'Focused bootcamps that end with a working project, instructor review, and a clear next step into OJT or employment.',
+    capabilities: [
+      'AI and ML track',
+      'Full-stack web track',
+      'Cloud and DevOps track',
+      'Computer vision track',
+      'Daily labs and code review',
+      'Capstone project defence',
+    ],
+    deliverables: [
+      'Track syllabus',
+      'Lab assignments',
+      'Capstone application',
+      'Instructor feedback',
+      'Skills report',
+      'Next-step recommendation',
+    ],
+    process: ['Enrolment', 'Fundamentals', 'Daily Labs', 'Capstone Build', 'Review & Next Step'],
+    useCases: [
+      'Fast skill build before an internship',
+      'Company-sponsored reskilling cohorts',
+      'Specialist jump into AI or cloud',
+      'Portfolio project with mentor review',
+    ],
+    businessValue: [
+      'Compressed learning with production habits',
+      'A working project, not a certificate only',
+      'Clear path into OJT or hiring',
     ],
   },
 ]
+
+export const softwareServices = services.filter((s) => s.category === 'software')
+export const manpowerServices = services.filter((s) => s.category === 'manpower')
+export const trainingServices = services.filter((s) => s.category === 'training')
+

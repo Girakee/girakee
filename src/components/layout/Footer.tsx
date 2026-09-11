@@ -6,34 +6,24 @@ import { company, offices } from '../../data/company'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const footerColumns = {
-  Company: [
-    { label: 'About', path: '/about' },
-    { label: 'Careers', path: '/careers' },
-    { label: 'Internship', path: '/internship' },
-    { label: 'Training', path: '/training' },
-    { label: 'Contact', path: '/contact' },
-    { label: 'Engagement Models', path: '/engagement-models' },
-  ],
-  Services: [
-    { label: 'Web & Mobile Development', path: '/web-mobile-development' },
-    { label: 'AI & Machine Learning', path: '/ai-engineering' },
-    { label: 'Computer Vision', path: '/computer-vision' },
-    { label: 'Cloud & DevOps', path: '/cloud-devops' },
-    { label: 'Cybersecurity', path: '/cybersecurity' },
-    { label: 'UI/UX Design', path: '/ui-ux-design' },
-    { label: 'Testing & QA', path: '/software-testing' },
-    { label: 'Intelligent QA', path: '/intelligent-qa' },
-    { label: 'Data Analytics & BI', path: '/data-analytics' },
-    { label: 'Talent Outsourcing', path: '/talent-outsourcing' },
-  ],
   Solutions: [
     { label: 'Solutions Overview', path: '/solutions' },
-    { label: 'Industries', path: '/industries' },
-    { label: 'Drawing Validation', path: '/solutions' },
-    { label: 'AI Automation', path: '/ai-engineering' },
+    { label: 'Software Services', path: '/services' },
+    { label: 'AI Digital Employee', path: '/products/digital-employees' },
+    { label: 'Manpower Solutions', path: '/manpower-solutions' },
+    { label: 'Training & Internships', path: '/training' },
   ],
-  Resources: [
-    { label: 'Technology', path: '/technology' },
+  Products: [
+    { label: 'Products Overview', path: '/products' },
+    { label: 'Rozgar.ai Digital HR Employee', path: '/products/rozgar-ai' },
+  ],
+  Company: [
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Internship', path: '/internship' },
+  ],
+  Legal: [
     { label: 'Privacy Policy', path: '/privacy-policy' },
     { label: 'Terms of Service', path: '/terms' },
   ],

@@ -37,8 +37,13 @@ export default function GlobalDeliverySection() {
             <TextReveal
               text="Engineering from Bengaluru. Delivering Globally."
               as="h2"
-              className="editorial-display text-[clamp(1.875rem,4vw,3rem)] text-white mb-8 leading-tight"
+              className="editorial-display text-[clamp(1.875rem,4vw,3rem)] text-white mb-6 leading-tight"
             />
+            <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-md">
+              Headquarters in Rajajinagar, Bengaluru. Delivery for product and engineering
+              teams in the United States, United Kingdom, European Union, and Middle East,
+              with offices launching in Dubai, Germany, and Canada.
+            </p>
             <div className="flex flex-wrap gap-2">
               {regions.map((r) => (
                 <span

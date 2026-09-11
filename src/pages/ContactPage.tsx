@@ -10,7 +10,7 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact"
-        description="Connect with Innovation. Start Your Transformation. Contact Girakee for web, AI, cloud, and security solutions — jaw-dropping quality at unbeatable prices."
+        description="Connect with Innovation. Start Your Transformation. Contact Girakee for web, AI, cloud, and security solutions, jaw-dropping quality at unbeatable prices."
         path="/contact"
       />
       <section className="relative bg-navy-deep pt-28 sm:pt-32 md:pt-36 pb-16 page-px overflow-hidden">

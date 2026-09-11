@@ -364,7 +364,7 @@ export function TerminalScene({ loop }: { loop: boolean }) {
 export function TalentScene({ loop }: { loop: boolean }) {
   const devs = [{ x: 100, label: 'FE' }, { x: 180, label: 'BE' }, { x: 260, label: 'AI' }, { x: 340, label: 'DevOps' }]
   return (
-    <HudFrame label="Talent Outsourcing" status="TEAM ONLINE">
+    <HudFrame label="Staff Augmentation" status="TEAM ONLINE">
       <svg viewBox="0 0 480 280" className="w-full h-full">
         <ellipse cx="240" cy="130" rx="160" ry="80" fill="none" stroke={FAINT} strokeWidth="1" />
         {devs.map((d, i) => (

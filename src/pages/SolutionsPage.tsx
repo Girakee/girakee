@@ -4,14 +4,30 @@ import SEO from '../components/seo/SEO'
 import PageHero from '../components/ui/PageHero'
 import { StaggerChildren, StaggerItem } from '../components/animations/StaggerChildren'
 import FinalCTASection from '../components/home/FinalCTASection'
+import { softwareServices, manpowerServices, trainingServices } from '../data/services'
 
-const solutions = [
-  { title: 'Automate Manual Work', description: 'Eliminate repetitive tasks with intelligent automation and RPA workflows.', path: '/ai-engineering', service: 'AI Engineering' },
-  { title: 'Modernize Legacy Systems', description: 'Migrate and transform legacy applications to cloud-native, modern architectures.', path: '/web-mobile-development', service: 'Software Development' },
-  { title: 'Improve Quality', description: 'AI-powered inspection, automated validation, and continuous quality assurance.', path: '/intelligent-qa', service: 'Intelligent QA' },
-  { title: 'Build AI Capabilities', description: 'Production ML systems, computer vision, and agentic AI for your domain.', path: '/ai-engineering', service: 'AI Engineering' },
-  { title: 'Scale Engineering', description: 'Augment your team with vetted engineers or dedicated delivery teams.', path: '/talent-outsourcing', service: 'Workforce Solutions' },
-  { title: 'Strengthen Security', description: 'Zero Trust architecture, threat detection, and compliance automation.', path: '/cybersecurity', service: 'Cybersecurity' },
+const pillars = [
+  {
+    title: 'Software Services',
+    path: '/services',
+    description:
+      'Product engineering, AI, computer vision, cloud, security, design, QA, and data platforms built for production.',
+    items: softwareServices,
+  },
+  {
+    title: 'Manpower Solutions',
+    path: '/manpower-solutions',
+    description:
+      'Staff augmentation, dedicated teams, contract-to-hire, IT recruitment, and engagement models from Bengaluru.',
+    items: manpowerServices,
+  },
+  {
+    title: 'Training & Internships',
+    path: '/training',
+    description:
+      'Six-month OJT internships, corporate workshops, technical bootcamps, and careers with Girakee.',
+    items: trainingServices,
+  },
 ]
 
 export default function SolutionsPage() {
@@ -19,31 +35,59 @@ export default function SolutionsPage() {
     <>
       <SEO
         title="Solutions"
-        description="Business-problem-oriented AI and engineering solutions — automate, modernize, improve quality, and scale."
+        description="Girakee solutions: software services, manpower solutions, and training and internships from Bengaluru."
         path="/solutions"
       />
       <PageHero
         label="Solutions"
-        title="Engineered for Impact"
-        subtitle="Purpose-built solutions that address real business challenges — not generic technology offerings."
+        title="Software. Manpower. Training."
+        subtitle="Three practices under one delivery company. Pick a line, then a sub-service with defined work and an owner in Bengaluru."
+        scene="orbit"
       />
 
       <section className="bg-navy-dark section-py page-px">
-        <div className="max-w-7xl mx-auto">
-          <StaggerChildren className="grid md:grid-cols-2 gap-8">
-            {solutions.map((sol) => (
-              <StaggerItem key={sol.title}>
-                <Link
-                  to={sol.path}
-                  className="group block p-10 border border-white/[0.08] hover:border-cyan/30 holographic-panel transition-all duration-500"
-                >
-                  <span className="text-xs tracking-[0.2em] uppercase text-cyan mb-4 block">{sol.service}</span>
-                  <h2 className="text-2xl font-bold text-white mb-4">{sol.title}</h2>
-                  <p className="text-white/50 group-hover:text-white/65 transition-colors leading-relaxed mb-6">{sol.description}</p>
-                  <span className="inline-flex items-center gap-2 text-cyan text-sm font-medium">
-                    Explore <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
+        <div className="max-w-[90rem] mx-auto">
+          <StaggerChildren className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+            {pillars.map((pillar) => (
+              <StaggerItem key={pillar.title}>
+                <div className="h-full holographic-panel p-6 md:p-8 flex flex-col">
+                  <h2 className="text-xl font-semibold text-white mb-3">{pillar.title}</h2>
+                  <p className="text-sm text-white/50 leading-relaxed mb-6">{pillar.description}</p>
+                  <ul className="space-y-2 mb-8 flex-1">
+                    {pillar.items.map((item) => (
+                      <li key={item.id}>
+                        <Link to={item.path} className="text-sm text-white/55 hover:text-cyan transition-colors">
+                          {item.shortTitle}
+                        </Link>
+                      </li>
+                    ))}
+                    {pillar.path === '/services' && (
+                      <li>
+                        <Link to="/products/digital-employees" className="text-sm text-white/55 hover:text-cyan transition-colors">
+                          AI Digital Employee
+                        </Link>
+                      </li>
+                    )}
+                    {pillar.path === '/training' && (
+                      <li>
+                        <Link to="/careers" className="text-sm text-white/55 hover:text-cyan transition-colors">
+                          Careers
+                        </Link>
+                      </li>
+                    )}
+                    {pillar.path === '/manpower-solutions' && (
+                      <li>
+                        <Link to="/engagement-models" className="text-sm text-white/55 hover:text-cyan transition-colors">
+                          Engagement Models
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                  <Link to={pillar.path} className="inline-flex items-center gap-2 text-sm text-cyan">
+                    Open {pillar.title}
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
               </StaggerItem>
             ))}
           </StaggerChildren>

@@ -2,11 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import EditorialHeading from './shared/EditorialHeading'
 import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren'
-import { services } from '../../data/services'
-
-const featured = services.filter((s) =>
-  ['web-mobile', 'ai-ml', 'computer-vision', 'cloud-devops', 'cybersecurity', 'data-analytics'].includes(s.id),
-)
+import { softwareServices } from '../../data/services'
 
 export default function AIEngineeringSection() {
   return (
@@ -15,14 +11,14 @@ export default function AIEngineeringSection() {
 
       <div className="relative max-w-[90rem] mx-auto">
         <EditorialHeading
-          label="Services"
-          title="Engineering Capabilities for Enterprise Teams"
-          subtitle="AI, cloud, security, and software — delivered as one integrated engineering ecosystem."
+          label="Software Lines"
+          title="Nine Engineering Practices, One Delivery Team"
+          subtitle="From product UI to models, cloud, and quality. Each line below is a real service with a process, a stack, and a landing page."
           dark
         />
 
         <StaggerChildren className="divide-y divide-white/[0.06]">
-          {featured.map((cap, i) => (
+          {softwareServices.map((cap, i) => (
             <StaggerItem key={cap.id}>
               <Link
                 to={cap.path}
@@ -35,8 +31,11 @@ export default function AIEngineeringSection() {
                   <h3 className="text-lg md:text-xl font-semibold text-white mb-1.5">
                     {cap.title}
                   </h3>
-                  <p className="text-body text-body-dark leading-relaxed">
+                  <p className="text-body text-body-dark leading-relaxed mb-2">
                     {cap.description}
+                  </p>
+                  <p className="text-xs text-white/30 hidden md:block">
+                    {cap.capabilities.slice(0, 4).join(' · ')}
                   </p>
                 </div>
                 <ArrowUpRight
@@ -51,7 +50,7 @@ export default function AIEngineeringSection() {
 
         <div className="mt-10">
           <Link to="/services" className="btn-secondary">
-            View All Services
+            Software Services Hub
             <ArrowUpRight size={15} strokeWidth={1.5} />
           </Link>
         </div>

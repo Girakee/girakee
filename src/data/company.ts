@@ -32,12 +32,22 @@ export const aboutMessaging = {
 export const contactMessaging = {
   headline: 'Connect with Innovation. Start Your Transformation.',
   description:
-    'From Bengaluru to your board room, we\'re ready to build your future. Your next competitive edge starts with a conversation. Whether you\'re in the US, the EU, the UK, or the Middle East, our experts are standing by to discuss how our integrated Web, AI, Cloud, and Security solutions can be delivered to you with jaw-dropping quality and unbeatable prices. Reach out today — let\'s discuss your vision and make digital transformation a powerful reality.',
+    'From Bengaluru to your board room, we\'re ready to build your future. Your next competitive edge starts with a conversation. Whether you\'re in the US, the EU, the UK, or the Middle East, our experts are standing by to discuss how our integrated Web, AI, Cloud, and Security solutions can be delivered to you with jaw-dropping quality and unbeatable prices. Reach out today. Let\'s discuss your vision and make digital transformation a powerful reality.',
   callUs: {
     title: 'Call us',
     description:
-      'Got questions or need urgent help? Call our squad anytime. We\'re ready to talk, guide, and deliver. Your transformation is one call away — secure peace of mind now.',
+      'Got questions or need urgent help? Call our squad anytime. We\'re ready to talk, guide, and deliver. Your transformation is one call away. Secure peace of mind now.',
   },
+}
+
+export const homeMatter = {
+  introBody:
+    'Girakee Software Services Private Limited is a Bengaluru engineering company. We build production software, place vetted engineers inside client teams, and train people on live industry work. Clients in the US, UK, EU, and Middle East use us when they need delivery that holds up after the demo.',
+  howWeWork: [
+    { title: 'A named owner', body: 'Every engagement has a delivery lead in Bengaluru who reports progress, risks, and next steps in your language, not a ticket dump.' },
+    { title: 'Work you can inspect', body: 'Code, models, pipelines, and staffing plans sit in your repos and tools. We do not hide delivery behind a black box.' },
+    { title: 'Price without theatre', body: 'Quality is the promise. Cost is Indian engineering rates with senior review, not a discount on unfinished work.' },
+  ],
 }
 
 export const internshipMessaging = {

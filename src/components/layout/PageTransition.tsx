@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
@@ -6,7 +7,11 @@ import { pickVariants } from '../../animations/motionConfig'
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const location = useLocation()
-  const { reduced, transitionFast } = useMotionConfig()
+  const { reduced } = useMotionConfig()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: reduced ? 'auto' : 'smooth' })
+  }, [location.pathname, reduced])
 
   return (
     <motion.div
@@ -14,7 +19,6 @@ export default function PageTransition({ children }: { children: React.ReactNode
       initial="hidden"
       animate="visible"
       variants={pickVariants(reduced, pageEnter)}
-      transition={transitionFast()}
     >
       {children}
     </motion.div>

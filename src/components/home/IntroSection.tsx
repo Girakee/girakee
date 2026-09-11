@@ -36,7 +36,7 @@ export default function IntroSection() {
               <ScrollReveal variant="slideUpSubtle" delay={0.1} className="lg:col-span-5 pointer-events-auto">
                 <p className="text-body text-white/60 mb-6 max-w-md backdrop-blur-sm">
                   Bengaluru-based AI engineering for ambitious businesses across
-                  the US, UK, Middle East, and EU — powered by a holographic
+                  the US, UK, Middle East, and EU, powered by a holographic
                   team of engineers, designers, and scientists.
                 </p>
                 <Link
@@ -59,7 +59,7 @@ export default function IntroSection() {
             { label: 'Headquarters', value: 'Bengaluru' },
             { label: 'Delivery Regions', value: 'US · UK · EU · ME' },
             { label: 'Core Practice', value: 'AI Engineering' },
-            { label: 'Services', value: '11 Capabilities' },
+            { label: 'Practices', value: 'Software · Manpower · Training' },
           ].map((stat, i) => (
             <ScrollReveal key={stat.label} variant="fade" delay={i * 0.05}>
               <p className="text-[10px] font-mono text-cyan/40 tracking-widest uppercase mb-1.5">{stat.label}</p>

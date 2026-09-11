@@ -17,7 +17,7 @@ export const engagementModels: EngagementModel[] = [
       'Predictable monthly investment',
       'Continuous improvement cycles',
     ],
-    details: 'We take full ownership of your technology operations — from architecture to deployment, monitoring, and ongoing optimization.',
+    details: 'We take full ownership of your technology operations, from architecture to deployment, monitoring, and ongoing optimization.',
   },
   {
     id: 'time-material',
