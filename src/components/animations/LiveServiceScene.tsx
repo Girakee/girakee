@@ -39,6 +39,7 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
   orbit: OrbitScene,
   network: NetworkScene,
   talent: TalentScene,
+  classroom: TerminalScene,
 }
 
 export default function LiveServiceScene({ scene, className = '', compact = false }: LiveServiceSceneProps) {

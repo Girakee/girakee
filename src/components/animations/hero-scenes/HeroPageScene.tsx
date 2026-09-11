@@ -15,6 +15,7 @@ import {
   HeroTerminalScene,
   HeroOrbitScene,
   HeroNetworkScene,
+  HeroClassroomScene,
   HeroDefaultScene,
 } from './scenes'
 
@@ -38,6 +39,7 @@ const HERO_SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode>
   terminal: HeroTerminalScene,
   orbit: HeroOrbitScene,
   network: HeroNetworkScene,
+  classroom: HeroClassroomScene,
 }
 
 export default function HeroPageScene({ scene, className = '' }: HeroPageSceneProps) {

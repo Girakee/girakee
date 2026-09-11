@@ -391,6 +391,7 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
   orbit: OrbitScene,
   network: NetworkScene,
   talent: TalentScene,
+  classroom: TerminalScene,
 }
 
 export default function PremiumScene({ scene, size = 'page', className = '' }: PremiumSceneProps) {

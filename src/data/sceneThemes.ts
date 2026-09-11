@@ -13,6 +13,7 @@ export type SceneType =
   | 'orbit'
   | 'network'
   | 'talent'
+  | 'classroom'
 
 export const routeScenes: Record<string, SceneType> = {
   '/': 'hero',
@@ -48,7 +49,7 @@ export const routeScenes: Record<string, SceneType> = {
   '/corporate-training': 'terminal',
   '/on-job-training': 'terminal',
   '/technical-bootcamps': 'terminal',
-  '/careers': 'network',
+  '/careers': 'classroom',
   '/contact': 'network',
 }
 

@@ -53,8 +53,8 @@ export default function ServiceShowcaseSection() {
       <div className="relative max-w-[90rem] mx-auto">
         <EditorialHeading
           label="What We Do"
-          title="Software. Manpower. Training."
-          subtitle="Three practices, each with named sub-services, defined deliverables, and a live way of working you can inspect before you hire us."
+          title="Engineering Software That Powers Business"
+          subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
           dark
         />
 

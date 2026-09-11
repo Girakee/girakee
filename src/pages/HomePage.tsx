@@ -22,7 +22,7 @@ export default function HomePage() {
     <>
       <SEO
         title="Digital Transformation & Custom Software"
-        description="Girakee Software Services. Build With Quality & Love. Web/mobile apps, AI automation, cloud solutions, and cyber security from Bengaluru. Global delivery."
+        description="Girakee Software Services. Global Digital Transformation. Web/mobile apps, AI automation, cloud solutions, and cyber security from Bengaluru. Global delivery."
         path="/"
       />
       <Hero />

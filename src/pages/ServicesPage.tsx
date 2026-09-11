@@ -17,7 +17,7 @@ export default function ServicesPage() {
       path="/services"
       label="Software Services"
       title="Engineering Software That Powers Business"
-      subtitle="Eight software capabilities delivered by practitioners who build production systems in Bengaluru for clients worldwide."
+      subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
       scene="orbit"
       introTitle="A Software Company Built for Production"
       intro={[

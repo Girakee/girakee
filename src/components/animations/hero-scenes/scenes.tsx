@@ -412,6 +412,48 @@ export function HeroNetworkScene({ loop }: Props) {
   )
 }
 
+export function HeroClassroomScene({ loop }: Props) {
+  return (
+    <HeroBackdrop label="AI Training Lab">
+      <img
+        src="/careers-lab.png"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#040c16] via-transparent to-[#040c16]/50 pointer-events-none" />
+      <svg viewBox="0 0 480 300" className="absolute inset-0 w-full h-full pointer-events-none">
+        {loop && (
+          <motion.line
+            x1="0"
+            x2="480"
+            y1="40"
+            y2="40"
+            stroke={CYAN_BRIGHT}
+            strokeWidth="1.5"
+            opacity="0.55"
+            filter="url(#hs-glow)"
+            animate={{ y1: [36, 264, 36], y2: [36, 264, 36] }}
+            transition={{ repeat: Infinity, duration: 5.5, ease: 'linear' }}
+          />
+        )}
+        <motion.path
+          d="M268 118 C 300 108, 330 148, 368 122 C 392 108, 410 132, 428 118"
+          fill="none"
+          stroke={CYAN_BRIGHT}
+          strokeWidth="2"
+          strokeDasharray="180"
+          animate={loop ? { strokeDashoffset: [180, 0, 0, 180] } : undefined}
+          transition={loop ? { repeat: Infinity, duration: 6, ease: 'easeInOut' } : undefined}
+        />
+        <PulseDot cx={368} cy={122} loop={loop} />
+        <text x="240" y="286" fill="rgba(255,255,255,0.45)" fontSize="7" textAnchor="middle" fontFamily="monospace">
+          Live projects · Mentors · AI lab
+        </text>
+      </svg>
+    </HeroBackdrop>
+  )
+}
+
 /* ── DEFAULT / AI HERO: agentic automation ── */
 export function HeroDefaultScene({ loop }: Props) {
   return (

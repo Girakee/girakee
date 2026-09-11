@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom'
 import HeroVisualization from './HeroVisualization'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { company } from '../../data/company'
+import { useNav } from '../../context/NavContext'
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const { shouldAnimate, transition, isMobile, shouldParallax } = useMotionConfig()
+  const { openCallback } = useNav()
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -62,10 +64,10 @@ export default function Hero() {
             <motion.div {...reveal(0.45)} className="flex flex-col sm:flex-row gap-3 mb-10 lg:mb-14">
               {!isMobile && (
                 <>
-                  <Link to="/contact" className="btn-primary">
+                  <button type="button" onClick={openCallback} className="btn-primary">
                     Talk to an Expert
                     <ArrowRight size={15} strokeWidth={1.75} />
-                  </Link>
+                  </button>
                   <a
                     href={company.meetingUrl}
                     target="_blank"
@@ -83,7 +85,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.p {...reveal(0.55)} className="eyebrow eyebrow-dark text-[0.625rem] opacity-60">
-              Bengaluru · US · UK · EU · Middle East
+              Bengaluru, India · Middle East · EU
             </motion.p>
           </div>
 

@@ -14,7 +14,7 @@ import { useNav } from '../../context/NavContext'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [activeMega, setActiveMega] = useState<string | null>(null)
-  const { mobileOpen, setMobileOpen } = useNav()
+  const { mobileOpen, setMobileOpen, openCallback, callbackOpen } = useNav()
   const location = useLocation()
   const { reduced, shouldAnimate, transitionFast } = useMotionConfig()
   const isHome = location.pathname === '/'
@@ -32,9 +32,9 @@ export default function Navbar() {
   }, [location.pathname, setMobileOpen])
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    document.body.style.overflow = mobileOpen || callbackOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
+  }, [mobileOpen, callbackOpen])
 
   const showSolid = scrolled || !isHome || mobileOpen
   const textColor = showSolid ? 'text-text' : 'text-white'
@@ -117,7 +117,7 @@ export default function Navbar() {
             >
               Schedule a meeting
             </a>
-            <MagneticButton to="/contact">Talk to an Expert</MagneticButton>
+            <MagneticButton onClick={openCallback}>Talk to an Expert</MagneticButton>
           </div>
 
           <HamburgerButton

@@ -2,7 +2,7 @@
 
 export const company = {
   legalName: 'Girakee Software Services Private Limited',
-  tagline: 'Build With Quality & Love',
+  tagline: 'Global Digital Transformation',
   email: 'connect@girakee.com',
   phone: '+91-9731848149',
   phoneTel: '+919731848149',

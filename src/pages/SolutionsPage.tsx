@@ -40,8 +40,8 @@ export default function SolutionsPage() {
       />
       <PageHero
         label="Services"
-        title="Software. Manpower. Training."
-        subtitle="Three practices under one delivery company. Pick a line, then a sub-service with defined work and an owner in Bengaluru."
+        title="Engineering Software That Powers Business"
+        subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
         scene="orbit"
       />
 

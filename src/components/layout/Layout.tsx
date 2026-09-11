@@ -6,6 +6,7 @@ import PageTransition from './PageTransition'
 import FloatingCTA from '../animations/FloatingCTA'
 import ParticleField from '../animations/ParticleField'
 import AmbientMotion from '../animations/AmbientMotion'
+import CallbackRequestModal from '../forms/CallbackRequestModal'
 
 export default function Layout() {
   return (
@@ -20,6 +21,7 @@ export default function Layout() {
       </PageTransition>
       <Footer />
       <FloatingCTA />
+      <CallbackRequestModal />
     </NavProvider>
   )
 }

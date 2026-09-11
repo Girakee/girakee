@@ -9,7 +9,7 @@ import GirakeeLogo from '../ui/GirakeeLogo'
 import { company } from '../../data/company'
 
 export default function MobileNav() {
-  const { mobileOpen, setMobileOpen } = useNav()
+  const { mobileOpen, setMobileOpen, openCallback } = useNav()
   const location = useLocation()
   const { reduced, shouldAnimate } = useMotionConfig()
 
@@ -110,10 +110,14 @@ export default function MobileNav() {
               >
                 Schedule a meeting
               </a>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
+              <button
+                type="button"
+                onClick={openCallback}
+                className="btn-primary w-full"
+              >
                 Talk to an Expert
                 <ArrowRight size={15} strokeWidth={1.75} />
-              </Link>
+              </button>
             </div>
           </motion.div>
         </>
