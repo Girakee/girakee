@@ -7,117 +7,105 @@ export interface ServiceRoute {
 
 export const serviceRoutes: ServiceRoute[] = [
   {
-    path: '/web-mobile-development',
+    path: '/services/web-mobile',
     serviceId: 'web-mobile',
     seoTitle: 'Web & Mobile Engineering',
     seoDescription:
-      'High-performance web ecosystems, native mobile apps, and scalable microservices engineered from discovery to production by Girakee.',
+      'High-performance web, mobile, and platform engineering from Girakee—scalable applications, design systems, and high-concurrency microservices.',
   },
   {
-    path: '/ai-engineering',
+    path: '/services/ai-vision',
     serviceId: 'ai-ml',
     seoTitle: 'Applied AI & Computer Vision',
     seoDescription:
-      'Production AI architectures, custom computer vision models, predictive systems, and autonomous agentic workflows from Girakee.',
+      'Production-grade applied AI and computer vision from Girakee: custom deep learning, multimodal extraction, and autonomous agentic workflows.',
   },
   {
-    path: '/cloud-devops',
+    path: '/services/cloud-devops',
     serviceId: 'cloud-devops',
     seoTitle: 'Cloud Architecture & DevOps',
     seoDescription:
-      'Cloud-native infrastructure, container orchestration, and automated CI/CD for resilient, high-availability deployments from Girakee.',
+      'Resilient multi-cloud architecture, Kubernetes orchestration, and automated CI/CD engineered for high availability from Girakee.',
   },
   {
-    path: '/cybersecurity',
+    path: '/services/cybersecurity',
     serviceId: 'cybersecurity',
     seoTitle: 'Zero-Trust Cybersecurity',
     seoDescription:
-      'End-to-end security posture engineering, Zero-Trust network architecture, and continuous threat mitigation from Girakee.',
+      'Proactive Zero-Trust cybersecurity and DevSecOps from Girakee: IAM, secrets management, SAST/DAST, and continuous compliance.',
   },
   {
-    path: '/ui-ux-design',
-    serviceId: 'ui-ux',
-    seoTitle: 'UI/UX Design',
-    seoDescription:
-      'User research, design systems, prototyping, and accessible front-end implementation from Girakee.',
-  },
-  {
-    path: '/software-testing',
+    path: '/services/qa-automation',
     serviceId: 'software-testing',
     seoTitle: 'QA Automation & Intelligent Testing',
     seoDescription:
-      'Automated regression frameworks, high-load performance validation, and AI-powered computer vision document audits from Girakee.',
+      'Automated QA and AI-powered schematic verification from Girakee: Playwright suites, load testing, and computer-vision blueprint inspection.',
   },
   {
-    path: '/intelligent-qa',
-    serviceId: 'intelligent-qa',
-    seoTitle: 'Intelligent QA',
-    seoDescription:
-      'AI-powered drawing validation, computer vision inspection, rule engines, and automated quality assurance from Girakee.',
-  },
-  {
-    path: '/data-analytics',
+    path: '/services/data-engineering',
     serviceId: 'data-analytics',
     seoTitle: 'Data Engineering & Analytics',
     seoDescription:
-      'Modern data warehousing, scalable ETL/ELT pipelines, and interactive executive intelligence dashboards from Girakee.',
+      'Enterprise data engineering and business intelligence from Girakee: lakehouses, streaming pipelines, and executive dashboards.',
   },
   {
-    path: '/time-and-material',
-    serviceId: 'staff-augmentation',
-    seoTitle: 'Staff Augmentation',
-    seoDescription:
-      'Girakee delivers enterprise workforce solutions, IT staff augmentation, and technical manpower services for scaling companies in UAE, Europe, and India.',
-  },
-  {
-    path: '/managed-services',
+    path: '/services/dedicated-pods',
     serviceId: 'dedicated-teams',
     seoTitle: 'Dedicated Engineering Pods',
     seoDescription:
-      'Autonomous, cross-functional engineering squads accountable for milestone delivery, system quality, and sprint execution from Girakee.',
+      'Autonomous dedicated engineering pods from Girakee—cross-functional squads accountable for end-to-end roadmap delivery under SLAs.',
   },
   {
-    path: '/contract-to-hire',
+    path: '/services/staff-augmentation',
+    serviceId: 'staff-augmentation',
+    seoTitle: 'Staff Augmentation (T&M)',
+    seoDescription:
+      'Senior technical staff augmentation from Girakee. Embed pre-vetted engineers into your sprints with dedicated timezone overlap.',
+  },
+  {
+    path: '/services/contract-to-hire',
     serviceId: 'contract-to-hire',
-    seoTitle: 'Contract-to-Hire',
+    seoTitle: 'Contract-to-Hire Engineering',
     seoDescription:
-      'De-risk long-term talent acquisition through trial-based project execution before permanent conversion with Girakee.',
+      'Evaluate engineers on production tickets before a permanent hire. Girakee contract-to-hire placements with transparent conversion.',
   },
   {
-    path: '/recruitment',
+    path: '/services/it-recruitment',
     serviceId: 'it-recruitment',
-    seoTitle: 'IT Recruitment & Technical Staffing Services',
+    seoTitle: 'IT Recruitment & Specialized Tech Search',
     seoDescription:
-      'Specialized IT recruitment and technical talent placement in Bengaluru and Dubai. We connect scaling enterprises with pre-vetted senior software engineers, tech leads, and specialized tech talent.',
+      'Practitioner-led IT recruitment and specialized tech search from Girakee for senior developers, engineering managers, and deep-tech specialists.',
   },
   {
-    path: '/internship',
-    serviceId: 'internship',
-    seoTitle: 'Student Internship (3-Month)',
-    seoDescription:
-      'A flexible 3-month structured internship for college students to build hands-on software development skills with Girakee.',
-  },
-  {
-    path: '/corporate-training',
+    path: '/services/corporate-training',
     serviceId: 'corporate-training',
-    seoTitle: 'Corporate Upskilling',
+    seoTitle: 'Corporate Tech Enablement',
     seoDescription:
-      'Bespoke technical capability programs designed around your active tech stack and led by practicing software architects at Girakee.',
+      'Practitioner-led corporate tech enablement from Girakee: custom engineering bootcamps and architecture workshops on your stack.',
   },
   {
-    path: '/on-job-training',
+    path: '/services/on-job-training',
     serviceId: 'on-job-training',
-    seoTitle: 'On-the-Job Training (6-Month)',
+    seoTitle: 'Graduate Engineering Residency (6-Month OJT)',
     seoDescription:
-      'A 6-month intensive engineering residency for recent graduates to gain verifiable production experience on live enterprise systems.',
+      'Girakee 6-month graduate engineering residency: live production code, senior mentorship, and a verified industry experience credential.',
+  },
+  {
+    path: '/services/internship',
+    serviceId: 'internship',
+    seoTitle: 'Student Engineering Internship (3-Month Track)',
+    seoDescription:
+      'A structured 12-week Girakee engineering internship for university students. Build real software and graduate with a capstone evaluation.',
   },
 ]
 
 export function getServicePath(serviceId: string): string {
   const route = serviceRoutes.find((r) => r.serviceId === serviceId)
   if (route) return route.path
-  if (serviceId === 'talent-outsourcing') return '/time-and-material'
-  if (serviceId === 'computer-vision') return '/ai-engineering'
-  if (serviceId === 'technical-bootcamps') return '/on-job-training'
-  return '/services'
+  if (serviceId === 'talent-outsourcing') return '/services/staff-augmentation'
+  if (serviceId === 'computer-vision') return '/services/ai-vision'
+  if (serviceId === 'ui-ux') return '/services/web-mobile'
+  if (serviceId === 'intelligent-qa') return '/services/qa-automation'
+  if (serviceId === 'technical-bootcamps') return '/services/on-job-training'
+  return '/services/engineering'
 }

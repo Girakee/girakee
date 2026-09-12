@@ -37,7 +37,97 @@ export const team = [
   },
 ]
 
-export const jobs = [
+export interface Job {
+  id: string
+  title: string
+  location: string
+  type: string
+  summary: string
+  responsibilities: string[]
+  requirements: string[]
+  applySubject?: string
+  about?: string
+  overview?: string
+  portfolio?: string[]
+  commercial?: string[]
+  howToApply?: string
+}
+
+export const jobs: Job[] = [
+  {
+    id: 'bd-partner-uae',
+    title: 'Business Development Partner – Middle East (Enterprise Tech & AI Solutions)',
+    location: 'Dubai / Abu Dhabi, UAE (Hybrid / Remote / Commission-Based Consultancy)',
+    type: 'Strategic Channel Partner / Commission-Based Contractor',
+    applySubject: 'BD Partner – UAE Application',
+    about:
+      'Girakee Software Services Private Limited is an enterprise software engineering consultancy and deep-tech incubator headquartered in Bengaluru, India. We architect high-concurrency digital platforms, applied AI & computer vision pipelines, zero-trust cloud infrastructure, and autonomous delivery pods for international scale-ups and global enterprises.',
+    overview:
+      'We are seeking an entrepreneurial Business Development Partner based in the UAE to originate and secure enterprise digital transformation contracts, technical workforce solutions, and proprietary software engagements across the GCC region. You will bridge regional decision-makers (CTOs, CIOs, and Digital Transformation Heads) with our offshore delivery center in Bengaluru, backed directly by our senior technical architects.',
+    summary:
+      'Originate enterprise digital transformation, workforce, and proprietary software engagements across the UAE and GCC, backed by Girakee architects in Bengaluru.',
+    responsibilities: [
+      'Originate Opportunities: Leverage your professional network across the UAE and GCC to identify organizations requiring custom platform engineering, cloud migration, AI/vision automation, or dedicated engineering squads.',
+      'Executive Introductions: Secure discovery meetings with C-level executives, VP Engineering leaders, and procurement directors.',
+      'Deal Structuring: Partner with Girakee’s Principal Architects to pitch tailored technical solutions, scope deliverables, and close multi-quarter service contracts.',
+      'Account Relationship Management: Serve as the trusted local relationship partner while our delivery squads execute sprint lifecycles.',
+    ],
+    portfolio: [
+      'Autonomous Delivery Pods & Workforce Solutions: Managed engineering squads, senior staff augmentation, and contract-to-hire frameworks.',
+      'Core Engineering Disciplines: Web/mobile platforms, applied AI & computer vision, zero-trust cybersecurity, cloud DevOps, and automated QA.',
+      'Proprietary Products: Rozgar.ai (autonomous AI digital employee for HR operations) and Intelligent Vision QA Studio (CAD blueprint validation).',
+    ],
+    requirements: [
+      '5+ years of B2B sales, technology consulting, or enterprise agency experience within the UAE/GCC market.',
+      'Proven network among tech founders, CIOs, CTOs, and digital decision-makers across retail, logistics, real estate, fintech, or government-backed entities.',
+      'Clear understanding of software delivery models (offshore pods, fixed-scope sprints, T&M staffing).',
+      'Strong executive communication and negotiation skills.',
+    ],
+    commercial: [
+      'High Commission Structure: Substantial uncapped revenue share on originating deal value and recurring sprint contracts.',
+      'Full Technical Presales Support: Direct collaboration with Girakee’s engineering leadership for client demos, RFPs, and architecture blueprints.',
+      'Flexible Engagement: Non-exclusive partnership structure suitable for independent consultants or established agency directors.',
+    ],
+    howToApply:
+      'Send your professional profile or LinkedIn credentials to connect@girakee.com with the subject line "BD Partner – UAE Application".',
+  },
+  {
+    id: 'bd-partner-dach',
+    title: 'Business Development Partner – DACH Region (IT Services & Enterprise Engineering)',
+    location: 'Germany (Burghausen / Munich / Frankfurt / Berlin – Remote / Hybrid)',
+    type: 'Strategic Sales Partner / Commercial Representative (Freie Mitarbeit / Revenue Share)',
+    applySubject: 'BD Partner – DACH Application',
+    about:
+      'Girakee Software Services Private Limited is a Bengaluru-based software engineering consultancy and incubation firm. We build production-grade web and mobile applications, deep-tech AI & computer vision engines, automated QA frameworks, and dedicated engineering pods for enterprises seeking cost-efficient, high-velocity offshore engineering.',
+    overview:
+      'We are engaging a Business Development Partner in Germany to spearhead client acquisition across the DACH region (Germany, Austria, Switzerland). You will position Girakee as an agile offshore engineering partner for mid-sized enterprises (Mittelstand) and tech scale-ups facing domestic developer shortages, high hiring friction, and complex cloud/AI modernization requirements.',
+    summary:
+      'Spearhead Girakee client acquisition across Germany, Austria, and Switzerland for dedicated pods, deep-tech engineering, and proprietary software.',
+    responsibilities: [
+      'Market Origination: Identify and engage DACH-based technical directors, product owners, and CTOs seeking dedicated engineering capacity or deep-tech transformation.',
+      'Client Engagement: Position Girakee’s delivery models to address regional engineering shortages under transparent, SLA-backed frameworks.',
+      'Collaborative Solutioning: Facilitate introductory discovery calls alongside our Bengaluru architecture leads to review technical requirements, security baselines, and sprint plans.',
+      'Commercial Closing: Guide negotiations through client onboarding, statement-of-work (SOW) execution, and long-term delivery extensions.',
+    ],
+    portfolio: [
+      'Dedicated Engineering Pods: Fully managed, cross-functional squads (Full-stack, QA, Lead, DevOps) operating on 2-week agile sprints.',
+      'Enterprise Engineering Disciplines: Cloud-native architecture (Kubernetes, AWS/Azure/GCP), Zero-Trust DevSecOps, applied computer vision, and data lakehouses.',
+      'Proprietary Software Solutions: Rozgar.ai (agentic HR workflow automation) and CAD schematic verification platforms.',
+    ],
+    requirements: [
+      'Based in Germany with native/fluent German and professional English proficiency.',
+      '5+ years of experience in IT services sales, software consulting, or commercial B2B agency representation in the DACH territory.',
+      'Established access to decision-makers within German tech companies, industrial/automotive firms, or enterprise software providers.',
+      'Familiarity with EU data privacy expectations (GDPR compliance) and standard offshore delivery governance.',
+    ],
+    commercial: [
+      'Uncapped Revenue Share: Highly competitive commission paid on initial contract value and recurring monthly sprint billings.',
+      'Dedicated Delivery Support: Direct backing from our senior engineering management for RFPs, technical proposals, and solution architectures.',
+      'Autonomous Structure: Flexible, independent contract model (Freier Mitarbeiter / Handelsvertreter) ideal for experienced tech sales executives and independent advisors.',
+    ],
+    howToApply:
+      'Send your CV or LinkedIn profile to connect@girakee.com with the subject line "BD Partner – DACH Application".',
+  },
   {
     id: 'full-stack-engineer',
     title: 'Full-Stack Engineer',
@@ -140,10 +230,10 @@ export const jobs = [
   },
 ]
 
-export function jobApplyHref(title: string): string {
-  const subject = encodeURIComponent(`Application: ${title}`)
+export function jobApplyHref(title: string, subject?: string): string {
+  const encodedSubject = encodeURIComponent(subject ?? `Application: ${title}`)
   const body = encodeURIComponent(
     `I am applying for ${title} at Girakee.\n\nName:\nPhone:\nLinkedIn or portfolio:\n\nNote:\n`,
   )
-  return `mailto:connect@girakee.com?subject=${subject}&body=${body}`
+  return `mailto:connect@girakee.com?subject=${encodedSubject}&body=${body}`
 }

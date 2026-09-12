@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
-import { services } from '../../data/services'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { company } from '../../data/company'
 
@@ -17,8 +16,20 @@ interface FormData {
 interface FormErrors {
   name?: string
   email?: string
+  company?: string
+  service?: string
   message?: string
 }
+
+const engagementCategories = [
+  'Software Engineering (Web, AI, Cloud, QA, Data)',
+  'Dedicated Engineering Pod (Managed Squad)',
+  'Staff Augmentation / Time & Material',
+  'Contract-to-Hire Placement',
+  'IT Recruitment & Specialized Search',
+  'Corporate Tech Enablement / Upskilling',
+  'Rozgar.ai Enterprise Deployment',
+]
 
 const initialForm: FormData = {
   name: '',
@@ -37,13 +48,15 @@ export default function ContactForm() {
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {}
-    if (!form.name.trim()) newErrors.name = 'Name is required'
+    if (!form.name.trim()) newErrors.name = 'Full name is required'
+    if (!form.company.trim()) newErrors.company = 'Company name is required'
     if (!form.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = 'Work email is required'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = 'Enter a valid email address'
+      newErrors.email = 'Enter a valid work email address'
     }
-    if (!form.message.trim()) newErrors.message = 'Project details are required'
+    if (!form.service) newErrors.service = 'Select an engagement category'
+    if (!form.message.trim()) newErrors.message = 'Project scope is required'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -52,18 +65,13 @@ export default function ContactForm() {
     e.preventDefault()
     if (!validate()) return
 
-    const payload = {
-      ...form,
-      submittedAt: new Date().toISOString(),
-      source: 'girakee-website',
-    }
-    console.info('Contact form submission:', payload)
-
-    const subject = encodeURIComponent(`Inquiry from ${form.name}${form.company ? ` (${form.company})` : ''}`)
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nCompany: ${form.company}\nEmail: ${form.email}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`,
+    const subject = encodeURIComponent(
+      `Inquiry from ${form.name}${form.company ? ` (${form.company})` : ''} — Request NDA`,
     )
-    window.location.href = `mailto:connect@girakee.com?subject=${subject}&body=${body}`
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nCompany: ${form.company}\nWork Email: ${form.email}\nPhone / WhatsApp: ${form.phone}\nEngagement Category: ${form.service}\n\nProject Scope & Requirements:\n${form.message}`,
+    )
+    window.location.href = `mailto:${company.email}?subject=${subject}&body=${body}`
     setSubmitted(true)
   }
 
@@ -90,9 +98,10 @@ export default function ContactForm() {
           >
             <CheckCircle size={48} className="text-cyan mb-6" />
           </motion.div>
-          <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Message Sent</h3>
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">Inquiry queued</h3>
           <p className="text-white/50 max-w-sm text-sm sm:text-base">
-            Thank you for reaching out. Our team will get back to you shortly.
+            Thank you. All inquiries are protected under mutual NDA standards. We respond within 24
+            business hours.
           </p>
         </motion.div>
       </AnimatePresence>
@@ -107,54 +116,106 @@ export default function ContactForm() {
     }`
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
+    <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
+      <input type="hidden" name="form-name" value="contact" />
       <div>
-        <label htmlFor="name" className="block text-sm text-white/50 mb-2">Name *</label>
-        <input id="name" type="text" required autoComplete="name" value={form.name} onChange={(e) => update('name', e.target.value)} className={inputClass('name')} aria-invalid={!!errors.name} />
+        <label htmlFor="name" className="block text-sm text-white/50 mb-2">Full Name *</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autoComplete="name"
+          placeholder="e.g., Alex Vance"
+          value={form.name}
+          onChange={(e) => update('name', e.target.value)}
+          className={inputClass('name')}
+          aria-invalid={!!errors.name}
+        />
         {errors.name && <p className="text-red-500 text-xs mt-1" role="alert">{errors.name}</p>}
       </div>
       <div>
-        <label htmlFor="company" className="block text-sm text-white/50 mb-2">Company</label>
-        <input id="company" type="text" autoComplete="organization" value={form.company} onChange={(e) => update('company', e.target.value)} className={inputClass()} />
-      </div>
-      <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
-        <div>
-          <label htmlFor="email" className="block text-sm text-white/50 mb-2">Email *</label>
-          <input id="email" type="email" required autoComplete="email" inputMode="email" value={form.email} onChange={(e) => update('email', e.target.value)} className={inputClass('email')} aria-invalid={!!errors.email} />
-          {errors.email && <p className="text-red-500 text-xs mt-1" role="alert">{errors.email}</p>}
-        </div>
-        <div>
-          <label htmlFor="phone" className="block text-sm text-white/50 mb-2">Phone</label>
-          <input id="phone" type="tel" autoComplete="tel" inputMode="tel" value={form.phone} onChange={(e) => update('phone', e.target.value)} className={inputClass()} />
-        </div>
+        <label htmlFor="email" className="block text-sm text-white/50 mb-2">Work Email *</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          inputMode="email"
+          value={form.email}
+          onChange={(e) => update('email', e.target.value)}
+          className={inputClass('email')}
+          aria-invalid={!!errors.email}
+        />
+        {errors.email && <p className="text-red-500 text-xs mt-1" role="alert">{errors.email}</p>}
       </div>
       <div>
-        <label htmlFor="service" className="block text-sm text-white/50 mb-2">Service</label>
-        <select id="service" value={form.service} onChange={(e) => update('service', e.target.value)} className={inputClass()}>
-          <option value="">Select a service</option>
-          {services.map((s) => (
-            <option key={s.id} value={s.title}>{s.title}</option>
+        <label htmlFor="company" className="block text-sm text-white/50 mb-2">Company Name *</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          required
+          autoComplete="organization"
+          value={form.company}
+          onChange={(e) => update('company', e.target.value)}
+          className={inputClass('company')}
+        />
+        {errors.company && <p className="text-red-500 text-xs mt-1" role="alert">{errors.company}</p>}
+      </div>
+      <div>
+        <label htmlFor="phone" className="block text-sm text-white/50 mb-2">Phone / WhatsApp</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          inputMode="tel"
+          placeholder="+1 (555) 000-0000"
+          value={form.phone}
+          onChange={(e) => update('phone', e.target.value)}
+          className={inputClass()}
+        />
+      </div>
+      <div>
+        <label htmlFor="service" className="block text-sm text-white/50 mb-2">Engagement Category *</label>
+        <select
+          id="service"
+          name="service"
+          required
+          value={form.service}
+          onChange={(e) => update('service', e.target.value)}
+          className={inputClass('service')}
+        >
+          <option value="">Select a category</option>
+          {engagementCategories.map((item) => (
+            <option key={item} value={item}>{item}</option>
           ))}
         </select>
+        {errors.service && <p className="text-red-500 text-xs mt-1" role="alert">{errors.service}</p>}
       </div>
       <div>
-        <label htmlFor="message" className="block text-sm text-white/50 mb-2">Project Details *</label>
-        <textarea id="message" required rows={5} value={form.message} onChange={(e) => update('message', e.target.value)} className={`${inputClass('message')} resize-none min-h-[120px]`} aria-invalid={!!errors.message} />
+        <label htmlFor="message" className="block text-sm text-white/50 mb-2">Project Scope & Requirements *</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          placeholder="Provide an overview of your architecture, technical constraints, team size, or target timeline..."
+          value={form.message}
+          onChange={(e) => update('message', e.target.value)}
+          className={`${inputClass('message')} resize-none min-h-[120px]`}
+          aria-invalid={!!errors.message}
+        />
         {errors.message && <p className="text-red-500 text-xs mt-1" role="alert">{errors.message}</p>}
       </div>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <button type="submit" className="btn-primary w-full touch-manipulation">
-          Start a Conversation
-        </button>
-        <a
-          href={company.meetingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-secondary w-full touch-manipulation"
-        >
-          Request a meeting
-        </a>
-      </div>
+      <button type="submit" className="btn-primary w-full touch-manipulation">
+        Submit Inquiry & Request NDA
+      </button>
+      <p className="text-xs text-white/35 leading-relaxed">
+        All inquiries are protected under mutual NDA standards. Response within 24 business hours.
+      </p>
     </form>
   )
 }

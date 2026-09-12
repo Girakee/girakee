@@ -34,7 +34,12 @@ export default function MegaMenu({ title, items, groups, align = 'left' }: MegaM
                 key={group.title}
                 className="px-5 py-5 border-l border-[var(--border-subtle)] first:border-l-0"
               >
-                <p className="text-left text-[0.8125rem] font-bold text-text mb-3">{group.title}</p>
+                <Link
+                  to={group.path}
+                  className="block text-left text-[0.8125rem] font-bold text-text mb-3 hover:text-cyan transition-colors"
+                >
+                  {group.title}
+                </Link>
                 <ul>
                   {group.items.map((item) => (
                     <li key={item.path + item.label}>

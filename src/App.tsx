@@ -20,6 +20,7 @@ import IndustryPackPage from './pages/IndustryPackPage'
 import RozgarAiPage from './pages/RozgarAiPage'
 import ServiceLandingPage from './components/sections/ServiceLandingPage'
 import { serviceRoutes } from './data/serviceRoutes'
+import { legacyRedirects } from './data/legacyRedirects'
 
 export default function App() {
   return (
@@ -28,7 +29,9 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="services" element={<ServicesPage />} />
-        <Route path="manpower-solutions" element={<ManpowerPage />} />
+        <Route path="services/engineering" element={<ServicesPage />} />
+        <Route path="services/workforce" element={<ManpowerPage />} />
+        <Route path="services/enablement" element={<TrainingPage />} />
         {serviceRoutes.map(({ path, serviceId, seoTitle, seoDescription }) => (
           <Route
             key={path}
@@ -42,12 +45,9 @@ export default function App() {
             }
           />
         ))}
-        <Route path="talent-outsourcing" element={<Navigate to="/time-and-material" replace />} />
-        <Route path="staff-augmentation" element={<Navigate to="/time-and-material" replace />} />
-        <Route path="dedicated-teams" element={<Navigate to="/managed-services" replace />} />
-        <Route path="it-recruitment" element={<Navigate to="/recruitment" replace />} />
-        <Route path="computer-vision" element={<Navigate to="/ai-engineering" replace />} />
-        <Route path="technical-bootcamps" element={<Navigate to="/on-job-training" replace />} />
+        {legacyRedirects.map(({ from, to }) => (
+          <Route key={from} path={from.replace(/^\//, '')} element={<Navigate to={to} replace />} />
+        ))}
         <Route path="solutions" element={<SolutionsPage />} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/digital-employees" element={<DigitalEmployeePlatformPage />} />
@@ -63,7 +63,6 @@ export default function App() {
         <Route path="industries" element={<IndustriesPage />} />
         <Route path="technology" element={<TechnologyPage />} />
         <Route path="engagement-models" element={<EngagementModelsPage />} />
-        <Route path="training" element={<TrainingPage />} />
         <Route path="careers" element={<CareersPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="privacy-policy" element={<PrivacyPolicyPage />} />

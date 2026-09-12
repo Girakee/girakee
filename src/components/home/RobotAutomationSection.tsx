@@ -21,7 +21,7 @@ const showcase = [
       'Tokenized Enterprise Design Systems & CRO',
     ],
     cta: 'Explore Web & Mobile',
-    path: '/web-mobile-development',
+    path: '/services/web-mobile',
   },
   {
     id: 'ai-ml',
@@ -37,7 +37,7 @@ const showcase = [
       'Automated MLOps & Real-Time Drift Monitoring',
     ],
     cta: 'Explore AI Solutions',
-    path: '/ai-engineering',
+    path: '/services/ai-vision',
   },
   {
     id: 'cloud-devops',
@@ -53,7 +53,7 @@ const showcase = [
       'Automated Zero-Downtime CI/CD Pipelines',
     ],
     cta: 'Explore Cloud & DevOps',
-    path: '/cloud-devops',
+    path: '/services/cloud-devops',
   },
   {
     id: 'cybersecurity',
@@ -69,7 +69,7 @@ const showcase = [
       'Regulatory Compliance Hardening (SOC 2, ISO 27001, GDPR)',
     ],
     cta: 'Explore Cybersecurity',
-    path: '/cybersecurity',
+    path: '/services/cybersecurity',
   },
   {
     id: 'software-testing',
@@ -85,7 +85,7 @@ const showcase = [
       'Deterministic Engineering Rule & Tolerance Engines',
     ],
     cta: 'Explore Quality Engineering',
-    path: '/software-testing',
+    path: '/services/qa-automation',
   },
   {
     id: 'data-analytics',
@@ -101,7 +101,7 @@ const showcase = [
       'Interactive Executive Dashboards (Power BI / Tableau)',
     ],
     cta: 'Explore Data Solutions',
-    path: '/data-analytics',
+    path: '/services/data-engineering',
   },
 ]
 

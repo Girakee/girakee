@@ -14,7 +14,7 @@ export default function ServicesPage() {
     <CategoryLandingPage
       seoTitle="Core Engineering & AI"
       seoDescription="Web and mobile engineering, applied AI and computer vision, cloud architecture, zero-trust cybersecurity, QA automation, and data platforms from Girakee."
-      path="/services"
+      path="/services/engineering"
       label="Core Engineering & AI"
       title="Engineering Software That Powers Business"
       subtitle="Scalable digital architecture, intelligent automation, and robust enterprise engineering delivered to clients across the Middle East, Europe, and North America."

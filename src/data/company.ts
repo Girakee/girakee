@@ -4,6 +4,7 @@ export const company = {
   legalName: 'Girakee Software Services Private Limited',
   tagline: 'Global Digital Transformation',
   email: 'connect@girakee.com',
+  enterpriseEmail: 'enterprise@girakee.com',
   phone: '+91-9731848149',
   phoneTel: '+919731848149',
   website: 'https://www.girakee.com',
@@ -36,13 +37,12 @@ export const aboutMessaging = {
 }
 
 export const contactMessaging = {
-  headline: 'Connect with Innovation. Start Your Transformation.',
+  headline: 'Initiate Your Engineering Engagement',
   description:
-    'From Bengaluru to your board room, we\'re ready to build your future. Your next competitive edge starts with a conversation. Whether you\'re in the US, the EU, the UK, or the Middle East, our experts are standing by to discuss how our integrated Web, AI, Cloud, and Security solutions can be delivered to you with jaw-dropping quality and unbeatable prices. Reach out today. Let\'s discuss your vision and make digital transformation a powerful reality.',
+    'Whether architecting an autonomous delivery pod, deploying applied AI systems, or scaling sprint capacity from Bengaluru, our solutions architects are ready to evaluate your requirements.',
   callUs: {
-    title: 'Call us',
-    description:
-      'Got questions or need urgent help? Call our squad anytime. We\'re ready to talk, guide, and deliver. Your transformation is one call away. Secure peace of mind now.',
+    title: 'Direct Advisory & Hotline',
+    description: 'Mon–Fri, 9:00 AM – 7:00 PM IST (Global Coverage)',
   },
 }
 
@@ -77,7 +77,7 @@ export const internshipMessaging = {
   primaryLabel: 'Explore Engineering Careers',
   primaryPath: '/careers',
   secondaryLabel: 'Apply for Incubation',
-  secondaryPath: '/on-job-training',
+  secondaryPath: '/services/on-job-training',
 }
 
 export const offices = [

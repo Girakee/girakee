@@ -78,7 +78,7 @@ export default function CareersPage() {
                       </p>
                     </button>
                     <div className="flex items-center gap-3 shrink-0">
-                      <a href={jobApplyHref(job.title)} className="btn-primary">
+                      <a href={jobApplyHref(job.title, job.applySubject)} className="btn-primary">
                         Apply
                       </a>
                       <button
@@ -98,7 +98,15 @@ export default function CareersPage() {
                   </div>
                   {open && (
                     <div className="px-5 md:px-6 pb-6 border-t border-white/[0.06] pt-5">
-                      <p className="text-sm text-white/55 leading-relaxed mb-6">{job.summary}</p>
+                      {job.about && (
+                        <>
+                          <h4 className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">
+                            About Girakee
+                          </h4>
+                          <p className="text-sm text-white/55 leading-relaxed mb-6">{job.about}</p>
+                        </>
+                      )}
+                      <p className="text-sm text-white/55 leading-relaxed mb-6">{job.overview ?? job.summary}</p>
                       <h4 className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">
                         What you will do
                       </h4>
@@ -109,6 +117,20 @@ export default function CareersPage() {
                           </li>
                         ))}
                       </ul>
+                      {job.portfolio && job.portfolio.length > 0 && (
+                        <>
+                          <h4 className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">
+                            Portfolio you will represent
+                          </h4>
+                          <ul className="space-y-2 mb-6">
+                            {job.portfolio.map((item) => (
+                              <li key={item} className="text-sm text-white/50 leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:bg-cyan/70">
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
                       <h4 className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">
                         What we look for
                       </h4>
@@ -119,6 +141,23 @@ export default function CareersPage() {
                           </li>
                         ))}
                       </ul>
+                      {job.commercial && job.commercial.length > 0 && (
+                        <>
+                          <h4 className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-3 mt-6">
+                            Commercial terms & perks
+                          </h4>
+                          <ul className="space-y-2">
+                            {job.commercial.map((item) => (
+                              <li key={item} className="text-sm text-white/50 leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:bg-cyan/70">
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                      {job.howToApply && (
+                        <p className="text-sm text-white/55 leading-relaxed mt-6">{job.howToApply}</p>
+                      )}
                     </div>
                   )}
                 </article>

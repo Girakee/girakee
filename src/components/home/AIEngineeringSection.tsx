@@ -7,32 +7,32 @@ const disciplines = [
   {
     title: 'Web & Mobile Engineering',
     body: 'High-performance web applications, native mobile apps, and microservice APIs engineered for global concurrency.',
-    path: '/web-mobile-development',
+    path: '/services/web-mobile',
   },
   {
     title: 'Applied AI & Computer Vision',
     body: 'Production AI architectures, custom computer vision models, predictive engines, and autonomous agentic workflows.',
-    path: '/ai-engineering',
+    path: '/services/ai-vision',
   },
   {
     title: 'Cloud Architecture & DevOps',
     body: 'Multi-cloud infrastructure (AWS/Azure/GCP), Infrastructure as Code, Kubernetes orchestration, and automated CI/CD.',
-    path: '/cloud-devops',
+    path: '/services/cloud-devops',
   },
   {
     title: 'Zero-Trust Cybersecurity',
     body: 'End-to-end security hardening, automated SAST/DAST pipeline scanning, IAM governance, and compliance readiness.',
-    path: '/cybersecurity',
+    path: '/services/cybersecurity',
   },
   {
     title: 'QA Automation & Intelligent Testing',
     body: 'Continuous CI/CD test gates, automated regression suites, and AI-driven schematic verification.',
-    path: '/software-testing',
+    path: '/services/qa-automation',
   },
   {
     title: 'Data Engineering & Analytics',
     body: 'Centralized enterprise data platforms, scalable ETL/ELT streaming pipelines, and executive BI dashboards.',
-    path: '/data-analytics',
+    path: '/services/data-engineering',
   },
 ]
 
@@ -78,7 +78,7 @@ export default function AIEngineeringSection() {
         </StaggerChildren>
 
         <div className="mt-10">
-          <Link to="/services" className="btn-secondary">
+          <Link to="/services/engineering" className="btn-secondary">
             Core Engineering Hub
             <ArrowUpRight size={15} strokeWidth={1.5} />
           </Link>

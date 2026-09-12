@@ -9,21 +9,21 @@ import { softwareServices, manpowerServices, trainingServices } from '../data/se
 const pillars = [
   {
     title: 'Core Engineering & AI',
-    path: '/services',
+    path: '/services/engineering',
     description:
       'End-to-end full-stack architectures, applied computer vision, cloud-native deployments, and automated QA.',
     items: softwareServices,
   },
   {
     title: 'Workforce Solutions & Pods',
-    path: '/manpower-solutions',
+    path: '/services/workforce',
     description:
       'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
     items: manpowerServices,
   },
   {
-    title: 'Corporate Upskilling',
-    path: '/training',
+    title: 'Corporate Upskilling & Incubation',
+    path: '/services/enablement',
     description:
       'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships led by practicing engineers.',
     items: trainingServices,

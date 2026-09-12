@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { pickVariants } from '../../animations/motionConfig'
 import { slideUpSubtle } from '../../animations/variants'
@@ -15,6 +16,8 @@ interface PageHeroProps {
   showScene?: boolean
   sceneContent?: ReactNode
   showScan?: boolean
+  cta?: { label: string; to: string }
+  secondaryCta?: { label: string; to: string; external?: boolean }
 }
 
 export default function PageHero({
@@ -25,6 +28,8 @@ export default function PageHero({
   showScene = true,
   sceneContent,
   showScan = true,
+  cta,
+  secondaryCta,
 }: PageHeroProps) {
   const location = useLocation()
   const { reduced, shouldAnimate, transition } = useMotionConfig()
@@ -56,6 +61,32 @@ export default function PageHero({
               <motion.p {...reveal(0.22)} className="mt-4 md:mt-5 text-body text-body-dark max-w-xl">
                 {subtitle}
               </motion.p>
+            )}
+            {(cta || secondaryCta) && (
+              <motion.div {...reveal(0.28)} className="mt-7 flex flex-wrap gap-3">
+                {cta && (
+                  <Link to={cta.to} className="btn-primary inline-flex">
+                    {cta.label}
+                    <ArrowRight size={15} strokeWidth={1.75} />
+                  </Link>
+                )}
+                {secondaryCta && (
+                  secondaryCta.external ? (
+                    <a
+                      href={secondaryCta.to}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary inline-flex"
+                    >
+                      {secondaryCta.label}
+                    </a>
+                  ) : (
+                    <Link to={secondaryCta.to} className="btn-secondary inline-flex">
+                      {secondaryCta.label}
+                    </Link>
+                  )
+                )}
+              </motion.div>
             )}
           </div>
 

@@ -7,31 +7,31 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const footerColumns = {
   'Engineering & Services': [
-    { label: 'Core Software Engineering', path: '/services' },
-    { label: 'Applied AI & Computer Vision', path: '/ai-engineering' },
-    { label: 'Cloud Architecture & DevOps', path: '/cloud-devops' },
-    { label: 'Zero-Trust Cybersecurity', path: '/cybersecurity' },
-    { label: 'QA Automation & Testing', path: '/software-testing' },
-    { label: 'Workforce Solutions & Pods', path: '/manpower-solutions' },
-    { label: 'Corporate Tech Enablement', path: '/training' },
+    { label: 'Core Software Engineering', path: '/services/engineering' },
+    { label: 'Applied AI & Computer Vision', path: '/services/ai-vision' },
+    { label: 'Cloud Architecture & DevOps', path: '/services/cloud-devops' },
+    { label: 'Zero-Trust Cybersecurity', path: '/services/cybersecurity' },
+    { label: 'QA Automation & Testing', path: '/services/qa-automation' },
+    { label: 'Workforce Solutions & Pods', path: '/services/workforce' },
+    { label: 'Corporate Tech Enablement', path: '/services/enablement' },
   ],
   'Proprietary Products & Labs': [
     { label: 'Rozgar.ai (Intelligent HR Tech)', path: '/products/rozgar-ai' },
-    { label: 'Intelligent Vision QA (CAD/Drawing Engine)', path: '/intelligent-qa' },
-    { label: 'Girakee Talent Incubation Lab', path: '/on-job-training' },
+    { label: 'Intelligent Vision QA (CAD/Drawing Engine)', path: '/services/qa-automation' },
+    { label: 'Girakee Talent Incubation Lab', path: '/services/on-job-training' },
   ],
   'Company & Careers': [
     { label: 'About Girakee', path: '/about' },
     { label: 'Leadership & Engineering Culture', path: '/about' },
     { label: 'Case Studies & Client Work', path: '/solutions' },
     { label: 'Engineering Careers', path: '/careers' },
-    { label: 'Graduate Residency Program (OJT)', path: '/on-job-training' },
+    { label: 'Graduate Residency Program (OJT)', path: '/services/on-job-training' },
     { label: 'Contact & Discovery Sessions', path: '/contact' },
   ],
   'Governance & Legal': [
     { label: 'Privacy Policy', path: '/privacy-policy' },
     { label: 'Terms of Service', path: '/terms' },
-    { label: 'Information Security & Compliance', path: '/cybersecurity' },
+    { label: 'Information Security & Compliance', path: '/services/cybersecurity' },
     { label: 'Whistleblower & Ethical Conduct', path: '/terms' },
   ],
 }

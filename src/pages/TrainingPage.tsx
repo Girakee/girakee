@@ -12,11 +12,11 @@ const methodology = [
 export default function TrainingPage() {
   return (
     <CategoryLandingPage
-      seoTitle="Corporate Upskilling"
-      seoDescription="Corporate engineering bootcamps, 6-month graduate incubation, and 3-month student internships mentored by practicing engineers at Girakee."
-      path="/training"
-      label="Capability Building & Talent Incubation"
-      title="Corporate Upskilling & Practical Talent Incubation"
+      seoTitle="Corporate Upskilling & Incubation"
+      seoDescription="Corporate engineering bootcamps, 6-month graduate residency, and 3-month student internships mentored by practicing engineers at Girakee."
+      path="/services/enablement"
+      label="Corporate Upskilling & Incubation"
+      title="Corporate Upskilling & Incubation"
       subtitle="From tailored corporate engineering bootcamps to structured graduate incubation, Girakee bridges the gap between academic foundations and production-grade software delivery. All programs are mentored by active engineering leads using real-world architectures, continuous integration, and verifiable project outcomes."
       scene="terminal"
       introTitle="Training That Looks Like the Job"

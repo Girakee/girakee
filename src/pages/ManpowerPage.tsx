@@ -12,9 +12,9 @@ const methodology = [
 export default function ManpowerPage() {
   return (
     <CategoryLandingPage
-      seoTitle="Workforce Solutions"
+      seoTitle="Workforce Solutions & Pods"
       seoDescription="Girakee delivers enterprise workforce solutions, IT staff augmentation, and technical manpower services for scaling companies in UAE, Europe, and India."
-      path="/manpower-solutions"
+      path="/services/workforce"
       label="Flexible Engagement Models"
       title="Workforce Solutions & Dedicated Engineering Pods"
       subtitle="Scale your engineering velocity with pre-vetted senior software engineers and cross-functional technical squads. From embedded time-and-material staff augmentation to fully managed delivery pods, Girakee provides seamless team integration across global timezones under strict SLA governance."

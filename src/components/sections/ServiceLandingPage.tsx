@@ -6,8 +6,9 @@ import ServiceProcessTimeline from '../animations/ServiceProcessTimeline'
 import ScrollReveal from '../animations/ScrollReveal'
 import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren'
 import FinalCTASection from '../home/FinalCTASection'
+import ProgramApplicationForm from '../forms/ProgramApplicationForm'
 import { getSceneForService } from '../../data/sceneThemes'
-import { services, type Service } from '../../data/services'
+import { processTitle, services, type Service } from '../../data/services'
 import { ArrowRight, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -17,22 +18,10 @@ interface ServiceLandingPageProps {
   seoDescription?: string
 }
 
-const relatedMap: Record<string, string[]> = {
-  'web-mobile': ['cloud-devops', 'software-testing', 'ai-ml'],
-  'ai-ml': ['software-testing', 'data-analytics', 'cloud-devops'],
-  'cloud-devops': ['cybersecurity', 'web-mobile', 'data-analytics'],
-  'cybersecurity': ['cloud-devops', 'software-testing', 'ai-ml'],
-  'ui-ux': ['web-mobile', 'software-testing', 'data-analytics'],
-  'software-testing': ['ai-ml', 'web-mobile', 'cybersecurity'],
-  'intelligent-qa': ['software-testing', 'ai-ml', 'data-analytics'],
-  'data-analytics': ['ai-ml', 'cloud-devops', 'web-mobile'],
-  'staff-augmentation': ['dedicated-teams', 'contract-to-hire', 'it-recruitment'],
-  'dedicated-teams': ['staff-augmentation', 'contract-to-hire', 'web-mobile'],
-  'contract-to-hire': ['staff-augmentation', 'it-recruitment', 'dedicated-teams'],
-  'it-recruitment': ['staff-augmentation', 'contract-to-hire', 'dedicated-teams'],
-  internship: ['corporate-training', 'on-job-training', 'staff-augmentation'],
-  'corporate-training': ['on-job-training', 'internship', 'dedicated-teams'],
-  'on-job-training': ['corporate-training', 'internship', 'staff-augmentation'],
+const categoryHub: Record<Service['category'], { label: string; path: string }> = {
+  software: { label: 'All Software Services', path: '/services/engineering' },
+  manpower: { label: 'Workforce Solutions & Pods', path: '/services/workforce' },
+  training: { label: 'Corporate Upskilling & Incubation', path: '/services/enablement' },
 }
 
 export function getServiceById(id: string): Service | undefined {
@@ -44,10 +33,19 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
   if (!service) return null
 
   const scene = getSceneForService(service.id)
-  const relatedIds = relatedMap[service.id] ?? []
-  const relatedServices = relatedIds
-    .map((id) => getServiceById(id))
-    .filter((s): s is Service => Boolean(s))
+  const relatedServices = (service.related ?? [])
+    .map((item) => {
+      const related = getServiceById(item.id)
+      return related ? { ...item, service: related } : null
+    })
+    .filter((item): item is { id: string; blurb: string; service: Service } => Boolean(item))
+
+  const ctaTo = service.ctaHref ?? '/contact'
+  const relatedHeading =
+    service.relatedHeading ??
+    (service.category === 'manpower' ? 'Related Models' : 'Related Disciplines')
+  const hub = categoryHub[service.category]
+  const applyAnchor = service.application === 'internship' ? 'apply' : 'register'
 
   return (
     <>
@@ -57,10 +55,11 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         path={service.path}
       />
       <PageHero
-        label={service.shortTitle}
-        title={service.title}
+        label={service.heroKicker ?? service.shortTitle}
+        title={service.heroTitle ?? service.title}
         subtitle={service.description}
         scene={scene}
+        cta={{ label: service.ctaLabel, to: ctaTo }}
       />
 
       <AnimatedTechMarquee technologies={service.technologies} />
@@ -69,17 +68,15 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         <div className="max-w-[90rem] mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
             <ScrollReveal variant="slideUpSubtle">
+              <p className="eyebrow eyebrow-dark mb-4">{service.buildSectionTitle ?? 'What We Build'}</p>
               <h2 className="editorial-display text-2xl md:text-3xl text-white mb-6">
-                What We Build
+                {service.buildHeadline ?? service.overview}
               </h2>
-              <p className="text-body text-body-dark leading-relaxed mb-4 text-base">
-                {service.overview}
-              </p>
-              <p className="text-sm text-white/45 leading-relaxed mb-8">
+              <p className="text-body text-body-dark leading-relaxed mb-8 text-base">
                 {service.detailedOverview}
               </p>
-              <Link to="/contact" className="btn-primary inline-flex">
-                {service.ctaLabel}
+              <Link to={service.application ? `#${applyAnchor}` : '/contact'} className="btn-primary inline-flex">
+                {service.inSectionCta ?? service.ctaLabel}
                 <ArrowRight size={15} strokeWidth={1.75} />
               </Link>
             </ScrollReveal>
@@ -104,7 +101,7 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
             </ScrollReveal>
 
             <ScrollReveal variant="slideUpSubtle" delay={0.08}>
-              <h3 className="eyebrow eyebrow-dark mb-5 text-[0.625rem]">Deliverables</h3>
+              <h3 className="eyebrow eyebrow-dark mb-5 text-[0.625rem]">Deliverables (You Get)</h3>
               <StaggerChildren className="space-y-2">
                 {service.deliverables.map((item) => (
                   <StaggerItem key={item}>
@@ -126,52 +123,55 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
       </section>
 
       <section className="bg-navy-dark section-py page-px">
-        <div className="max-w-[90rem] mx-auto grid md:grid-cols-2 gap-12">
-          <ScrollReveal variant="fade">
-            <h3 className="eyebrow eyebrow-dark mb-6 text-[0.625rem]">Use Cases</h3>
-            <ul className="space-y-4">
-              {service.useCases.map((uc) => (
-                <li key={uc} className="text-sm text-white/55 flex items-start gap-3">
-                  <ArrowRight size={14} className="text-cyan/50 shrink-0 mt-0.5" />
-                  {uc}
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
-          <ScrollReveal variant="fade" delay={0.08}>
-            <h3 className="eyebrow eyebrow-dark mb-6 text-[0.625rem]">Business Outcomes</h3>
-            <ul className="space-y-4">
-              {service.businessValue.map((bv) => (
-                <li key={bv} className="text-sm text-white/65 flex items-start gap-3">
-                  <span className="text-cyan font-mono text-xs shrink-0">→</span>
-                  {bv}
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
+        <div className="max-w-[90rem] mx-auto">
+          <h2 className="editorial-display text-xl md:text-2xl text-white mb-10">Use Cases & Business Outcomes</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <ScrollReveal variant="fade">
+              <h3 className="eyebrow eyebrow-dark mb-6 text-[0.625rem]">Use Cases</h3>
+              <ul className="space-y-4">
+                {service.useCases.map((uc) => (
+                  <li key={uc} className="text-sm text-white/55 flex items-start gap-3">
+                    <ArrowRight size={14} className="text-cyan/50 shrink-0 mt-0.5" />
+                    {uc}
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={0.08}>
+              <h3 className="eyebrow eyebrow-dark mb-6 text-[0.625rem]">Business Outcomes</h3>
+              <ul className="space-y-4">
+                {service.businessValue.map((bv) => (
+                  <li key={bv} className="text-sm text-white/65 flex items-start gap-3">
+                    <span className="text-cyan font-mono text-xs shrink-0">→</span>
+                    {bv}
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
         <div className="max-w-[90rem] mx-auto">
           <ScrollReveal variant="slideUpSubtle">
-            <h2 className="editorial-display text-xl md:text-2xl text-white mb-4">
-              How We Engage
-            </h2>
+            <h2 className="editorial-display text-xl md:text-2xl text-white mb-4">How We Engage</h2>
             <p className="text-sm text-white/45 max-w-2xl mb-10 leading-relaxed">
-              Every {service.shortTitle.toLowerCase()} engagement follows a structured delivery model,
-              from discovery through production handover. We work in agile sprints with transparent
-              reporting, documented deliverables, and direct access to senior engineers in Bengaluru.
+              {service.engageSubtext ??
+                `Every ${service.shortTitle.toLowerCase()} engagement follows a structured delivery model, from discovery through production handover.`}
             </p>
           </ScrollReveal>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {service.process.map((step, i) => (
-              <StaggerItem key={step}>
+              <StaggerItem key={`${i}-${processTitle(step)}`}>
                 <div className="p-4 holographic-panel h-full">
                   <span className="text-xs font-mono text-cyan/50 block mb-2">
-                    {String(i + 1).padStart(2, '0')}
+                    Stage {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="text-sm text-white/65">{step}</p>
+                  <p className="text-sm text-white mb-2">{processTitle(step)}</p>
+                  {step.description && (
+                    <p className="text-xs text-white/45 leading-relaxed">{step.description}</p>
+                  )}
                 </div>
               </StaggerItem>
             ))}
@@ -179,25 +179,31 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         </div>
       </section>
 
+      {service.application && (
+        <section id={applyAnchor} className="bg-navy-dark section-py page-px border-t border-white/[0.06] scroll-mt-24">
+          <div className="max-w-3xl mx-auto holographic-panel p-6 sm:p-8 md:p-10">
+            <ProgramApplicationForm kind={service.application} />
+          </div>
+        </section>
+      )}
+
       {relatedServices.length > 0 && (
         <section className="bg-navy-dark section-py page-px border-t border-white/[0.06]">
           <div className="max-w-[90rem] mx-auto">
             <ScrollReveal variant="fade">
-              <h2 className="eyebrow eyebrow-dark mb-8 text-[0.625rem]">Related Services</h2>
+              <h2 className="eyebrow eyebrow-dark mb-8 text-[0.625rem]">{relatedHeading}</h2>
             </ScrollReveal>
             <StaggerChildren className="grid md:grid-cols-3 gap-6">
-              {relatedServices.map((related) => (
+              {relatedServices.map(({ blurb, service: related }) => (
                 <StaggerItem key={related.id}>
                   <Link
                     to={related.path}
                     className="group block p-6 holographic-panel h-full hover:border-cyan/30 transition-colors"
                   >
                     <h3 className="text-base font-semibold text-white group-hover:text-cyan transition-colors mb-2">
-                      {related.shortTitle}
+                      {related.title}
                     </h3>
-                    <p className="text-xs text-white/40 leading-relaxed mb-4 line-clamp-3">
-                      {related.description}
-                    </p>
+                    <p className="text-xs text-white/40 leading-relaxed mb-4">{blurb}</p>
                     <span className="inline-flex items-center gap-1 text-xs text-cyan/70">
                       Learn more <ArrowRight size={12} />
                     </span>
@@ -209,17 +215,19 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         </section>
       )}
 
-      {service.category === 'software' && (
-        <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
-          <div className="max-w-[90rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-white/40">Part of Girakee core engineering & AI</p>
-            <Link to="/services" className="btn-secondary inline-flex">
-              All Software Services
-              <ArrowRight size={15} strokeWidth={1.75} />
-            </Link>
-          </div>
-        </section>
-      )}
+      <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
+        <div className="max-w-[90rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="text-sm text-white/40">
+            {service.category === 'software' && 'Part of Girakee core engineering & AI'}
+            {service.category === 'manpower' && 'Part of Girakee workforce solutions & pods'}
+            {service.category === 'training' && 'Part of Girakee corporate upskilling & incubation'}
+          </p>
+          <Link to={hub.path} className="btn-secondary inline-flex">
+            {hub.label}
+            <ArrowRight size={15} strokeWidth={1.75} />
+          </Link>
+        </div>
+      </section>
 
       <FinalCTASection />
     </>

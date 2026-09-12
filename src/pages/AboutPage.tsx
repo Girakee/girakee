@@ -8,35 +8,88 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 
 const timeline = [
-  { year: 'Foundation', title: 'Bengaluru Roots', description: 'Founded in Rajajinagar, Bengaluru, the heart of India\'s technology ecosystem.' },
-  { year: 'Mission', title: 'Digital India', description: 'Passionate about accelerating the Digital India mission with world-class engineering.' },
-  { year: 'Growth', title: 'Global Reach', description: 'Expanding delivery to clients across the US, UK, Middle East, and European Union.' },
-  { year: 'Today', title: 'AI-First Engineering', description: 'Building production AI systems: computer vision, intelligent QA, and automation.' },
+  {
+    year: 'Phase 01',
+    title: 'Bengaluru Roots',
+    description:
+      'Founded in Rajajinagar, Bengaluru, with a mandate to pair engineering rigor with global delivery speed.',
+  },
+  {
+    year: 'Phase 02',
+    title: 'Global Delivery Reach',
+    description:
+      'Expanding practitioner-led delivery to enterprises and scale-ups across North America, the UK, Europe, and the Middle East.',
+  },
+  {
+    year: 'Phase 03',
+    title: 'Product Incubation',
+    description:
+      'Building proprietary systems—Rozgar.ai and intelligent vision QA—alongside client engineering work.',
+  },
+  {
+    year: 'Phase 04',
+    title: 'Autonomous Engineering',
+    description:
+      'Delivering mission-critical platforms, applied AI, and specialized technical workforce solutions at production scale.',
+  },
 ]
 
 const philosophy = [
-  { title: 'Engineering Over Hype', description: 'We build systems that work in production, not demos that impress in presentations.' },
-  { title: 'Quality at Scale', description: 'Top-tier Indian engineering talent delivering enterprise-grade quality at optimized cost.' },
-  { title: 'Partnership Mindset', description: 'We invest in understanding your business deeply before writing a single line of code.' },
-  { title: 'Continuous Learning', description: 'Our team stays at the frontier of AI, cloud, and software engineering.' },
+  {
+    title: '01. Production Over Hype',
+    kicker: 'Built for Runtime Concurrency',
+    description:
+      'We ship software architectures, models, and pipelines engineered to survive production load—not demos that impress in presentations.',
+  },
+  {
+    title: '02. Engineering at Scale',
+    kicker: 'High-Assurance Delivery',
+    description:
+      'We model top-tier talent under rigorous agile quality, automated testing, and architectural ownership.',
+  },
+  {
+    title: '03. Deep Partnership Mindset',
+    kicker: 'Architectural Co-Ownership',
+    description:
+      'We invest in your domain, constraints, and regulatory context before drafting a single system diagram in lieu of a quote.',
+  },
+  {
+    title: '04. Continued Practitioner Edge',
+    kicker: 'Active Technology Frontiers',
+    description:
+      'Our engineers remain in the production of technology—shipping autonomous systems, cloud platforms, and vision pipelines every sprint.',
+  },
 ]
 
 const practices = [
   {
-    title: 'Core Engineering & AI',
-    description: 'Web and mobile platforms, applied AI, computer vision, cloud, zero-trust security, QA automation, and data platforms.',
-    path: '/services',
+    title: 'Core Engineering Disciplines',
+    description:
+      'Scalable Web & Mobile platforms, Applied AI, Computer Vision, Cloud DevOps, Zero-Trust Cybersecurity, Automated QA, and Data Engineering.',
+    path: '/services/engineering',
+    cta: 'Explore Engineering Disciplines',
   },
   {
-    title: 'Workforce Solutions & Pods',
-    description: 'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
-    path: '/manpower-solutions',
+    title: 'Strategic Workforce Models',
+    description:
+      'Autonomous Dedicated Pods, Staff Augmentation (T&M), Contract-to-Hire trials, and practitioner-led executive IT recruitment.',
+    path: '/services/workforce',
+    cta: 'Explore Workforce Solutions',
   },
   {
-    title: 'Corporate Upskilling',
-    description: 'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships on live industry work.',
-    path: '/training',
+    title: 'Technical Enablement & Academy',
+    description:
+      'Practitioner-led Corporate Tech Enablement, 6-Month Graduate Engineering Residency, and 3-Month Student Internships.',
+    path: '/services/enablement',
+    cta: 'Explore Tech Enablement',
   },
+]
+
+const metrics = [
+  { value: '100%', label: 'Full IP & Codebase Ownership' },
+  { value: '48-hr', label: 'Candidate Screening Turnaround' },
+  { value: '85%', label: 'Max Test Automation Coverage' },
+  { value: 'Zero', label: 'Vendor Lock-in or Sprawl' },
 ]
 
 export default function AboutPage() {
@@ -44,41 +97,45 @@ export default function AboutPage() {
     <>
       <SEO
         title="About Us"
-        description="Girakee Software Services. Global Excellence, Indian Innovation. Bengaluru-based AI engineering company with global delivery."
+        description="Girakee Software Services is an enterprise engineering firm and product incubation company headquartered in Bengaluru, delivering global engineering resilience."
         path="/about"
       />
       <PageHero
-        label="About Girakee"
-        title="Who We Are"
-        subtitle="Global Excellence. Indian Innovation."
+        label="Global Engineering & Incubation"
+        title="Engineering Global Resilience From Bengaluru"
+        subtitle="An enterprise engineering firm and product incubator delivering mission-critical digital platforms, autonomous AI systems, and specialized technical workforce solutions worldwide."
+        cta={{ label: 'Explore Our Disciplines', to: '/solutions' }}
       />
 
       <section className="bg-navy-dark section-py page-px">
         <div className="max-w-7xl mx-auto">
-          <TextReveal text="Our Story" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-8 sm:mb-12" />
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 items-start">
             <SlideUp>
+              <h2 className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-8">Our Story</h2>
               <p className="text-lg text-white/55 leading-relaxed mb-6">
-                Girakee Software Services Private Limited is a Bengaluru-based engineering
-                company founded by digital enthusiasts passionate about accelerating the
-                Digital India mission.
+                Girakee Software Services Private Limited is an enterprise technology consultancy
+                and product incubation firm headquartered in Bengaluru, Karnataka, India. Founded
+                with a mandate to bridge deep engineering rigor with global delivery speed, we
+                architect software systems that thrive under production scale.
               </p>
               <p className="text-white/55 leading-relaxed">
-                While our roots are proudly in India&apos;s Silicon Valley, our vision and
-                reach are international. We primarily serve ambitious clients across the
-                US, UK, the Middle East, and the EU.
+                Rooted in India&apos;s premier technology capital, we partner with enterprises,
+                high-growth scale-ups, and academic institutions across North America, the United
+                Kingdom, Europe, and the Middle East. We eliminate the layers of vendor bureaucracy
+                to deliver transparent, practitioner-led engineering—from distributed cloud backends
+                to autonomous AI agents and computer vision pipelines.
               </p>
             </SlideUp>
             <SlideUp delay={0.2}>
-              <div className="bg-navy-deep p-6 sm:p-10 text-white">
-                <h3 className="text-xs tracking-[0.2em] uppercase text-cyan mb-6">Mission</h3>
+              <div className="bg-navy-deep p-6 sm:p-10 text-white holographic-panel">
+                <h3 className="text-xs tracking-[0.2em] uppercase text-cyan mb-6">Our Mission</h3>
                 <p className="text-2xl font-display font-semibold leading-snug mb-4">
-                  Engineering the Future with AI
+                  Architecting the Autonomous Enterprise
                 </p>
                 <p className="text-white/50 leading-relaxed">
-                  To deliver jaw-dropping quality at unbeatable prices, building integrated
-                  AI, cloud, and security solutions that drive intelligent efficiency and
-                  protect your assets.
+                  To empower modern enterprises with high-assurance software engineering, deep-tech
+                  intelligence, and autonomous digital systems—delivering predictable delivery
+                  velocity, robust security, and long-term architectural independence.
                 </p>
               </div>
             </SlideUp>
@@ -88,7 +145,7 @@ export default function AboutPage() {
 
       <section className="bg-navy-deep section-py page-px">
         <div className="max-w-7xl mx-auto">
-          <TextReveal text="Our Approach" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-10 sm:mb-16" />
+          <TextReveal text="Our Evolution" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-10 sm:mb-16" />
           <div className="relative">
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-cyan/20 md:-translate-x-px" />
             <div className="space-y-12">
@@ -117,6 +174,7 @@ export default function AboutPage() {
             {philosophy.map((item) => (
               <StaggerItem key={item.title}>
                 <div className="p-8 border border-white/10 hover:border-cyan/30 transition-colors h-full">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-cyan/70 mb-3">{item.kicker}</p>
                   <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
                 </div>
@@ -139,7 +197,7 @@ export default function AboutPage() {
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan transition-colors">{item.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed mb-6">{item.description}</p>
                   <span className="inline-flex items-center gap-2 text-sm text-cyan">
-                    Explore
+                    {item.cta}
                     <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </span>
                 </Link>
@@ -150,20 +208,36 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-navy-deep section-py page-px">
-        <div className="max-w-4xl mx-auto text-center">
-          <TextReveal text="Why Girakee" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-6 sm:mb-8" />
+        <div className="max-w-5xl mx-auto">
+          <TextReveal text="Why Enterprises Build with Girakee" as="h2" className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-6 sm:mb-8" />
           <SlideUp>
-            <p className="text-white/55 leading-relaxed text-lg">
-              We combine top-tier Indian engineering talent with a deep commitment to
-              delivering services that are not just high-quality, but remarkably affordable.
-              From AI engineering to cloud infrastructure, we are your long-term technology
-              partner, not just a vendor.
+            <p className="text-white/55 leading-relaxed text-lg mb-12">
+              We replace fragmented vendor handoffs with accountable engineering squads. By combining
+              Bengaluru&apos;s deepest technical talent with mature agile delivery practices, we
+              deliver enterprise systems with full IP transparency and zero management drag.
             </p>
           </SlideUp>
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {metrics.map((item) => (
+              <StaggerItem key={item.label}>
+                <div className="holographic-panel p-6 h-full text-center">
+                  <p className="editorial-display text-2xl text-cyan mb-2">{item.value}</p>
+                  <p className="text-xs text-white/50 leading-relaxed">{item.label}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
         </div>
       </section>
 
-      <FinalCTASection />
+      <FinalCTASection
+        title="Ready to Engineer What’s Next?"
+        subtitle="Whether you need an autonomous delivery pod, an AI architecture audit, or corporate tech enablement, our architects are ready to deploy."
+        primaryLabel="Schedule Architectural Discovery"
+        secondaryLabel="Explore Case Studies & Solutions"
+        secondaryTo="/solutions"
+        secondaryExternal={false}
+      />
     </>
   )
 }

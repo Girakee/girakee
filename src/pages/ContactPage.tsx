@@ -2,7 +2,7 @@ import SEO from '../components/seo/SEO'
 import ContactForm from '../components/forms/ContactForm'
 import PremiumScene from '../components/animations/PremiumScene'
 import OfficeLocationsSection from '../components/home/OfficeLocationsSection'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
 import { contactMessaging, company } from '../data/company'
 
 export default function ContactPage() {
@@ -10,13 +10,13 @@ export default function ContactPage() {
     <>
       <SEO
         title="Contact"
-        description="Connect with Innovation. Start Your Transformation. Contact Girakee for web, AI, cloud, and security solutions, jaw-dropping quality at unbeatable prices."
+        description="Initiate your engineering engagement with Girakee. Talk directly with an architect in Bengaluru for software, pods, talent, and Rozgar.ai."
         path="/contact"
       />
       <section className="relative bg-navy-deep pt-28 sm:pt-32 md:pt-36 pb-16 page-px overflow-hidden">
         <PremiumScene scene="network" size="page" />
         <div className="relative z-10 max-w-3xl">
-          <p className="eyebrow eyebrow-dark mb-4">Contact</p>
+          <p className="eyebrow eyebrow-dark mb-4">Global Inquiries & Engagement</p>
           <h1 className="editorial-display text-[clamp(2rem,6vw,3.5rem)] text-white mb-6">
             {contactMessaging.headline}
           </h1>
@@ -30,13 +30,16 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>
-              <p className="text-body text-body-dark leading-relaxed mb-6 max-w-md">
-                Tell us what you&apos;re building. Let&apos;s explore how AI, automation
-                and engineering can transform it.
+              <p className="eyebrow eyebrow-dark mb-4">Direct Channels</p>
+              <h2 className="editorial-display text-2xl sm:text-3xl text-white mb-3">
+                Talk Directly with an Architect
+              </h2>
+              <p className="text-body text-body-dark leading-relaxed mb-8 max-w-md">
+                Skip generic sales queues. Connect directly with our engineering and delivery leadership.
               </p>
 
-              <div className="p-5 holographic-panel mb-8 max-w-md">
-                <h2 className="text-sm font-semibold text-white mb-2">{contactMessaging.callUs.title}</h2>
+              <div className="p-5 holographic-panel mb-4 max-w-md">
+                <h3 className="text-sm font-semibold text-white mb-2">{contactMessaging.callUs.title}</h3>
                 <p className="text-xs text-white/45 leading-relaxed mb-4">
                   {contactMessaging.callUs.description}
                 </p>
@@ -48,53 +51,73 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              <div className="p-5 holographic-panel mb-8 max-w-md">
-                <h2 className="text-sm font-semibold text-white mb-2">Schedule a meeting</h2>
+              <div className="p-5 holographic-panel mb-4 max-w-md">
+                <h3 className="text-sm font-semibold text-white mb-2">
+                  Schedule an Architectural Discovery Session
+                </h3>
                 <p className="text-xs text-white/45 leading-relaxed mb-4">
-                  Prefer a calendar slot? Request a meeting and we will confirm a time with you.
+                  Book a 30-minute consultation with engineering leadership.
                 </p>
                 <a
                   href={company.meetingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan font-medium hover:text-cyan-bright transition-colors"
+                  className="inline-flex items-center gap-2 text-cyan font-medium hover:text-cyan-bright transition-colors"
                 >
-                  Request a meeting
+                  Book a 30-Min Consultation
+                  <ArrowRight size={14} />
                 </a>
               </div>
 
-              <div className="space-y-5 sm:space-y-6">
-                <a href="mailto:connect@girakee.com" className="flex items-center gap-4 group touch-manipulation">
-                  <div className="p-3 border border-white/[0.08] group-hover:border-cyan/30 transition-colors shrink-0">
-                    <Mail size={18} className="text-cyan" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs text-white/40">Email</div>
-                    <div className="text-white/80 group-hover:text-cyan transition-colors break-all">connect@girakee.com</div>
-                  </div>
+              <div className="p-5 holographic-panel mb-4 max-w-md space-y-4">
+                <h3 className="text-sm font-semibold text-white">Corporate Correspondence</h3>
+                <a href={`mailto:${company.email}`} className="flex items-start gap-3 group">
+                  <Mail size={16} className="text-cyan mt-0.5 shrink-0" />
+                  <span>
+                    <span className="block text-xs text-white/40">General & Business</span>
+                    <span className="text-white/80 group-hover:text-cyan transition-colors break-all">
+                      {company.email}
+                    </span>
+                  </span>
                 </a>
-                <a href="tel:+919731848149" className="flex items-center gap-4 group touch-manipulation">
-                  <div className="p-3 border border-white/[0.08] group-hover:border-cyan/30 transition-colors shrink-0">
-                    <Phone size={18} className="text-cyan" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-white/40">Phone</div>
-                    <div className="text-white/80 group-hover:text-cyan transition-colors">+91-9731848149</div>
-                  </div>
+                <a href={`mailto:${company.enterpriseEmail}`} className="flex items-start gap-3 group">
+                  <Mail size={16} className="text-cyan mt-0.5 shrink-0" />
+                  <span>
+                    <span className="block text-xs text-white/40">Enterprise & RFP</span>
+                    <span className="text-white/80 group-hover:text-cyan transition-colors break-all">
+                      {company.enterpriseEmail}
+                    </span>
+                  </span>
                 </a>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 border border-white/[0.08] shrink-0">
-                    <MapPin size={18} className="text-cyan" />
-                  </div>
+                <a href={`tel:${company.phoneTel}`} className="flex items-start gap-3 group">
+                  <Phone size={16} className="text-cyan mt-0.5 shrink-0" />
+                  <span>
+                    <span className="block text-xs text-white/40">Hotline</span>
+                    <span className="text-white/80 group-hover:text-cyan transition-colors">{company.phone}</span>
+                  </span>
+                </a>
+              </div>
+
+              <div className="p-5 holographic-panel max-w-md">
+                <div className="flex items-start gap-3">
+                  <MapPin size={16} className="text-cyan mt-0.5 shrink-0" />
                   <div>
-                    <div className="text-xs text-white/40">Headquarters</div>
-                    <div className="text-white/80">Rajajinagar, Bengaluru, India</div>
+                    <h3 className="text-sm font-semibold text-white mb-2">Headquarters</h3>
+                    <p className="text-sm text-white/60 leading-relaxed">
+                      Girakee Software Services Private Limited
+                      <br />
+                      Rajajinagar, Bengaluru, Karnataka 560010, India
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="holographic-panel p-6 sm:p-8 md:p-10">
+              <h2 className="editorial-display text-2xl text-white mb-2">Tell Us About Your Project</h2>
+              <p className="text-sm text-white/45 mb-8 leading-relaxed">
+                Share your technical scope, hiring timeline, or capability requirements.
+              </p>
               <ContactForm />
             </div>
           </div>

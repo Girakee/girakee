@@ -3,14 +3,28 @@
   <url><loc>https://www.girakee.com/</loc><priority>1.0</priority></url>
   <url><loc>https://www.girakee.com/about</loc><priority>0.8</priority></url>
   <url><loc>https://www.girakee.com/services</loc><priority>0.9</priority></url>
-  <url><loc>https://www.girakee.com/ai-engineering</loc><priority>0.9</priority></url>
-  <url><loc>https://www.girakee.com/computer-vision</loc><priority>0.9</priority></url>
-  <url><loc>https://www.girakee.com/intelligent-qa</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/engineering</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/web-mobile</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/ai-vision</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/cloud-devops</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/cybersecurity</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/qa-automation</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/data-engineering</loc><priority>0.9</priority></url>
+  <url><loc>https://www.girakee.com/services/workforce</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/dedicated-pods</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/staff-augmentation</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/contract-to-hire</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/it-recruitment</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/enablement</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/services/corporate-training</loc><priority>0.7</priority></url>
+  <url><loc>https://www.girakee.com/services/on-job-training</loc><priority>0.7</priority></url>
+  <url><loc>https://www.girakee.com/services/internship</loc><priority>0.7</priority></url>
   <url><loc>https://www.girakee.com/solutions</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/products</loc><priority>0.8</priority></url>
+  <url><loc>https://www.girakee.com/products/rozgar-ai</loc><priority>0.9</priority></url>
   <url><loc>https://www.girakee.com/industries</loc><priority>0.8</priority></url>
   <url><loc>https://www.girakee.com/technology</loc><priority>0.8</priority></url>
   <url><loc>https://www.girakee.com/engagement-models</loc><priority>0.7</priority></url>
-  <url><loc>https://www.girakee.com/training</loc><priority>0.7</priority></url>
   <url><loc>https://www.girakee.com/careers</loc><priority>0.7</priority></url>
   <url><loc>https://www.girakee.com/contact</loc><priority>0.8</priority></url>
   <url><loc>https://www.girakee.com/privacy-policy</loc><priority>0.3</priority></url>

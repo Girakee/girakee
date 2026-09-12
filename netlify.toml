@@ -3,6 +3,131 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/web-mobile-development"
+  to = "/services/web-mobile"
+  status = 301
+
+[[redirects]]
+  from = "/ui-ux-design"
+  to = "/services/web-mobile"
+  status = 301
+
+[[redirects]]
+  from = "/ai-engineering"
+  to = "/services/ai-vision"
+  status = 301
+
+[[redirects]]
+  from = "/computer-vision"
+  to = "/services/ai-vision"
+  status = 301
+
+[[redirects]]
+  from = "/cloud-devops"
+  to = "/services/cloud-devops"
+  status = 301
+
+[[redirects]]
+  from = "/cybersecurity"
+  to = "/services/cybersecurity"
+  status = 301
+
+[[redirects]]
+  from = "/software-testing"
+  to = "/services/qa-automation"
+  status = 301
+
+[[redirects]]
+  from = "/intelligent-qa"
+  to = "/services/qa-automation"
+  status = 301
+
+[[redirects]]
+  from = "/data-analytics"
+  to = "/services/data-engineering"
+  status = 301
+
+[[redirects]]
+  from = "/managed-services"
+  to = "/services/dedicated-pods"
+  status = 301
+
+[[redirects]]
+  from = "/dedicated-teams"
+  to = "/services/dedicated-pods"
+  status = 301
+
+[[redirects]]
+  from = "/time-and-material"
+  to = "/services/staff-augmentation"
+  status = 301
+
+[[redirects]]
+  from = "/staff-augmentation"
+  to = "/services/staff-augmentation"
+  status = 301
+
+[[redirects]]
+  from = "/talent-outsourcing"
+  to = "/services/staff-augmentation"
+  status = 301
+
+[[redirects]]
+  from = "/contract-to-hire"
+  to = "/services/contract-to-hire"
+  status = 301
+
+[[redirects]]
+  from = "/recruitment"
+  to = "/services/it-recruitment"
+  status = 301
+
+[[redirects]]
+  from = "/it-recruitment"
+  to = "/services/it-recruitment"
+  status = 301
+
+[[redirects]]
+  from = "/corporate-training"
+  to = "/services/corporate-training"
+  status = 301
+
+[[redirects]]
+  from = "/on-job-training"
+  to = "/services/on-job-training"
+  status = 301
+
+[[redirects]]
+  from = "/technical-bootcamps"
+  to = "/services/on-job-training"
+  status = 301
+
+[[redirects]]
+  from = "/internship"
+  to = "/services/internship"
+  status = 301
+
+[[redirects]]
+  from = "/manpower-solutions"
+  to = "/services/workforce"
+  status = 301
+
+[[redirects]]
+  from = "/training"
+  to = "/services/enablement"
+  status = 301
+
+[[redirects]]
+  from = "/careers/residency"
+  to = "/services/on-job-training"
+  status = 301
+
+[[redirects]]
+  from = "/careers/internships"
+  to = "/services/internship"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

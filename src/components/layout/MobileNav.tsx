@@ -58,7 +58,12 @@ export default function MobileNav() {
                       {megaMenus[item.mega].groups ? (
                         megaMenus[item.mega].groups!.map((group) => (
                           <div key={group.title} className="mb-4 last:mb-0">
-                            <p className="text-left text-xs font-bold text-white/80 mb-1.5">{group.title}</p>
+                            <Link
+                              to={group.path}
+                              className="block text-left text-xs font-bold text-white/80 mb-1.5 hover:text-white"
+                            >
+                              {group.title}
+                            </Link>
                             {group.items.map((link) => (
                               <Link
                                 key={link.path + link.label}

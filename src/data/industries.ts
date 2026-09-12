@@ -10,19 +10,19 @@ export const industries: Industry[] = [
     id: 'manufacturing',
     title: 'Manufacturing',
     description: 'Visual inspection, quality control, and predictive maintenance for production environments.',
-    relatedServices: ['intelligent-qa', 'ai-ml', 'software-testing'],
+    relatedServices: ['software-testing', 'ai-ml', 'cloud-devops'],
   },
   {
     id: 'engineering',
     title: 'Engineering',
     description: 'Automated drawing validation, document processing, and compliance verification for technical workflows.',
-    relatedServices: ['intelligent-qa', 'ai-ml', 'data-analytics'],
+    relatedServices: ['software-testing', 'ai-ml', 'data-analytics'],
   },
   {
     id: 'healthcare',
     title: 'Healthcare',
     description: 'Medical imaging analysis, document digitization, and intelligent workflow automation.',
-    relatedServices: ['ai-ml', 'intelligent-qa', 'data-analytics'],
+    relatedServices: ['ai-ml', 'software-testing', 'data-analytics'],
   },
   {
     id: 'financial-services',
@@ -40,7 +40,7 @@ export const industries: Industry[] = [
     id: 'technology',
     title: 'Technology',
     description: 'Custom AI platforms, cloud infrastructure, and intelligent QA for software products.',
-    relatedServices: ['ai-ml', 'cloud-devops', 'intelligent-qa'],
+    relatedServices: ['ai-ml', 'cloud-devops', 'software-testing'],
   },
   {
     id: 'logistics',

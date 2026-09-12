@@ -10,7 +10,7 @@ const pillars = [
     title: 'Core Engineering & AI',
     description:
       'End-to-end full-stack architectures, applied computer vision, cloud-native deployments, and automated QA.',
-    path: '/services',
+    path: '/services/engineering',
     items: softwareServices,
   },
   {
@@ -18,15 +18,15 @@ const pillars = [
     title: 'Workforce Solutions & Pods',
     description:
       'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
-    path: '/manpower-solutions',
+    path: '/services/workforce',
     items: manpowerServices,
   },
   {
     label: '03',
-    title: 'Corporate Upskilling',
+    title: 'Corporate Upskilling & Incubation',
     description:
       'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships on live work.',
-    path: '/training',
+    path: '/services/enablement',
     items: trainingServices,
   },
 ]
