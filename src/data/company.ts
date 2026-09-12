@@ -12,15 +12,19 @@ export const company = {
 }
 
 export const heroMessaging = {
-  headline: 'Digital Transformation & Custom Software for Growing Businesses',
+  kicker: 'Enterprise Engineering & AI Innovation',
+  headline: 'Digital Transformation & Enterprise Software Engineering',
   description:
-    'We craft Web/Mobile Apps and implement AI Automation on Cloud Solutions with embedded Cyber Security. This integrated approach guarantees optimized operations, drives intelligent efficiency, ensures scalability, and protects your assets for maximum growth and business agility.',
+    'We engineer resilient web and mobile platforms, mission-critical cloud infrastructure, and proprietary AI automation with built-in zero-trust security. Headquartered in Bengaluru with operations expanding across Dubai and Europe, Girakee partners with ambitious enterprises to eliminate operational bottlenecks and deliver robust, production-grade systems built for global scale.',
 }
 
 export const servicePromise = {
-  headline: 'Deliver what we Promise',
-  description:
-    'Our promise is simple: to deliver jaw-dropping quality at unbeatable prices. We offer premium, integrated services that form a unified digital ecosystem, ensuring you achieve maximum efficiency and growth without the premium cost.',
+  kicker: 'Accountability & Rigor',
+  headline: 'Engineering Excellence. Guaranteed Delivery.',
+  paragraphs: [
+    'We combine engineering precision with clear commercial accountability. By integrating scalable software development, agile talent solutions, and enterprise capability building under one unified ecosystem, we accelerate delivery cycles while optimizing total cost of ownership.',
+    'Every engagement is backed by defined SLAs, production-ready codebases, and direct technical ownership at every phase of execution.',
+  ],
 }
 
 export const aboutMessaging = {
@@ -43,29 +47,74 @@ export const contactMessaging = {
 }
 
 export const homeMatter = {
-  introBody:
-    'Girakee Software Services Private Limited is a Bengaluru engineering company. We build production software, place vetted engineers inside client teams, and train people on live industry work. Clients in the US, UK, EU, and Middle East use us when they need delivery that holds up after the demo.',
+  introBody: heroMessaging.description,
   howWeWork: [
-    { title: 'A named owner', body: 'Every engagement has a delivery lead in Bengaluru who reports progress, risks, and next steps in your language, not a ticket dump.' },
-    { title: 'Work you can inspect', body: 'Code, models, pipelines, and staffing plans sit in your repos and tools. We do not hide delivery behind a black box.' },
-    { title: 'Price without theatre', body: 'Quality is the promise. Cost is Indian engineering rates with senior review, not a discount on unfinished work.' },
+    {
+      title: 'Dedicated Delivery Ownership',
+      body: 'Every engagement is steered by a dedicated technical lead providing transparent sprint cadence, architectural oversight, and direct executive reporting.',
+    },
+    {
+      title: 'Zero Black-Box Delivery',
+      body: 'Full transparency from day one. Codebases, CI/CD pipelines, and AI models reside directly within your repositories and infrastructure.',
+    },
+    {
+      title: 'High-Impact Engineering Economics',
+      body: 'Top-tier engineering capabilities delivered with predictable commercial models, strict SLAs, and zero vendor lock-in.',
+    },
   ],
 }
 
 export const internshipMessaging = {
-  headline: 'Stop learning. Start shipping real code.',
+  kicker: 'Girakee Talent Incubation',
+  headline: 'Bridging Academics with Production Software Delivery',
+  description:
+    'We cultivate early-career technical talent through intensive, mentor-led engineering residencies—ensuring our client pods are backed by sustainable talent pipelines.',
   points: [
-    '6 Months On-The-Job Training',
-    'Work on live industry projects',
-    'Get an Experience Letter',
+    '6-Month Structured Post-Graduate Residency (OJT)',
+    'Live Enterprise Production Systems & CI/CD Workflows',
+    'Verified Technical Experience & Practitioner Mentorship',
   ],
-  registerLabel: 'Register',
-  knowMoreLabel: 'Know More',
+  primaryLabel: 'Explore Engineering Careers',
+  primaryPath: '/careers',
+  secondaryLabel: 'Apply for Incubation',
+  secondaryPath: '/on-job-training',
 }
 
 export const offices = [
-  { city: 'Rajajinagar, Bengaluru', country: 'India', status: 'active' as const },
-  { city: 'Bur Dubai, Dubai', country: 'UAE', status: 'launching' as const },
-  { city: 'Burghausen', country: 'Germany', status: 'launching' as const },
-  { city: 'Winnipeg', country: 'Canada', status: 'launching' as const },
+  {
+    city: 'Bengaluru',
+    country: 'India',
+    locality: 'Rajajinagar',
+    hub: 'Global Headquarters & Delivery Center',
+    description: 'Core Engineering Center, AI Research Labs & Enterprise Delivery Hub',
+    footerDetail: 'Rajajinagar (Global HQ & Engineering Delivery Center)',
+  },
+  {
+    city: 'Dubai',
+    country: 'UAE',
+    locality: 'Downtown / Business Bay',
+    hub: 'Middle East Client Hub',
+    description: 'Regional Client Services, FinTech & Enterprise Solutions',
+    footerDetail: 'Downtown / Business Bay (Middle East Client Hub)',
+  },
+  {
+    city: 'Burghausen / Munich',
+    country: 'Germany',
+    locality: 'DACH',
+    hub: 'European Union Hub',
+    description: 'DACH Engineering Partnerships & Nearshore Client Delivery',
+    footerDetail: 'European Client Hub',
+  },
+  {
+    city: 'Winnipeg',
+    country: 'Canada',
+    locality: 'North America',
+    hub: 'North American Operations',
+    description: 'North America Timezone Support & Strategic Delivery',
+    footerDetail: 'North America Delivery Support',
+  },
+]
+
+export const socialLinks = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/girakee-software-services' },
 ]

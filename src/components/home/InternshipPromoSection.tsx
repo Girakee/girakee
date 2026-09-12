@@ -9,10 +9,13 @@ export default function InternshipPromoSection() {
       <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
       <div className="relative max-w-[90rem] mx-auto z-10">
         <ScrollReveal variant="slideUpSubtle">
-          <p className="eyebrow eyebrow-dark mb-5">Internship</p>
-          <h2 className="editorial-display text-[clamp(1.75rem,4vw,3rem)] text-white mb-8 max-w-3xl">
+          <p className="eyebrow eyebrow-dark mb-5">{internshipMessaging.kicker}</p>
+          <h2 className="editorial-display text-[clamp(1.75rem,4vw,3rem)] text-white mb-6 max-w-3xl">
             {internshipMessaging.headline}
           </h2>
+          <p className="text-body text-body-dark max-w-2xl mb-8 leading-relaxed">
+            {internshipMessaging.description}
+          </p>
         </ScrollReveal>
 
         <ScrollReveal variant="fade" delay={0.08}>
@@ -25,12 +28,12 @@ export default function InternshipPromoSection() {
             ))}
           </ul>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/contact" className="btn-primary inline-flex">
-              {internshipMessaging.registerLabel}
+            <Link to={internshipMessaging.primaryPath} className="btn-primary inline-flex">
+              {internshipMessaging.primaryLabel}
               <ArrowRight size={15} strokeWidth={1.75} />
             </Link>
-            <Link to="/internship" className="btn-secondary inline-flex">
-              {internshipMessaging.knowMoreLabel}
+            <Link to={internshipMessaging.secondaryPath} className="btn-secondary inline-flex">
+              {internshipMessaging.secondaryLabel}
               <ArrowRight size={15} strokeWidth={1.75} className="opacity-50" />
             </Link>
           </div>

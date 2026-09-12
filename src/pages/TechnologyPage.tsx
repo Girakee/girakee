@@ -23,7 +23,7 @@ export default function TechnologyPage() {
       <PageHero
         label="Technology"
         title="Full-Stack Technology Ecosystem"
-        subtitle={`${allTechnologies.length}+ technologies across languages, frameworks, cloud platforms, and engineering tools.`}
+        subtitle={`${allTechnologies.length}+ production-tested technologies across cloud platforms, deep-learning frameworks, data systems, and delivery pipelines.`}
       />
 
       <section className="relative bg-navy-dark section-py page-px overflow-hidden">

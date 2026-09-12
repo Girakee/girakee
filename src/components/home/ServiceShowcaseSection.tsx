@@ -7,30 +7,37 @@ import WorkPreview from '../animations/WorkPreview'
 import { softwareServices, manpowerServices, trainingServices, type Service } from '../../data/services'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 
-const groups: { id: 'software' | 'manpower' | 'training'; title: string; kicker: string; body: string; items: Service[]; hub: string }[] = [
+const groups: {
+  id: 'software' | 'manpower' | 'training'
+  title: string
+  heading: string
+  kicker: string
+  body: string
+  items: Service[]
+}[] = [
   {
     id: 'software',
-    title: 'Software Services',
-    kicker: 'Build and run production systems',
-    body: 'We design, build, and operate web products, mobile apps, AI pipelines, cloud platforms, security controls, and data systems. Work is done in sprints, with code review, CI, and a named delivery lead in Bengaluru.',
+    title: 'Core Engineering & AI',
+    heading: 'Core Engineering & AI',
+    kicker: 'Production systems, defined milestones',
+    body: 'End-to-end full-stack architectures, applied computer vision, cloud-native deployments, and automated QA. Each initiative follows defined engineering milestones and clear deliverables.',
     items: softwareServices,
-    hub: '/services',
   },
   {
     id: 'manpower',
-    title: 'Manpower Solutions',
-    kicker: 'People who can ship, not CV stacks',
-    body: 'Recruitment, contract to hire, managed services, and time and material. Engineers are screened on live problems, then join your tools and rituals. You keep product ownership. We keep the bench and the performance loop.',
+    title: 'Workforce Solutions & Pods',
+    heading: 'Workforce Solutions & Dedicated Engineering Pods',
+    kicker: 'Flexible Engagement Models',
+    body: 'Scale your engineering velocity with pre-vetted senior software engineers and cross-functional technical squads. From embedded time-and-material staff augmentation to fully managed delivery pods, Girakee provides seamless team integration across global timezones under strict SLA governance.',
     items: manpowerServices,
-    hub: '/manpower-solutions',
   },
   {
     id: 'training',
-    title: 'Training & Internships',
-    kicker: 'Learn on the job that actually ships',
-    body: 'Internships on live projects, corporate workshops for existing teams, and on job training. Instructors are delivery engineers. Completers leave with work, reviews, and an experience letter or capability report.',
+    title: 'Corporate Upskilling',
+    heading: 'Corporate Upskilling & Practical Talent Incubation',
+    kicker: 'Capability Building & Talent Incubation',
+    body: 'From tailored corporate engineering bootcamps to structured graduate incubation, Girakee bridges the gap between academic foundations and production-grade software delivery. All programs are mentored by active engineering leads using real-world architectures, continuous integration, and verifiable project outcomes.',
     items: trainingServices,
-    hub: '/training',
   },
 ]
 
@@ -54,7 +61,7 @@ export default function ServiceShowcaseSection() {
         <EditorialHeading
           label="What We Do"
           title="Engineering Software That Powers Business"
-          subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
+          subtitle="Scalable digital architecture, intelligent automation, and robust enterprise engineering delivered to clients across the Middle East, Europe, and North America."
           dark
         />
 
@@ -78,7 +85,7 @@ export default function ServiceShowcaseSection() {
         <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] gap-8 lg:gap-12 items-start mb-12">
           <div>
             <p className="text-[11px] font-mono text-cyan/60 uppercase tracking-widest mb-3">{group.kicker}</p>
-            <h3 className="editorial-display text-2xl text-white mb-4">{group.title}</h3>
+            <h3 className="editorial-display text-2xl text-white mb-4">{group.heading}</h3>
             <p className="text-sm text-white/55 leading-relaxed mb-8">{group.body}</p>
             <ul className="space-y-1">
               {group.items.map((item) => (
@@ -136,11 +143,8 @@ export default function ServiceShowcaseSection() {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Link to={active.path} className="btn-primary">
-                    Open {active.shortTitle}
+                    {active.ctaLabel}
                     <ArrowRight size={15} strokeWidth={1.75} />
-                  </Link>
-                  <Link to={group.hub} className="btn-secondary">
-                    All {group.title}
                   </Link>
                 </div>
               </motion.div>

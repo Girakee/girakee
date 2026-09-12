@@ -11,21 +11,21 @@ export default function FinalCTASection() {
 
       <div className="relative max-w-3xl mx-auto text-center">
         <TextReveal
-          text="Let's Engineer Together."
+          text="Let's Engineer Your Next Competitive Advantage."
           as="h2"
           className="editorial-display text-[clamp(2rem,6vw,4rem)] text-white mb-5 sm:mb-6"
         />
 
         <SlideUp delay={0.1}>
-          <p className="text-body text-body-dark mb-10 max-w-md mx-auto">
-            Tell us what you&apos;re building.
+          <p className="text-body text-body-dark mb-10 max-w-xl mx-auto">
+            Schedule an architectural discovery session with our senior engineering leadership in Bengaluru or Dubai.
           </p>
         </SlideUp>
 
         <SlideUp delay={0.18}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link to="/contact" className="btn-primary w-full sm:w-auto">
-              Start a Conversation
+              Consult an Architect
               <ArrowRight size={15} strokeWidth={1.75} />
             </Link>
             <a
@@ -34,7 +34,7 @@ export default function FinalCTASection() {
               rel="noopener noreferrer"
               className="btn-secondary w-full sm:w-auto"
             >
-              Request a meeting
+              Schedule a Discovery Call
             </a>
           </div>
         </SlideUp>

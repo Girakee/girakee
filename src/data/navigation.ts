@@ -10,27 +10,25 @@ export type NavGroup = {
 }
 
 export const softwareMenu: NavLink[] = [
-  { label: 'Web & Mobile Development', path: '/web-mobile-development' },
-  { label: 'Artificial Intelligence & ML', path: '/ai-engineering' },
-  { label: 'Cloud & DevOps', path: '/cloud-devops' },
-  { label: 'Cybersecurity', path: '/cybersecurity' },
-  { label: 'UI/UX Design', path: '/ui-ux-design' },
-  { label: 'Software Testing & QA', path: '/software-testing' },
-  { label: 'Intelligent QA', path: '/intelligent-qa' },
-  { label: 'Data Analytics & BI', path: '/data-analytics' },
+  { label: 'Web & Mobile Engineering', path: '/web-mobile-development' },
+  { label: 'Applied AI & Computer Vision', path: '/ai-engineering' },
+  { label: 'Cloud Architecture & DevOps', path: '/cloud-devops' },
+  { label: 'Zero-Trust Cybersecurity', path: '/cybersecurity' },
+  { label: 'QA Automation & Intelligent Testing', path: '/software-testing' },
+  { label: 'Data Engineering & Analytics', path: '/data-analytics' },
 ]
 
 export const manpowerMenu: NavLink[] = [
-  { label: 'Recruitment', path: '/recruitment' },
-  { label: 'Contract to Hire', path: '/contract-to-hire' },
-  { label: 'Managed Services', path: '/managed-services' },
-  { label: 'Time and Material', path: '/time-and-material' },
+  { label: 'Dedicated Engineering Pods', path: '/managed-services' },
+  { label: 'Staff Augmentation', path: '/time-and-material' },
+  { label: 'Contract-to-Hire', path: '/contract-to-hire' },
+  { label: 'Executive & Specialized Tech Search', path: '/recruitment' },
 ]
 
 export const trainingMenu: NavLink[] = [
-  { label: 'Internship', path: '/internship' },
-  { label: 'Corporate Training', path: '/corporate-training' },
-  { label: 'On Job Training', path: '/on-job-training' },
+  { label: 'Corporate Upskilling', path: '/corporate-training' },
+  { label: 'On-the-Job Training (6-Month)', path: '/on-job-training' },
+  { label: 'Student Internship (3-Month)', path: '/internship' },
 ]
 
 export const productsMenu: NavLink[] = [
@@ -38,9 +36,9 @@ export const productsMenu: NavLink[] = [
 ]
 
 export const serviceGroups: NavGroup[] = [
-  { title: 'Software Services', path: '/services', items: softwareMenu },
-  { title: 'Manpower Solutions', path: '/manpower-solutions', items: manpowerMenu },
-  { title: 'Training & Internships', path: '/training', items: trainingMenu },
+  { title: 'Core Engineering & AI', path: '/services', items: softwareMenu },
+  { title: 'Workforce Solutions & Pods', path: '/manpower-solutions', items: manpowerMenu },
+  { title: 'Corporate Upskilling', path: '/training', items: trainingMenu },
 ]
 
 export type MegaKey = 'services' | 'products'

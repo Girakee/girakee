@@ -7,10 +7,30 @@ import ScrollReveal from '../animations/ScrollReveal'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 
 const stages = [
-  { num: '01', title: 'Ingestion', description: 'CAD, PDF, and technical documents enter the pipeline.' },
-  { num: '02', title: 'Detection', description: 'YOLO models identify components and regions of interest.' },
-  { num: '03', title: 'OCR Extraction', description: 'Dimensions and annotations extracted from detected regions.' },
-  { num: '04', title: 'Rule Validation', description: 'Deterministic engines validate against specifications.' },
+  {
+    num: '01',
+    title: 'Multimodal Ingestion',
+    description:
+      'High-throughput ingestion of multi-layer CAD layouts, high-resolution PDFs, and complex engineering schematics.',
+  },
+  {
+    num: '02',
+    title: 'Computer Vision Detection',
+    description:
+      'Custom-trained YOLO and vision models locate components, symbols, geometric regions, and critical annotations in real time.',
+  },
+  {
+    num: '03',
+    title: 'Precision OCR Extraction',
+    description:
+      'Deep-learning OCR extracts non-standard technical text, dimensional tolerances, GD&T callouts, and tabular metadata.',
+  },
+  {
+    num: '04',
+    title: 'Deterministic Compliance',
+    description:
+      'Configurable business logic and deterministic rule engines cross-reference extracted metrics against international engineering specs.',
+  },
 ]
 
 export default function HowAIWorksSection() {
@@ -24,9 +44,9 @@ export default function HowAIWorksSection() {
       <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
       <div className="relative max-w-[90rem] mx-auto z-10">
         <EditorialHeading
-          label="AI Pipeline"
-          title="How AI Works"
-          subtitle="From intelligence to automation. Data flows through AI into production systems."
+          label="Production AI Architecture"
+          title="How Our Applied AI Engine Delivers Zero-Defect Automation"
+          subtitle="Transitioning raw, unstructured engineering assets into verified, production-ready operational intelligence through automated multi-stage neural pipelines."
           dark
         />
 

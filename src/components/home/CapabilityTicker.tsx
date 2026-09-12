@@ -1,16 +1,16 @@
 const capabilities = [
-  'Web & Mobile Apps',
-  'AI & Machine Learning',
-  'Computer Vision',
-  'Cloud & DevOps',
-  'Cybersecurity',
-  'UI/UX Design',
-  'Software Testing',
-  'Data Analytics',
+  'Web & Mobile Engineering',
+  'Applied AI & Computer Vision',
+  'Cloud Architecture & DevOps',
+  'Zero-Trust Cybersecurity',
+  'QA Automation',
+  'Data Engineering',
+  'Engineering Pods',
   'Staff Augmentation',
-  'Dedicated Teams',
-  'Internship & OJT',
-  'Corporate Training',
+  'Contract-to-Hire',
+  'Corporate Upskilling',
+  '6-Month OJT',
+  'Student Internship',
 ]
 
 export default function CapabilityTicker() {

@@ -5,27 +5,27 @@ import SlideUp from '../animations/SlideUp'
 const statements = [
   {
     num: '01',
-    title: 'Integrated Expertise',
+    title: 'Unified Engineering Ecosystem',
     description:
-      'Software, manpower, and training sit in one company. The team that builds your product can also staff it and train the people who inherit it.',
+      'End-to-end technical cohesion. We architect your core software systems, provide flexible dedicated pods to scale delivery, and upskill your internal teams for seamless platform ownership.',
   },
   {
     num: '02',
-    title: 'Agile and Outcome-Driven',
+    title: 'Predictable Delivery Cadence',
     description:
-      'Sprints, demos, and written deliverables. You see working software or placed engineers on a cadence, not a slide about velocity.',
+      'Strict sprint milestones and SLA-backed accountability. Every development cycle concludes with verifiable production builds, automated test coverage, and transparent executive velocity reports.',
   },
   {
     num: '03',
-    title: 'AI-First Engineering',
+    title: 'Production-Grade Applied AI',
     description:
-      'Models, vision pipelines, and automation are designed for production: monitoring, fallbacks, and a human who owns the result.',
+      'Machine intelligence engineered for real-world reliability. We build custom computer vision, OCR, and agentic workflows backed by automated MLOps, deterministic safeguards, and low-latency inference.',
   },
   {
     num: '04',
-    title: 'Long-Term Partnership',
+    title: 'Global Reach & Lifecycle Support',
     description:
-      'Bengaluru HQ with delivery to the US, UK, EU, and Middle East. We stay after launch for operations, hiring, and the next release.',
+      'Headquartered in Bengaluru with expanding hubs in Dubai and Europe. We provide post-deployment L2/L3 engineering support, performance optimization, and long-term architectural stewardship.',
   },
 ]
 
@@ -33,17 +33,19 @@ export default function WhyGirakeeSection() {
   return (
     <section className="section-py bg-navy-deep page-px relative overflow-hidden">
       <div className="relative max-w-[90rem] mx-auto">
+        <p className="eyebrow eyebrow-dark mb-5">Why Girakee</p>
         <TextReveal
-          text="More Than a Technology Vendor."
+          text="A Strategic Engineering Partner, Built for Enterprise Scale"
           as="h2"
-          className="editorial-display text-[clamp(1.875rem,5vw,3.5rem)] text-white mb-6 max-w-3xl"
+          className="editorial-display text-[clamp(1.875rem,5vw,3.5rem)] text-white mb-6 max-w-4xl"
         />
         <SlideUp>
-          <p className="text-body text-body-dark max-w-2xl mb-12 md:mb-16 leading-relaxed">
-            Girakee is the engineering partner you keep when the first system is live.
-            We write the software, we put people on the work, and we train the next
-            engineers on the same production stack. That is the full practice, not a
-            catalogue of buzzwords.
+          <p className="text-body text-body-dark max-w-3xl mb-12 md:mb-16 leading-relaxed">
+            Girakee acts as a long-term technology co-innovation partner. We don't just
+            ship code; we architect resilient digital platforms, embed dedicated
+            high-velocity engineering pods, and enable in-house teams through structured
+            technical knowledge transfer—delivering measurable business impact beyond
+            the initial deployment.
           </p>
         </SlideUp>
 

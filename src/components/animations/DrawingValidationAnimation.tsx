@@ -10,12 +10,12 @@ const FAINT = 'rgba(8,175,199,0.08)'
 const DRAW = 'rgba(255,255,255,0.22)'
 
 export const VALIDATION_PHASES = [
-  'CAD / PDF Drawing',
-  'AI Detection',
+  'Ingestion',
+  'CV Detection',
   'OCR',
-  'Measurement',
-  'Rule Validation',
-  'PASS / FAIL',
+  'Geometry',
+  'Rule Engine',
+  'Pass / Fail',
 ] as const
 
 const CYCLE_MS = 9000
@@ -380,7 +380,7 @@ export default function DrawingValidationAnimation({
 
         {/* Status line */}
         <text x="240" y="322" fill={CYAN} fontSize="7" textAnchor="middle" fontFamily="monospace" opacity="0.6">
-          YOLOv8 · OpenCV · OCR · Rule Engine · CAD/PDF
+          YOLOv10 · OpenCV · OCR · Rule Engine · CAD/PDF
         </text>
       </svg>
 

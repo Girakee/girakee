@@ -12,17 +12,17 @@ const methodology = [
 export default function ManpowerPage() {
   return (
     <CategoryLandingPage
-      seoTitle="Manpower Solutions"
-      seoDescription="Recruitment, contract to hire, managed services, and time and material engineering talent from Girakee in Bengaluru."
+      seoTitle="Workforce Solutions"
+      seoDescription="Girakee delivers enterprise workforce solutions, IT staff augmentation, and technical manpower services for scaling companies in UAE, Europe, and India."
       path="/manpower-solutions"
-      label="Manpower Solutions"
-      title="Engineering Talent That Joins Your Team"
-      subtitle="Vetted software, AI, cloud, and QA professionals from Bengaluru. Recruit, convert on contract, run a managed pod, or staff on time and material."
+      label="Flexible Engagement Models"
+      title="Workforce Solutions & Dedicated Engineering Pods"
+      subtitle="Scale your engineering velocity with pre-vetted senior software engineers and cross-functional technical squads. From embedded time-and-material staff augmentation to fully managed delivery pods, Girakee provides seamless team integration across global timezones under strict SLA governance."
       scene="talent"
-      introTitle="Manpower Built by Engineers"
+      introTitle="Workforce Built by Engineers"
       intro={[
-        'Girakee manpower solutions are run by people who hire and ship software, not a generic staffing desk. We screen for real delivery skill: code quality, system thinking, communication, and the ability to work inside your rituals.',
-        'Choose recruitment when you need a full-time seat filled with evidence. Use contract to hire when you want to see output before a permanent offer. Choose managed services when you want a pod that owns a workstream. Choose time and material when you need people inside your squad.',
+        'Girakee workforce solutions are run by people who hire and ship software, not a generic staffing desk. We screen for real delivery skill: code quality, system thinking, communication, and the ability to work inside your rituals.',
+        'Choose dedicated engineering pods when you want outcome ownership. Use staff augmentation when you need people inside your squad. Choose contract-to-hire when you want to see output before a permanent offer. Choose specialized tech search when you need a full-time seat filled with evidence.',
       ]}
       methodology={methodology}
       services={manpowerServices}

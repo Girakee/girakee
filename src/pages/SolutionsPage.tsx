@@ -8,24 +8,24 @@ import { softwareServices, manpowerServices, trainingServices } from '../data/se
 
 const pillars = [
   {
-    title: 'Software Services',
+    title: 'Core Engineering & AI',
     path: '/services',
     description:
-      'Product engineering, AI, cloud, security, design, QA, and data platforms built for production.',
+      'End-to-end full-stack architectures, applied computer vision, cloud-native deployments, and automated QA.',
     items: softwareServices,
   },
   {
-    title: 'Manpower Solutions',
+    title: 'Workforce Solutions & Pods',
     path: '/manpower-solutions',
     description:
-      'Recruitment, contract to hire, managed services, and time and material from Bengaluru.',
+      'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
     items: manpowerServices,
   },
   {
-    title: 'Training & Internships',
+    title: 'Corporate Upskilling',
     path: '/training',
     description:
-      'Internship, corporate training, and on job training with Girakee engineers.',
+      'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships led by practicing engineers.',
     items: trainingServices,
   },
 ]
@@ -35,13 +35,13 @@ export default function SolutionsPage() {
     <>
       <SEO
         title="Services"
-        description="Girakee services: software services, manpower solutions, and training and internships from Bengaluru."
+        description="Girakee services: core engineering and AI, workforce solutions and pods, and corporate upskilling from Bengaluru."
         path="/solutions"
       />
       <PageHero
         label="Services"
         title="Engineering Software That Powers Business"
-        subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
+        subtitle="Scalable digital architecture, intelligent automation, and robust enterprise engineering delivered to clients across the Middle East, Europe, and North America."
         scene="orbit"
       />
 

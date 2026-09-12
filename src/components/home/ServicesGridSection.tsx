@@ -7,25 +7,25 @@ import { softwareServices, manpowerServices, trainingServices } from '../../data
 const pillars = [
   {
     label: '01',
-    title: 'Software Services',
+    title: 'Core Engineering & AI',
     description:
-      'Product engineering, AI, cloud, security, design, quality, and data platforms built for production.',
+      'End-to-end full-stack architectures, applied computer vision, cloud-native deployments, and automated QA.',
     path: '/services',
     items: softwareServices,
   },
   {
     label: '02',
-    title: 'Manpower Solutions',
+    title: 'Workforce Solutions & Pods',
     description:
-      'Recruitment, contract to hire, managed services, and time and material from Bengaluru.',
+      'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
     path: '/manpower-solutions',
     items: manpowerServices,
   },
   {
     label: '03',
-    title: 'Training & Internships',
+    title: 'Corporate Upskilling',
     description:
-      'Internship, corporate training, and on job training on live work.',
+      'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships on live work.',
     path: '/training',
     items: trainingServices,
   },

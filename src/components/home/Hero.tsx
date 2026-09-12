@@ -56,9 +56,10 @@ export default function Hero() {
               {...reveal(0.35)}
               className="text-body text-body-dark max-w-lg mb-8 sm:mb-10"
             >
-              Bengaluru engineers who ship web and mobile products, production AI,
-              cloud platforms, and the teams behind them. Software services, manpower
-              solutions, and training, delivered to clients in the US, UK, EU, and Middle East.
+              Architecting scalable web systems, enterprise cloud platforms, and
+              production-grade AI solutions. We deliver end-to-end engineering
+              excellence from India's tech capital to clients across the Middle East,
+              EU, UK, and US.
             </motion.p>
 
             <motion.div {...reveal(0.45)} className="flex flex-col sm:flex-row gap-3 mb-10 lg:mb-14">

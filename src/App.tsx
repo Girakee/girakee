@@ -46,7 +46,7 @@ export default function App() {
         <Route path="staff-augmentation" element={<Navigate to="/time-and-material" replace />} />
         <Route path="dedicated-teams" element={<Navigate to="/managed-services" replace />} />
         <Route path="it-recruitment" element={<Navigate to="/recruitment" replace />} />
-        <Route path="computer-vision" element={<Navigate to="/intelligent-qa" replace />} />
+        <Route path="computer-vision" element={<Navigate to="/ai-engineering" replace />} />
         <Route path="technical-bootcamps" element={<Navigate to="/on-job-training" replace />} />
         <Route path="solutions" element={<SolutionsPage />} />
         <Route path="products" element={<ProductsPage />} />

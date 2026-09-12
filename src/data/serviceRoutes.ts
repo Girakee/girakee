@@ -9,30 +9,30 @@ export const serviceRoutes: ServiceRoute[] = [
   {
     path: '/web-mobile-development',
     serviceId: 'web-mobile',
-    seoTitle: 'Web & Mobile Development',
+    seoTitle: 'Web & Mobile Engineering',
     seoDescription:
-      'Custom web applications, iOS and Android apps, and progressive web apps built for scale by Girakee.',
+      'High-performance web ecosystems, native mobile apps, and scalable microservices engineered from discovery to production by Girakee.',
   },
   {
     path: '/ai-engineering',
     serviceId: 'ai-ml',
-    seoTitle: 'AI Engineering',
+    seoTitle: 'Applied AI & Computer Vision',
     seoDescription:
-      'Production ML, generative AI, agentic workflows, and intelligent automation from Girakee.',
+      'Production AI architectures, custom computer vision models, predictive systems, and autonomous agentic workflows from Girakee.',
   },
   {
     path: '/cloud-devops',
     serviceId: 'cloud-devops',
-    seoTitle: 'Cloud & DevOps',
+    seoTitle: 'Cloud Architecture & DevOps',
     seoDescription:
-      'AWS, Azure, and GCP architecture, Kubernetes, IaC, and CI/CD automation from Girakee.',
+      'Cloud-native infrastructure, container orchestration, and automated CI/CD for resilient, high-availability deployments from Girakee.',
   },
   {
     path: '/cybersecurity',
     serviceId: 'cybersecurity',
-    seoTitle: 'Cybersecurity',
+    seoTitle: 'Zero-Trust Cybersecurity',
     seoDescription:
-      'Zero Trust architecture, IAM, threat detection, and security automation from Girakee.',
+      'End-to-end security posture engineering, Zero-Trust network architecture, and continuous threat mitigation from Girakee.',
   },
   {
     path: '/ui-ux-design',
@@ -44,9 +44,9 @@ export const serviceRoutes: ServiceRoute[] = [
   {
     path: '/software-testing',
     serviceId: 'software-testing',
-    seoTitle: 'Software Testing & QA',
+    seoTitle: 'QA Automation & Intelligent Testing',
     seoDescription:
-      'Test automation, performance testing, API validation, and continuous quality engineering from Girakee.',
+      'Automated regression frameworks, high-load performance validation, and AI-powered computer vision document audits from Girakee.',
   },
   {
     path: '/intelligent-qa',
@@ -58,58 +58,58 @@ export const serviceRoutes: ServiceRoute[] = [
   {
     path: '/data-analytics',
     serviceId: 'data-analytics',
-    seoTitle: 'Data Analytics & BI',
+    seoTitle: 'Data Engineering & Analytics',
     seoDescription:
-      'Data pipelines, warehousing, dashboards, and business intelligence platforms from Girakee.',
+      'Modern data warehousing, scalable ETL/ELT pipelines, and interactive executive intelligence dashboards from Girakee.',
   },
   {
     path: '/time-and-material',
     serviceId: 'staff-augmentation',
-    seoTitle: 'Time and Material',
+    seoTitle: 'Staff Augmentation',
     seoDescription:
-      'Pre-vetted engineers who join your squads on time and material. Full-stack, AI, cloud, QA, and data talent from Girakee Bengaluru.',
+      'Girakee delivers enterprise workforce solutions, IT staff augmentation, and technical manpower services for scaling companies in UAE, Europe, and India.',
   },
   {
     path: '/managed-services',
     serviceId: 'dedicated-teams',
-    seoTitle: 'Managed Services',
+    seoTitle: 'Dedicated Engineering Pods',
     seoDescription:
-      'Cross-functional delivery pods that own a product or workstream for your roadmap, from Girakee.',
+      'Autonomous, cross-functional engineering squads accountable for milestone delivery, system quality, and sprint execution from Girakee.',
   },
   {
     path: '/contract-to-hire',
     serviceId: 'contract-to-hire',
-    seoTitle: 'Contract to Hire',
+    seoTitle: 'Contract-to-Hire',
     seoDescription:
-      'Evaluate engineers on live work before you hire. Contract first, convert when the fit is proven.',
+      'De-risk long-term talent acquisition through trial-based project execution before permanent conversion with Girakee.',
   },
   {
     path: '/recruitment',
     serviceId: 'it-recruitment',
-    seoTitle: 'Recruitment',
+    seoTitle: 'IT Recruitment & Technical Staffing Services',
     seoDescription:
-      'Engineer-led permanent hiring for software, AI, cloud, and QA roles from Girakee.',
+      'Specialized IT recruitment and technical talent placement in Bengaluru and Dubai. We connect scaling enterprises with pre-vetted senior software engineers, tech leads, and specialized tech talent.',
   },
   {
     path: '/internship',
     serviceId: 'internship',
-    seoTitle: 'Internship',
+    seoTitle: 'Student Internship (3-Month)',
     seoDescription:
-      'Six-month internship on live industry projects with an experience letter from Girakee.',
+      'A flexible 3-month structured internship for college students to build hands-on software development skills with Girakee.',
   },
   {
     path: '/corporate-training',
     serviceId: 'corporate-training',
-    seoTitle: 'Corporate Training',
+    seoTitle: 'Corporate Upskilling',
     seoDescription:
-      'Practitioner-led workshops for engineering teams, customised to your stack, from Girakee.',
+      'Bespoke technical capability programs designed around your active tech stack and led by practicing software architects at Girakee.',
   },
   {
     path: '/on-job-training',
     serviceId: 'on-job-training',
-    seoTitle: 'On Job Training',
+    seoTitle: 'On-the-Job Training (6-Month)',
     seoDescription:
-      'Structured on-the-job training on live delivery with a mentor, from Girakee.',
+      'A 6-month intensive engineering residency for recent graduates to gain verifiable production experience on live enterprise systems.',
   },
 ]
 
@@ -117,7 +117,7 @@ export function getServicePath(serviceId: string): string {
   const route = serviceRoutes.find((r) => r.serviceId === serviceId)
   if (route) return route.path
   if (serviceId === 'talent-outsourcing') return '/time-and-material'
-  if (serviceId === 'computer-vision') return '/intelligent-qa'
+  if (serviceId === 'computer-vision') return '/ai-engineering'
   if (serviceId === 'technical-bootcamps') return '/on-job-training'
   return '/services'
 }

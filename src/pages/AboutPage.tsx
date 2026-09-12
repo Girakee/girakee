@@ -23,18 +23,18 @@ const philosophy = [
 
 const practices = [
   {
-    title: 'Software Services',
-    description: 'Web and mobile products, AI, computer vision, cloud, security, design, QA, and data platforms.',
+    title: 'Core Engineering & AI',
+    description: 'Web and mobile platforms, applied AI, computer vision, cloud, zero-trust security, QA automation, and data platforms.',
     path: '/services',
   },
   {
-    title: 'Manpower Solutions',
-    description: 'Staff augmentation, dedicated teams, contract-to-hire, and IT recruitment from Bengaluru.',
+    title: 'Workforce Solutions & Pods',
+    description: 'Dedicated engineering pods, staff augmentation, contract-to-hire, and specialized tech search from Bengaluru.',
     path: '/manpower-solutions',
   },
   {
-    title: 'Training & Internships',
-    description: 'Six-month OJT internships, corporate workshops, and bootcamps on live industry projects.',
+    title: 'Corporate Upskilling',
+    description: 'Enterprise bootcamps, 6-month graduate incubation, and 3-month student internships on live industry work.',
     path: '/training',
   },
 ]

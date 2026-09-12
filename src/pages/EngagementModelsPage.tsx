@@ -6,10 +6,10 @@ import SlideUp from '../components/animations/SlideUp'
 import FinalCTASection from '../components/home/FinalCTASection'
 
 const compareRows = [
-  { model: 'Managed Services', best: 'Ongoing operations', flex: 'Medium', commit: 'Long-term' },
-  { model: 'Time & Material', best: 'Evolving projects', flex: 'High', commit: 'Flexible' },
+  { model: 'Dedicated Engineering Pods', best: 'Outcome-owned delivery', flex: 'Medium', commit: 'Long-term' },
+  { model: 'Staff Augmentation (T&M)', best: 'Evolving capacity', flex: 'High', commit: 'Flexible' },
   { model: 'Contract-to-Hire', best: 'Talent evaluation', flex: 'Medium', commit: 'Transition-based' },
-  { model: 'Corporate Training', best: 'Team upskilling', flex: 'High', commit: 'Program-based' },
+  { model: 'Corporate Upskilling', best: 'Team capability', flex: 'High', commit: 'Program-based' },
 ]
 
 export default function EngagementModelsPage() {
@@ -17,13 +17,13 @@ export default function EngagementModelsPage() {
     <>
       <SEO
         title="Engagement Models"
-        description="Flexible partnership structures. Managed Services, Time & Material, Contract-to-Hire, and Corporate Training."
+        description="Flexible partnership structures. Dedicated engineering pods, staff augmentation, contract-to-hire, and corporate upskilling."
         path="/engagement-models"
       />
       <PageHero
         label="Engagement Models"
-        title="Choose the Right Delivery Model"
-        subtitle="Flexible partnership structures designed around your timeline, budget, and strategic goals."
+        title="Choose the Right Engagement Structure"
+        subtitle="Transparent, flexible commercial models engineered to align with your product delivery lifecycle, team structure, and budget velocity."
       />
 
       {engagementModels.map((model, i) => (

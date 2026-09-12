@@ -21,8 +21,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Digital Transformation & Custom Software"
-        description="Girakee Software Services. Global Digital Transformation. Web/mobile apps, AI automation, cloud solutions, and cyber security from Bengaluru. Global delivery."
+        title="Digital Transformation & Enterprise Software Engineering"
+        description="Architecting scalable web systems, enterprise cloud platforms, and production-grade AI solutions. Girakee delivers end-to-end engineering excellence from Bengaluru to clients across the Middle East, EU, UK, and US."
         path="/"
       />
       <Hero />

@@ -34,15 +34,16 @@ export default function GlobalDeliverySection() {
       <div className="relative max-w-[90rem] mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.15fr] gap-10 lg:gap-14 items-center">
           <div>
+            <p className="eyebrow eyebrow-dark mb-5">Global Reach</p>
             <TextReveal
               text="Engineering from Bengaluru. Delivering Globally."
               as="h2"
               className="editorial-display text-[clamp(1.875rem,4vw,3rem)] text-white mb-6 leading-tight"
             />
             <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-md">
-              Headquarters in Rajajinagar, Bengaluru. Delivery for product and engineering
-              teams in the United States, United Kingdom, European Union, and Middle East,
-              with offices launching in Dubai, Germany, and Canada.
+              Headquartered in India's technology capital, Girakee provides mission-critical
+              software engineering and dedicated technical talent to high-growth enterprises
+              across the Middle East, Europe, the UK, and North America.
             </p>
             <div className="flex flex-wrap gap-2">
               {regions.map((r) => (

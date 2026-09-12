@@ -27,8 +27,9 @@ export default function TechnologyEcosystemSection() {
       <PremiumScene scene="orbit" size="section" />
       <div className="relative max-w-[90rem] mx-auto z-10">
         <EditorialHeading
-          label="Technology"
-          title="Built With Modern Technology"
+          label="Technical Stack & Ecosystem"
+          title="Modern Tech Stack. Enterprise Architectures."
+          subtitle="Production-tested technologies across modern cloud platforms, deep-learning frameworks, distributed databases, and automated delivery pipelines."
           align="center"
           dark
         />

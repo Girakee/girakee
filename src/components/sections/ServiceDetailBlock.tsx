@@ -41,7 +41,7 @@ export default function ServiceDetailBlock({ service, index }: ServiceDetailBloc
                 to={service.path}
                 className="btn-primary inline-flex"
               >
-                Discuss This Service
+                {service.ctaLabel}
                 <ArrowRight size={15} strokeWidth={1.75} />
               </Link>
             </ScrollReveal>

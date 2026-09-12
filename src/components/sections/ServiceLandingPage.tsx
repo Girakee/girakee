@@ -18,12 +18,12 @@ interface ServiceLandingPageProps {
 }
 
 const relatedMap: Record<string, string[]> = {
-  'web-mobile': ['ui-ux', 'cloud-devops', 'software-testing'],
-  'ai-ml': ['intelligent-qa', 'data-analytics', 'software-testing'],
+  'web-mobile': ['cloud-devops', 'software-testing', 'ai-ml'],
+  'ai-ml': ['software-testing', 'data-analytics', 'cloud-devops'],
   'cloud-devops': ['cybersecurity', 'web-mobile', 'data-analytics'],
   'cybersecurity': ['cloud-devops', 'software-testing', 'ai-ml'],
   'ui-ux': ['web-mobile', 'software-testing', 'data-analytics'],
-  'software-testing': ['intelligent-qa', 'web-mobile', 'cybersecurity'],
+  'software-testing': ['ai-ml', 'web-mobile', 'cybersecurity'],
   'intelligent-qa': ['software-testing', 'ai-ml', 'data-analytics'],
   'data-analytics': ['ai-ml', 'cloud-devops', 'web-mobile'],
   'staff-augmentation': ['dedicated-teams', 'contract-to-hire', 'it-recruitment'],
@@ -31,8 +31,8 @@ const relatedMap: Record<string, string[]> = {
   'contract-to-hire': ['staff-augmentation', 'it-recruitment', 'dedicated-teams'],
   'it-recruitment': ['staff-augmentation', 'contract-to-hire', 'dedicated-teams'],
   internship: ['corporate-training', 'on-job-training', 'staff-augmentation'],
-  'corporate-training': ['internship', 'on-job-training', 'dedicated-teams'],
-  'on-job-training': ['internship', 'corporate-training', 'staff-augmentation'],
+  'corporate-training': ['on-job-training', 'internship', 'dedicated-teams'],
+  'on-job-training': ['corporate-training', 'internship', 'staff-augmentation'],
 }
 
 export function getServiceById(id: string): Service | undefined {
@@ -79,7 +79,7 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
                 {service.detailedOverview}
               </p>
               <Link to="/contact" className="btn-primary inline-flex">
-                Discuss {service.shortTitle}
+                {service.ctaLabel}
                 <ArrowRight size={15} strokeWidth={1.75} />
               </Link>
             </ScrollReveal>
@@ -209,34 +209,17 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         </section>
       )}
 
-      <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
-        <div className="max-w-[90rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-white/40">
-            {service.category === 'manpower'
-              ? 'Part of Girakee manpower solutions'
-              : service.category === 'training'
-                ? 'Part of Girakee training and internships'
-                : 'Part of Girakee software services'}
-          </p>
-          <Link
-            to={
-              service.category === 'manpower'
-                ? '/manpower-solutions'
-                : service.category === 'training'
-                  ? '/training'
-                  : '/services'
-            }
-            className="btn-secondary inline-flex"
-          >
-            {service.category === 'manpower'
-              ? 'All Manpower Solutions'
-              : service.category === 'training'
-                ? 'All Training Programs'
-                : 'All Software Services'}
-            <ArrowRight size={15} strokeWidth={1.75} />
-          </Link>
-        </div>
-      </section>
+      {service.category === 'software' && (
+        <section className="bg-navy-deep section-py page-px border-t border-white/[0.06]">
+          <div className="max-w-[90rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="text-sm text-white/40">Part of Girakee core engineering & AI</p>
+            <Link to="/services" className="btn-secondary inline-flex">
+              All Software Services
+              <ArrowRight size={15} strokeWidth={1.75} />
+            </Link>
+          </div>
+        </section>
+      )}
 
       <FinalCTASection />
     </>

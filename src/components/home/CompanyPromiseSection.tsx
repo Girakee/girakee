@@ -4,16 +4,16 @@ import { StaggerChildren, StaggerItem } from '../animations/StaggerChildren'
 
 const pillars = [
   {
-    title: 'Software',
-    body: 'Nine engineering lines from web and mobile to AI, vision, cloud, security, design, QA, and data. Each line has a process, a stack, and named deliverables.',
+    title: 'Core Engineering & AI',
+    body: 'End-to-end full-stack architectures, applied computer vision models, cloud-native deployments, and automated QA. Each initiative follows defined engineering milestones and clear deliverables.',
   },
   {
-    title: 'Manpower',
-    body: 'Staff augmentation, dedicated teams, contract-to-hire, and IT recruitment. People are screened by engineers, then placed into your sprints with a replacement path if the fit fails.',
+    title: 'Workforce Solutions & Pods',
+    body: 'Flexible engagement models including dedicated engineering pods, contract-to-hire, and sprint-ready talent augmentation. Every engineer is pre-vetted on production stacks to ensure seamless team integration.',
   },
   {
-    title: 'Training',
-    body: 'Internships on live projects, corporate workshops on your stack, and bootcamps that end with a working capstone. Training is taught by people who ship.',
+    title: 'Corporate Upskilling & Tech Enablement',
+    body: 'Tailored corporate training, specialized stack bootcamps, and executive technical workshops delivered by practicing engineers to upskill client teams on modern cloud, QA automation, and AI workflows.',
   },
 ]
 
@@ -23,19 +23,17 @@ export default function CompanyPromiseSection() {
       <div className="max-w-[90rem] mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-12">
           <ScrollReveal variant="slideUpSubtle">
-            <p className="eyebrow eyebrow-dark mb-5">Our Promise</p>
+            <p className="eyebrow eyebrow-dark mb-5">{servicePromise.kicker}</p>
             <h2 className="editorial-display text-[clamp(1.75rem,4vw,2.75rem)] text-white">
               {servicePromise.headline}
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade" delay={0.08}>
-            <p className="text-body text-body-dark leading-relaxed mb-4">
-              {servicePromise.description}
-            </p>
-            <p className="text-body text-body-dark leading-relaxed">
-              That means production code, placed engineers, and training that looks like the job.
-              Not a brochure of capabilities with no owner on the other end of the call.
-            </p>
+            {servicePromise.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)} className="text-body text-body-dark leading-relaxed mb-4 last:mb-0">
+                {paragraph}
+              </p>
+            ))}
           </ScrollReveal>
         </div>
 

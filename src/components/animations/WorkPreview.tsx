@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import type { ReactElement, ReactNode } from 'react'
+import { useState, type ReactElement, type ReactNode } from 'react'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 
 function Window({
@@ -58,7 +58,7 @@ function Typing({ lines, prefix = '>' }: { lines: string[]; prefix?: string }) {
 function WebPreview() {
   const { shouldAnimate } = useMotionConfig()
   return (
-    <Window title="app.client.com · dashboard">
+    <Window title="app.client.com · production dashboard">
       <div className="grid grid-cols-[72px_1fr] sm:grid-cols-[88px_1fr] gap-3 h-full">
         <div className="space-y-2 border-r border-white/[0.06] pr-2">
           {['Home', 'Orders', 'Users', 'Reports'].map((item, i) => (
@@ -72,7 +72,7 @@ function WebPreview() {
             </motion.div>
           ))}
         </div>
-        <div>
+        <div className="flex flex-col min-h-0">
           <div className="grid grid-cols-3 gap-2 mb-3">
             {[
               { label: 'Active users', value: '12.4k' },
@@ -91,7 +91,7 @@ function WebPreview() {
               </motion.div>
             ))}
           </div>
-          <div className="flex items-end gap-1.5 h-24">
+          <div className="flex items-end gap-1.5 h-20 mb-3">
             {[40, 62, 48, 78, 55, 88, 70, 92, 64, 80].map((h, i) => (
               <motion.div
                 key={i}
@@ -103,6 +103,9 @@ function WebPreview() {
               />
             ))}
           </div>
+          <p className="mt-auto text-[9px] font-mono text-white/35">
+            Cluster Health: Optimal · Latency: 42ms
+          </p>
         </div>
       </div>
     </Window>
@@ -112,8 +115,8 @@ function WebPreview() {
 function AiPreview() {
   const { shouldAnimate } = useMotionConfig()
   const messages = [
-    { role: 'user', text: 'Classify this invoice and extract the due date.' },
-    { role: 'ai', text: 'Invoice #4821 · Vendor: Helix Parts · Due 18 Sep · Confidence 97%.' },
+    { role: 'user', text: 'Classify document & extract deterministic entity fields.' },
+    { role: 'ai', text: 'Document #4821 · Vendor: Helix Parts · Confidence: 99.4%.' },
   ]
   return (
     <Window title="girakee · inference studio">
@@ -132,7 +135,7 @@ function AiPreview() {
           </motion.div>
         ))}
         <div className="mt-4">
-          <p className="text-[9px] text-white/30 mb-1">Model latency</p>
+          <p className="text-[9px] text-white/30 mb-1">Model latency 18ms · GPU-Accelerated (TensorRT)</p>
           <Bar delay={0.4} width="72%" />
         </div>
       </div>
@@ -178,10 +181,10 @@ function CloudPreview() {
     <Window title="terminal · deploy production">
       <Typing
         lines={[
-          'terraform plan · 14 to add, 2 to change',
-          'kubectl apply -f release.yml',
-          'rolling update: 3/3 pods ready',
-          'health checks passed · 99.95% SLO',
+          'terraform plan · 14 to add, 0 to destroy',
+          'kubectl apply -f release-v2.4.yml',
+          'rolling update: 3/3 pods ready (zero downtime)',
+          'health checks passed · 99.99% SLO verified',
         ]}
       />
       <div className="mt-4 flex gap-2">
@@ -203,10 +206,10 @@ function CloudPreview() {
 function SecurityPreview() {
   const { shouldAnimate } = useMotionConfig()
   const events = [
-    { t: '14:02:11', msg: 'Blocked brute-force on /admin', ok: true },
-    { t: '14:02:18', msg: 'Rotated secrets in vault', ok: true },
-    { t: '14:02:26', msg: 'Zero Trust policy updated', ok: true },
-    { t: '14:02:33', msg: 'Anomaly score 0.12 · allow', ok: true },
+    { t: '14:02:11', msg: 'Blocked brute-force attempts on /api/v1/auth' },
+    { t: '14:02:18', msg: 'Dynamic secrets auto-rotated in HashiCorp Vault' },
+    { t: '14:02:26', msg: 'Zero-Trust perimeter policy synchronized across VPC' },
+    { t: '14:02:33', msg: 'Network anomaly score: 0.02 (Nominal / Allowed)' },
   ]
   return (
     <Window title="security ops · live feed">
@@ -214,14 +217,14 @@ function SecurityPreview() {
         {events.map((e, i) => (
           <motion.div
             key={e.t}
-            className="flex items-center gap-3 px-2 py-2 border border-white/[0.06] bg-white/[0.02]"
+            className="flex items-start gap-3 px-2 py-2 border border-white/[0.06] bg-white/[0.02]"
             initial={{ opacity: 0, x: -16 }}
             animate={shouldAnimate ? { opacity: [0, 1, 1], x: [-16, 0, 0] } : { opacity: 1 }}
             transition={{ delay: i * 0.65, duration: 0.4, repeat: Infinity, repeatDelay: 3 }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="text-[9px] font-mono text-white/30 w-14">{e.t}</span>
-            <span className="text-[11px] text-white/70">{e.msg}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+            <span className="text-[9px] font-mono text-white/30 w-14 shrink-0">{e.t}</span>
+            <span className="text-[11px] text-white/70 leading-relaxed">{e.msg}</span>
           </motion.div>
         ))}
       </div>
@@ -255,29 +258,29 @@ function DesignPreview() {
 function QaPreview() {
   const { shouldAnimate } = useMotionConfig()
   const tests = [
-    'auth.login.spec.ts',
-    'checkout.flow.spec.ts',
-    'api.contracts.spec.ts',
-    'load.home.spec.ts',
+    { name: 'auth.login.spec.ts', status: 'PASSED' },
+    { name: 'checkout.flow.spec.ts', status: 'PASSED' },
+    { name: 'cad.drawing.tolerance.audit', status: 'PASSED (±0.02mm)' },
   ]
   return (
-    <Window title="playwright · test run">
+    <Window title="playwright & vision-lab · automated test runner">
       <div className="space-y-2">
         {tests.map((t, i) => (
-          <div key={t} className="flex items-center justify-between gap-3">
-            <span className="text-[11px] font-mono text-white/55">{t}</span>
+          <div key={t.name} className="flex items-center justify-between gap-3">
+            <span className="text-[11px] font-mono text-white/55 truncate">{t.name}</span>
             <motion.span
-              className="text-[10px] font-mono text-emerald-400"
+              className="text-[10px] font-mono text-emerald-400 shrink-0"
               initial={{ opacity: 0 }}
               animate={shouldAnimate ? { opacity: [0, 1, 1] } : { opacity: 1 }}
               transition={{ delay: 0.4 + i * 0.55, duration: 0.3, repeat: Infinity, repeatDelay: 2.8 }}
             >
-              passed
+              {t.status}
             </motion.span>
           </div>
         ))}
         <div className="pt-3">
           <Bar delay={0.2} width="100%" color="bg-emerald-400" />
+          <p className="text-[10px] font-mono text-white/40 mt-2">All 42 test suites completed in 1.4s (0 defects)</p>
         </div>
       </div>
     </Window>
@@ -297,7 +300,12 @@ function DataPreview() {
         </div>
         <Typing
           prefix=""
-          lines={['orders_daily  1.2M rows', 'freshness     4 min', 'dbt run       success', 'tableau sync  live']}
+          lines={[
+            'orders_daily  1.2M records',
+            'freshness     < 3 min',
+            'dbt run       SUCCESS',
+            'snowflake     synced',
+          ]}
         />
       </div>
     </Window>
@@ -306,26 +314,51 @@ function DataPreview() {
 
 function TalentPreview() {
   const { shouldAnimate } = useMotionConfig()
-  const people = [
-    { name: 'Ananya R.', role: 'Full-stack', status: 'Joined squad' },
-    { name: 'Karthik M.', role: 'DevOps', status: 'In screening' },
-    { name: 'Sara L.', role: 'ML Engineer', status: 'Client interview' },
+  const tags = ['React', 'Node.js', 'Python', 'AWS', 'YOLOv10', 'Kubernetes']
+  const roles: { role: string; tags: string[] }[] = [
+    { role: 'Senior Front-end Engineer', tags: ['React', 'Node.js'] },
+    { role: 'Full-stack Platform Engineer', tags: ['Node.js', 'React'] },
+    { role: 'Applied AI / ML Engineer', tags: ['Python', 'YOLOv10'] },
+    { role: 'Cloud Architect', tags: ['AWS', 'Kubernetes'] },
+    { role: 'Computer Vision Specialist', tags: ['YOLOv10', 'Python'] },
+    { role: 'DevOps / Platform Engineer', tags: ['Kubernetes', 'AWS'] },
   ]
+  const [active, setActive] = useState(tags[0])
+  const matches = roles.filter((r) => r.tags.includes(active))
+
   return (
-    <Window title="manpower · staff board">
+    <Window title="workforce · tech filter">
+      <p className="text-[10px] uppercase tracking-widest text-white/30 mb-3">Filter by stack</p>
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {tags.map((tag) => (
+          <button
+            key={tag}
+            type="button"
+            onClick={() => setActive(tag)}
+            className={`px-2.5 py-1 text-[10px] font-mono border transition-colors ${
+              active === tag
+                ? 'bg-cyan text-navy-deep border-cyan'
+                : 'border-white/[0.12] text-white/50 hover:text-white hover:border-white/25'
+            }`}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
       <div className="space-y-2">
-        {people.map((p, i) => (
+        {matches.map((r, i) => (
           <motion.div
-            key={p.name}
+            key={r.role}
             className="flex items-center justify-between p-2.5 border border-white/[0.08] bg-white/[0.03]"
-            animate={shouldAnimate ? { x: [0, 4, 0], opacity: [0.65, 1, 0.65] } : undefined}
-            transition={{ repeat: Infinity, duration: 3.4, delay: i * 0.4, ease: 'easeInOut' }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 1 }}
+            transition={{ delay: i * 0.08 }}
           >
             <div>
-              <p className="text-[12px] text-white">{p.name}</p>
-              <p className="text-[10px] text-white/40">{p.role}</p>
+              <p className="text-[12px] text-white">{r.role}</p>
+              <p className="text-[10px] text-white/40">{r.tags.join(' · ')}</p>
             </div>
-            <span className="text-[10px] text-cyan">{p.status}</span>
+            <span className="text-[10px] text-cyan">Pre-vetted</span>
           </motion.div>
         ))}
       </div>
@@ -391,14 +424,24 @@ function HirePreview() {
   )
 }
 
-function TrainingPreview() {
+function TrainingPreview({
+  months = 6,
+  title = 'ojt · 6 month residency',
+  outcome = 'Official Experience Letter & Portfolio Release at Month 6',
+}: {
+  months?: number
+  title?: string
+  outcome?: string
+}) {
   const { shouldAnimate } = useMotionConfig()
-  const months = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6']
+  const labels = Array.from({ length: months }, (_, i) => `M${i + 1}`)
   return (
-    <Window title="ojt · 6 month internship">
-      <p className="text-[11px] text-white/50 mb-4">Live project: drawing validation API</p>
-      <div className="grid grid-cols-6 gap-1.5 mb-5">
-        {months.map((m, i) => (
+    <Window title={title}>
+      <p className="text-[11px] text-white/50 mb-4">
+        {months === 3 ? 'Milestone track: web, Python, cloud fundamentals' : 'Live project: production engineering residency'}
+      </p>
+      <div className={`grid gap-1.5 mb-5`} style={{ gridTemplateColumns: `repeat(${months}, minmax(0, 1fr))` }}>
+        {labels.map((m, i) => (
           <motion.div
             key={m}
             className="h-16 border border-white/[0.08] flex items-end justify-center pb-1 text-[9px] text-white/40"
@@ -409,8 +452,8 @@ function TrainingPreview() {
           </motion.div>
         ))}
       </div>
-      <Bar delay={0.2} width="83%" />
-      <p className="text-[10px] text-cyan/70 mt-2">Experience letter ready at month 6</p>
+      <Bar delay={0.2} width={months === 3 ? '100%' : '83%'} />
+      <p className="text-[10px] text-cyan/70 mt-2">{outcome}</p>
     </Window>
   )
 }
@@ -444,9 +487,21 @@ const PREVIEWS: Record<string, () => ReactElement> = {
   'dedicated-teams': TeamPreview,
   'contract-to-hire': HirePreview,
   'it-recruitment': TalentPreview,
-  internship: TrainingPreview,
+  internship: () => (
+    <TrainingPreview
+      months={3}
+      title="internship · 3 month track"
+      outcome="Internship Certificate & Capstone Evaluation"
+    />
+  ),
   'corporate-training': WorkshopPreview,
-  'on-job-training': TrainingPreview,
+  'on-job-training': () => (
+    <TrainingPreview
+      months={6}
+      title="ojt · 6 month residency"
+      outcome="Official Experience Letter & Portfolio Release at Month 6"
+    />
+  ),
 }
 
 export default function WorkPreview({ serviceId }: { serviceId: string }) {

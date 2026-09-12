@@ -7,15 +7,12 @@ export default function DigitalTransformationSection() {
     <section className="section-py bg-navy-deep page-px border-b border-white/[0.06]">
       <div className="max-w-[90rem] mx-auto">
         <ScrollReveal variant="slideUpSubtle">
-          <p className="eyebrow eyebrow-dark mb-5">Welcome to the Journey of</p>
+          <p className="eyebrow eyebrow-dark mb-5">{heroMessaging.kicker}</p>
           <h2 className="editorial-display text-[clamp(1.75rem,4vw,3rem)] text-white mb-6 max-w-4xl leading-tight">
             {heroMessaging.headline}
           </h2>
-          <p className="text-body text-body-dark max-w-3xl leading-relaxed mb-6">
-            {heroMessaging.description}
-          </p>
           <p className="text-body text-body-dark max-w-3xl leading-relaxed">
-            {homeMatter.introBody}
+            {heroMessaging.description}
           </p>
         </ScrollReveal>
 

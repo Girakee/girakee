@@ -12,14 +12,14 @@ const methodology = [
 export default function ServicesPage() {
   return (
     <CategoryLandingPage
-      seoTitle="Software Services"
-      seoDescription="Web and mobile apps, AI and ML, cloud, cybersecurity, UI/UX, QA, intelligent QA, and data analytics from Girakee."
+      seoTitle="Core Engineering & AI"
+      seoDescription="Web and mobile engineering, applied AI and computer vision, cloud architecture, zero-trust cybersecurity, QA automation, and data platforms from Girakee."
       path="/services"
-      label="Software Services"
+      label="Core Engineering & AI"
       title="Engineering Software That Powers Business"
-      subtitle="Eleven integrated capabilities delivered by practitioners who build production systems, from Bengaluru to clients worldwide."
+      subtitle="Scalable digital architecture, intelligent automation, and robust enterprise engineering delivered to clients across the Middle East, Europe, and North America."
       scene="orbit"
-      introTitle="A Software Company Built for Production"
+      introTitle="Enterprise Engineering Built for Production"
       intro={[
         'Girakee is a Bengaluru-based software engineering company. We design, build, and deploy web applications, mobile apps, AI systems, cloud infrastructure, and data platforms for businesses across the US, UK, Middle East, and EU.',
         'Every service below includes defined deliverables, a documented process, and a dedicated visual identity so you know exactly what we build and how we work.',
