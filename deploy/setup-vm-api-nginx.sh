@@ -3,7 +3,11 @@
 set -euo pipefail
 
 SNIPPET="/etc/nginx/snippets/girakee-api.conf"
-DEFAULT_SITE="/etc/nginx/sites-enabled/default"
+
+echo "==> Girakee API nginx setup"
+
+# Remove conflicting standalone site from older script versions.
+rm -f /etc/nginx/sites-enabled/girakee-api /etc/nginx/sites-available/girakee-api
 
 mkdir -p /etc/nginx/snippets
 cat > "$SNIPPET" <<'EOF'
@@ -18,25 +22,27 @@ location /api/ {
 }
 EOF
 
-if [ -f "$DEFAULT_SITE" ] && ! grep -q "girakee-api.conf" "$DEFAULT_SITE"; then
-  sed -i '/server {/a \    include snippets/girakee-api.conf;' "$DEFAULT_SITE"
-  echo "Added girakee API include to $DEFAULT_SITE"
-elif [ -f /etc/nginx/sites-enabled/girakee-api ]; then
-  echo "girakee-api site already exists"
-else
-  cat > /etc/nginx/sites-available/girakee-api <<'SITE'
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    server_name _;
-    include snippets/girakee-api.conf;
-    location / {
-        return 404;
-    }
+add_include_to_site() {
+  local site_file="$1"
+  if grep -q "girakee-api.conf" "$site_file"; then
+    echo "Already configured in $site_file"
+    return 0
+  fi
+  sed -i '/server {/a \    include snippets/girakee-api.conf;' "$site_file"
+  echo "Added API proxy include to $site_file"
 }
-SITE
-  ln -sf /etc/nginx/sites-available/girakee-api /etc/nginx/sites-enabled/girakee-api
-  echo "Created standalone girakee-api nginx site"
+
+if [ -f /etc/nginx/sites-enabled/mnxstore ]; then
+  add_include_to_site /etc/nginx/sites-enabled/mnxstore
+elif [ -f /etc/nginx/sites-enabled/default ]; then
+  add_include_to_site /etc/nginx/sites-enabled/default
+else
+  primary_site="$(find /etc/nginx/sites-enabled -maxdepth 1 -type f ! -name 'girakee-api' | head -n 1)"
+  if [ -z "$primary_site" ]; then
+    echo "No nginx site found in /etc/nginx/sites-enabled"
+    exit 1
+  fi
+  add_include_to_site "$primary_site"
 fi
 
 nginx -t
@@ -44,12 +50,12 @@ systemctl reload nginx
 
 cd /opt/girakee
 npm install -g pm2 2>/dev/null || true
-pm2 start deploy/ecosystem.config.cjs || pm2 restart girakee-api
+pm2 start deploy/ecosystem.config.cjs 2>/dev/null || pm2 restart girakee-api
 pm2 save
 
 echo ""
-echo "Test locally:"
-curl -sf http://127.0.0.1:8787/api/jobs >/dev/null && echo "  OK 127.0.0.1:8787"
-curl -sf http://127.0.0.1/api/jobs >/dev/null && echo "  OK nginx http://127.0.0.1/api/jobs"
-echo "Test from your PC:"
-echo "  curl http://200.234.39.88/api/jobs"
+echo "==> Tests"
+curl -sf http://127.0.0.1:8787/api/jobs >/dev/null && echo "OK  API direct :8787"
+curl -sf http://127.0.0.1/api/jobs >/dev/null && echo "OK  nginx /api/jobs"
+echo ""
+echo "From your PC: curl http://200.234.39.88/api/jobs"
