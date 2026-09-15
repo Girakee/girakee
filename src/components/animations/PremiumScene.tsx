@@ -355,6 +355,83 @@ function NetworkScene({ loop }: { loop: boolean }) {
   )
 }
 
+function PodsScene({ loop }: { loop: boolean }) {
+  const members = ['FE', 'BE', 'QA', 'PM', 'DE']
+  return (
+    <svg viewBox="0 0 600 320" className="absolute right-0 top-0 h-full w-[min(100%,500px)]">
+      <circle cx="400" cy="150" r="22" fill="rgba(8,175,199,0.15)" stroke={CYAN} strokeWidth="1.5" />
+      <text x="400" y="154" fill={CYAN} fontSize="8" textAnchor="middle" fontFamily="monospace">DEV</text>
+      {members.map((m, i) => {
+        const angle = (i / members.length) * Math.PI * 2 - Math.PI / 2
+        const cx = 400 + Math.cos(angle) * 90
+        const cy = 150 + Math.sin(angle) * 70
+        return (
+          <motion.g key={m} animate={loop ? { y: [0, -4, 0] } : undefined} transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.25 }}>
+            <line x1="400" y1="150" x2={cx} y2={cy} stroke={CYAN_DIM} strokeWidth="1" />
+            <circle cx={cx} cy={cy} r="14" fill="rgba(8,175,199,0.1)" stroke={CYAN_DIM} strokeWidth="1" />
+            <text x={cx} y={cy + 4} fill={CYAN} fontSize="7" textAnchor="middle" fontFamily="monospace">{m}</text>
+          </motion.g>
+        )
+      })}
+      <motion.line x1="300" y1="240" x2="520" y2="240" stroke={CYAN_DIM} strokeWidth="1" strokeDasharray="6 4"
+        animate={loop ? { strokeDashoffset: [0, -20] } : undefined} transition={{ repeat: Infinity, duration: 2, ease: 'linear' }} />
+    </svg>
+  )
+}
+
+function StaffScene({ loop }: { loop: boolean }) {
+  const hubs = [{ x: 400, y: 160, label: 'BLR' }, { x: 320, y: 100, label: 'US' }, { x: 480, y: 95, label: 'UK' }, { x: 485, y: 210, label: 'EU' }, { x: 310, y: 215, label: 'ME' }]
+  return (
+    <svg viewBox="0 0 600 320" className="absolute right-0 top-0 h-full w-[min(100%,580px)]">
+      {hubs.slice(1).map((h, i) => (
+        <motion.line key={h.label} x1={hubs[0].x} y1={hubs[0].y} x2={h.x} y2={h.y} stroke={CYAN_DIM} strokeWidth="1"
+          animate={loop ? { opacity: [0.3, 0.8, 0.3] } : undefined} transition={{ repeat: Infinity, duration: 2.2, delay: i * 0.3 }} />
+      ))}
+      {loop && hubs.slice(1).map((h, i) => (
+        <motion.circle key={`d-${h.label}`} r="2" fill={CYAN}
+          animate={{ cx: [hubs[0].x, h.x, hubs[0].x], cy: [hubs[0].y, h.y, hubs[0].y], opacity: [0, 0.8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.8, delay: i * 0.5, ease: 'easeInOut' }} />
+      ))}
+      {hubs.map((h, i) => (
+        <g key={h.label}>
+          <circle cx={h.x} cy={h.y} r={i === 0 ? 8 : 6} fill={CYAN} opacity={i === 0 ? 1 : 0.55} />
+          <text x={h.x} y={h.y + 18} fill="rgba(255,255,255,0.35)" fontSize="6" textAnchor="middle" fontFamily="monospace">{h.label}</text>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+function HireScene({ loop }: { loop: boolean }) {
+  const steps = ['Role', 'Screen', 'Trial', 'Review', 'Convert']
+  return (
+    <svg viewBox="0 0 600 320" className="absolute right-0 top-0 h-full w-[min(100%,520px)]">
+      {steps.map((s, i) => (
+        <motion.g key={s} animate={loop ? { scale: [1, 1.08, 1] } : undefined} transition={{ repeat: Infinity, duration: 2, delay: i * 0.35 }}>
+          <circle cx={280 + i * 55} cy="150" r="16" fill="rgba(8,175,199,0.1)" stroke={CYAN_DIM} strokeWidth="1" />
+          <text x={280 + i * 55} y="154" fill={CYAN} fontSize="6" textAnchor="middle" fontFamily="monospace">{s}</text>
+          {i < steps.length - 1 && (
+            <motion.line x1={298 + i * 55} y1="150" x2={318 + i * 55} y2="150" stroke={CYAN_DIM} strokeWidth="1" strokeDasharray="4 3"
+              animate={loop ? { strokeDashoffset: [0, -14] } : undefined} transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }} />
+          )}
+        </motion.g>
+      ))}
+    </svg>
+  )
+}
+
+function RecruitScene({ loop }: { loop: boolean }) {
+  const stages = [280, 220, 160, 100]
+  return (
+    <svg viewBox="0 0 600 320" className="absolute right-0 top-0 h-full w-[min(100%,480px)]">
+      {stages.map((w, i) => (
+        <motion.rect key={w} x={(600 - w) / 2} y={70 + i * 42} width={w} height="28" fill="rgba(8,175,199,0.08)" stroke={CYAN_DIM} strokeWidth="1"
+          animate={loop ? { opacity: [0.4, 0.95, 0.4] } : undefined} transition={{ repeat: Infinity, duration: 2.4, delay: i * 0.35 }} />
+      ))}
+    </svg>
+  )
+}
+
 function TalentScene({ loop }: { loop: boolean }) {
   return (
     <svg viewBox="0 0 600 320" className="absolute right-0 top-0 h-full w-[min(100%,500px)]">
@@ -391,7 +468,13 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
   orbit: OrbitScene,
   network: NetworkScene,
   talent: TalentScene,
+  pods: PodsScene,
+  staff: StaffScene,
   classroom: TerminalScene,
+  office: StaffScene,
+  capstone: TerminalScene,
+  hire: HireScene,
+  recruit: RecruitScene,
 }
 
 export default function PremiumScene({ scene, size = 'page', className = '' }: PremiumSceneProps) {

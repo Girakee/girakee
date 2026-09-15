@@ -1,4 +1,4 @@
-import SEO from '../seo/SEO'
+import SEO, { serviceJsonLd } from '../seo/SEO'
 import PageHero from '../ui/PageHero'
 import ServiceScenePanel from '../animations/ServiceScenePanel'
 import AnimatedTechMarquee from '../animations/AnimatedTechMarquee'
@@ -46,6 +46,7 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
     (service.category === 'manpower' ? 'Related Models' : 'Related Disciplines')
   const hub = categoryHub[service.category]
   const applyAnchor = service.application === 'internship' ? 'apply' : 'register'
+  const engageSteps = service.engage ?? service.process
 
   return (
     <>
@@ -53,6 +54,18 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
         title={seoTitle ?? service.shortTitle}
         description={seoDescription ?? service.description}
         path={service.path}
+        keywords={[
+          service.shortTitle,
+          service.title,
+          ...service.technologies.slice(0, 6),
+          'Girakee Software Services',
+          'enterprise software engineering Bengaluru',
+        ]}
+        jsonLd={serviceJsonLd({
+          name: service.title,
+          description: service.description,
+          path: service.path,
+        })}
       />
       <PageHero
         label={service.heroKicker ?? service.shortTitle}
@@ -162,7 +175,7 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
             </p>
           </ScrollReveal>
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {service.process.map((step, i) => (
+            {engageSteps.map((step, i) => (
               <StaggerItem key={`${i}-${processTitle(step)}`}>
                 <div className="p-4 holographic-panel h-full">
                   <span className="text-xs font-mono text-cyan/50 block mb-2">

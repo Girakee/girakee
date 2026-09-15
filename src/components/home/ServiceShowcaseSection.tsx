@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
@@ -6,6 +6,8 @@ import EditorialHeading from './shared/EditorialHeading'
 import WorkPreview from '../animations/WorkPreview'
 import { softwareServices, manpowerServices, trainingServices, type Service } from '../../data/services'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
+
+const ROTATE_MS = 5200
 
 const groups: {
   id: 'software' | 'manpower' | 'training'
@@ -46,6 +48,7 @@ export default function ServiceShowcaseSection() {
   const [groupId, setGroupId] = useState<(typeof groups)[number]['id']>('software')
   const group = groups.find((g) => g.id === groupId) ?? groups[0]
   const [serviceId, setServiceId] = useState(group.items[0].id)
+  const [paused, setPaused] = useState(false)
   const active = group.items.find((s) => s.id === serviceId) ?? group.items[0]
 
   const selectGroup = (id: (typeof groups)[number]['id']) => {
@@ -53,6 +56,24 @@ export default function ServiceShowcaseSection() {
     setGroupId(id)
     setServiceId(next.items[0].id)
   }
+
+  useEffect(() => {
+    if (!shouldAnimate || paused) return
+    const timer = window.setInterval(() => {
+      const currentGroup = groups.find((g) => g.id === groupId) ?? groups[0]
+      const idx = currentGroup.items.findIndex((s) => s.id === serviceId)
+      const nextIdx = (Math.max(idx, 0) + 1) % currentGroup.items.length
+      if (nextIdx === 0) {
+        const groupIndex = groups.findIndex((g) => g.id === groupId)
+        const nextGroup = groups[(groupIndex + 1) % groups.length]
+        setGroupId(nextGroup.id)
+        setServiceId(nextGroup.items[0].id)
+        return
+      }
+      setServiceId(currentGroup.items[nextIdx].id)
+    }, ROTATE_MS)
+    return () => window.clearInterval(timer)
+  }, [shouldAnimate, paused, groupId, serviceId])
 
   return (
     <section className="section-py bg-navy-dark page-px relative overflow-hidden">
@@ -87,19 +108,37 @@ export default function ServiceShowcaseSection() {
             <p className="text-[11px] font-mono text-cyan/60 uppercase tracking-widest mb-3">{group.kicker}</p>
             <h3 className="editorial-display text-2xl text-white mb-4">{group.heading}</h3>
             <p className="text-sm text-white/55 leading-relaxed mb-8">{group.body}</p>
-            <ul className="space-y-1">
-              {group.items.map((item) => (
+            <ul
+              className="space-y-1"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              {group.items.map((item, i) => (
                 <li key={item.id}>
                   <button
                     type="button"
                     onClick={() => setServiceId(item.id)}
-                    className={`w-full text-left px-3 py-2.5 text-sm border-l-2 transition-colors ${
+                    className={`relative w-full text-left px-3 py-2.5 text-sm border-l-2 transition-colors overflow-hidden ${
                       item.id === active.id
                         ? 'border-cyan text-white bg-cyan/[0.06]'
                         : 'border-transparent text-white/50 hover:text-white/80'
                     }`}
                   >
-                    {item.title}
+                    {item.id === active.id && shouldAnimate && !paused && (
+                      <motion.span
+                        key={`${active.id}-progress`}
+                        className="absolute inset-y-0 left-0 bg-cyan/10"
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: ROTATE_MS / 1000, ease: 'linear' }}
+                      />
+                    )}
+                    <span className="relative z-10">
+                      <span className="font-mono text-[10px] text-cyan/50 mr-2">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      {item.title}
+                    </span>
                   </button>
                 </li>
               ))}

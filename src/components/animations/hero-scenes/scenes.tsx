@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { HeroBackdrop, CYAN, CYAN_BRIGHT, GREEN, AMBER, RED, METAL, METAL_DARK, DRAW, PulseDot, FlowLine } from './shared'
+import { HeroBackdrop, CYAN, CYAN_BRIGHT, GREEN, AMBER, RED, METAL, METAL_DARK, DRAW, DIM, PulseDot, FlowLine } from './shared'
+import IllustratedPhotoScene from '../IllustratedPhotoScene'
 
 type Props = { loop: boolean }
 
@@ -301,34 +303,124 @@ export function HeroDataScene({ loop }: Props) {
   )
 }
 
-/* ── TALENT OUTSOURCING: global team network ── */
-export function HeroTalentScene({ loop }: Props) {
-  const hubs = [{ x: 240, y: 150, label: 'BLR' }, { x: 100, y: 90, label: 'US' }, { x: 380, y: 80, label: 'UK' }, { x: 390, y: 200, label: 'EU' }, { x: 90, y: 210, label: 'ME' }]
+function useCycleIndex(count: number, loop: boolean, intervalMs = 1400) {
+  const [active, setActive] = useState(0)
+  useEffect(() => {
+    if (!loop || count < 2) return
+    const id = window.setInterval(() => setActive((i) => (i + 1) % count), intervalMs)
+    return () => window.clearInterval(id)
+  }, [loop, count, intervalMs])
+  return active
+}
+
+/* ── DEDICATED PODS: cross-functional squad hub ── */
+export function HeroPodsScene({ loop }: Props) {
+  const members = [
+    { x: 110, y: 75, label: 'FE' },
+    { x: 370, y: 75, label: 'BE' },
+    { x: 70, y: 175, label: 'QA' },
+    { x: 410, y: 175, label: 'PM' },
+    { x: 240, y: 225, label: 'DE' },
+  ]
+  const active = useCycleIndex(members.length, loop, 1200)
+
+  return (
+    <HeroBackdrop label="Dedicated Engineering Pod">
+      <svg viewBox="0 0 480 300" className="w-full h-full">
+        <ellipse cx="240" cy="145" rx="165" ry="95" fill="none" stroke="rgba(8,175,199,0.12)" strokeWidth="1" strokeDasharray="4 6" />
+        {members.map((m, i) => (
+          <FlowLine key={m.label} loop={loop} x1={240} y1={145} x2={m.x} y2={m.y} delay={i * 0.25} />
+        ))}
+        <motion.circle
+          cx={240}
+          cy={145}
+          r={26}
+          fill="rgba(8,175,199,0.18)"
+          stroke={CYAN_BRIGHT}
+          strokeWidth="2"
+          animate={loop ? { scale: [1, 1.06, 1] } : undefined}
+          transition={{ repeat: Infinity, duration: 2.5 }}
+        />
+        <text x="240" y="149" fill={CYAN_BRIGHT} fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">DEV</text>
+        {members.map((m, i) => (
+          <g key={m.label}>
+            <motion.circle
+              cx={m.x}
+              cy={m.y}
+              r={active === i ? 16 : 12}
+              fill={active === i ? 'rgba(8,175,199,0.25)' : 'rgba(8,175,199,0.1)'}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={active === i ? 2 : 1}
+              animate={loop ? { opacity: [0.7, 1, 0.7] } : undefined}
+              transition={{ repeat: Infinity, duration: 2.2, delay: i * 0.15 }}
+            />
+            <text x={m.x} y={m.y + 4} fill={CYAN} fontSize="7" textAnchor="middle" fontFamily="monospace">{m.label}</text>
+          </g>
+        ))}
+        <motion.line x1="60" y1="255" x2="420" y2="255" stroke={DIM} strokeWidth="1" strokeDasharray="6 4"
+          animate={loop ? { strokeDashoffset: [0, -20] } : undefined} transition={{ repeat: Infinity, duration: 2, ease: 'linear' }} />
+        {loop && (
+          <motion.circle r="3" fill={CYAN_BRIGHT} cy={255}
+            animate={{ cx: [60, 420], opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 2.8, ease: 'linear' }} />
+        )}
+        <text x="240" y="278" fill="rgba(255,255,255,0.35)" fontSize="7" textAnchor="middle" fontFamily="monospace">
+          Vetted engineers · Sprint-ready · Global delivery
+        </text>
+      </svg>
+    </HeroBackdrop>
+  )
+}
+
+/* ── STAFF AUGMENTATION: global delivery network ── */
+export function HeroStaffScene({ loop }: Props) {
+  const hubs = [
+    { x: 240, y: 145, label: 'BLR' },
+    { x: 95, y: 85, label: 'US' },
+    { x: 385, y: 75, label: 'UK' },
+    { x: 395, y: 195, label: 'EU' },
+    { x: 85, y: 205, label: 'ME' },
+  ]
+  const stacks = ['React', 'Node', 'Python', 'AWS']
+  const active = useCycleIndex(hubs.length, loop, 1500)
+
   return (
     <HeroBackdrop label="Global Engineering Pods">
       <svg viewBox="0 0 480 300" className="w-full h-full">
         {hubs.slice(1).map((h, i) => (
-          <FlowLine key={h.label} loop={loop} x1={hubs[0].x} y1={hubs[0].y} x2={h.x} y2={h.y} delay={i * 0.4} />
+          <FlowLine key={h.label} loop={loop} x1={hubs[0].x} y1={hubs[0].y} x2={h.x} y2={h.y} delay={i * 0.35} />
         ))}
         {hubs.map((h, i) => (
           <g key={h.label}>
-            <motion.circle cx={h.x} cy={h.y} r={i === 0 ? 14 : 10} fill="rgba(8,175,199,0.15)" stroke={CYAN} strokeWidth="1.5"
-              animate={loop ? { r: [i === 0 ? 12 : 8, i === 0 ? 16 : 12, i === 0 ? 12 : 8] } : undefined} transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.2 }} />
+            <motion.circle
+              cx={h.x}
+              cy={h.y}
+              r={i === 0 ? 16 : active === i ? 13 : 10}
+              fill={active === i ? 'rgba(8,175,199,0.22)' : 'rgba(8,175,199,0.12)'}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={i === 0 || active === i ? 2 : 1.5}
+              animate={loop ? { r: [i === 0 ? 14 : 9, i === 0 ? 18 : 13, i === 0 ? 14 : 9] } : undefined}
+              transition={{ repeat: Infinity, duration: 2.6, delay: i * 0.2 }}
+            />
             <text x={h.x} y={h.y + 4} fill={CYAN} fontSize="7" textAnchor="middle" fontFamily="monospace">{h.label}</text>
           </g>
         ))}
-        {[0, 1, 2].map((i) => (
-          <motion.g key={i} transform={`translate(${160 + i * 55}, 220)`}
-            animate={loop ? { y: [0, -4, 0] } : undefined} transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.3 }}
-          >
-            <circle cy="0" r="12" fill="rgba(8,175,199,0.2)" stroke={CYAN} />
-            <line x1="0" y1="12" x2="0" y2="28" stroke="rgba(255,255,255,0.2)" />
+        {stacks.map((s, i) => (
+          <motion.g key={s} transform={`translate(${125 + i * 58}, 228)`}>
+            <rect x="-22" y="-10" width="44" height="18" fill="rgba(8,175,199,0.06)" stroke={active % stacks.length === i ? CYAN_BRIGHT : 'rgba(255,255,255,0.12)'} rx="2" />
+            <text x="0" y="3" fill={active % stacks.length === i ? CYAN_BRIGHT : 'rgba(255,255,255,0.45)'} fontSize="6" textAnchor="middle" fontFamily="monospace">{s}</text>
           </motion.g>
         ))}
-        <text x="240" y="275" fill="rgba(255,255,255,0.35)" fontSize="7" textAnchor="middle" fontFamily="monospace">Vetted engineers · Sprint-ready · Global delivery</text>
+        <text x="240" y="278" fill="rgba(255,255,255,0.35)" fontSize="7" textAnchor="middle" fontFamily="monospace">
+          Vetted engineers · Sprint-ready · Global delivery
+        </text>
       </svg>
     </HeroBackdrop>
   )
+}
+
+/* ── WORKFORCE HUB: combined talent view ── */
+export function HeroTalentScene({ loop }: Props) {
+  return <HeroStaffScene loop={loop} />
 }
 
 /* ── TRAINING: learning path progress ── */
@@ -414,40 +506,137 @@ export function HeroNetworkScene({ loop }: Props) {
 
 export function HeroClassroomScene({ loop }: Props) {
   return (
-    <HeroBackdrop label="AI Training Lab">
-      <img
-        src="/careers-lab.png"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#040c16] via-transparent to-[#040c16]/50 pointer-events-none" />
-      <svg viewBox="0 0 480 300" className="absolute inset-0 w-full h-full pointer-events-none">
+    <IllustratedPhotoScene
+      src="/careers-lab.png"
+      label="AI Training Lab"
+      caption="Live projects · Mentors · 6-month residency"
+      loop={loop}
+    />
+  )
+}
+
+export function HeroOfficeScene({ loop }: Props) {
+  return (
+    <IllustratedPhotoScene
+      src="/careers-office.png"
+      label="Bengaluru Engineering Floor"
+      caption="Engineers · Mentors · Production delivery"
+      loop={loop}
+    />
+  )
+}
+
+export function HeroCapstoneScene({ loop }: Props) {
+  return (
+    <IllustratedPhotoScene
+      src="/internship-lab.png"
+      label="Academic Capstone Studio"
+      caption="Live projects · Mentors · 12-week internship"
+      loop={loop}
+    />
+  )
+}
+
+export function HeroHireScene({ loop }: Props) {
+  const steps = ['Role', 'Screen', 'Trial', 'Review', 'Convert']
+  const active = useCycleIndex(steps.length, loop, 1300)
+
+  return (
+    <HeroBackdrop label="Contract-to-Hire Path">
+      <svg viewBox="0 0 480 300" className="w-full h-full">
+        {steps.map((s, i) => (
+          <g key={s} transform={`translate(${40 + i * 88}, 110)`}>
+            <motion.circle
+              cx="24"
+              cy="24"
+              r={active === i ? 24 : 20}
+              fill={active === i ? 'rgba(8,175,199,0.2)' : 'rgba(8,175,199,0.08)'}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={active === i ? 2 : 1.5}
+              animate={loop ? { scale: active === i ? [1, 1.1, 1] : [1, 1.04, 1] } : undefined}
+              transition={{ repeat: Infinity, duration: 1.2 }}
+            />
+            <text x="24" y={active === i ? 29 : 28} fill={active === i ? CYAN_BRIGHT : CYAN} fontSize="7" textAnchor="middle" fontFamily="monospace">{s}</text>
+            {i < steps.length - 1 && (
+              <>
+                <line x1="48" y1="24" x2="84" y2="24" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" />
+                <motion.line
+                  x1="48"
+                  y1="24"
+                  x2="84"
+                  y2="24"
+                  stroke={active > i ? CYAN_BRIGHT : CYAN}
+                  strokeWidth="1.5"
+                  strokeDasharray="6 4"
+                  animate={loop ? { strokeDashoffset: [0, -20] } : undefined}
+                  transition={{ repeat: Infinity, duration: 1.4, ease: 'linear', delay: i * 0.15 }}
+                />
+                {loop && active === i && (
+                  <motion.circle r="3" fill={CYAN_BRIGHT} cy={24}
+                    animate={{ cx: [48, 84], opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1.2, ease: 'linear' }} />
+                )}
+              </>
+            )}
+          </g>
+        ))}
+        <motion.rect x="80" y="175" width="320" height="6" fill="rgba(255,255,255,0.06)" rx="2" />
         {loop && (
-          <motion.line
-            x1="0"
-            x2="480"
-            y1="40"
-            y2="40"
-            stroke={CYAN_BRIGHT}
-            strokeWidth="1.5"
-            opacity="0.55"
-            filter="url(#hs-glow)"
-            animate={{ y1: [36, 264, 36], y2: [36, 264, 36] }}
-            transition={{ repeat: Infinity, duration: 5.5, ease: 'linear' }}
+          <motion.rect
+            x="80"
+            y="175"
+            height="6"
+            fill="url(#hs-cyan)"
+            rx="2"
+            animate={{ width: [`${(active + 1) * 64}px`, `${(active + 1) * 64}px`] }}
+            transition={{ duration: 0.4 }}
           />
         )}
-        <motion.path
-          d="M268 118 C 300 108, 330 148, 368 122 C 392 108, 410 132, 428 118"
-          fill="none"
-          stroke={CYAN_BRIGHT}
-          strokeWidth="2"
-          strokeDasharray="180"
-          animate={loop ? { strokeDashoffset: [180, 0, 0, 180] } : undefined}
-          transition={loop ? { repeat: Infinity, duration: 6, ease: 'easeInOut' } : undefined}
-        />
-        <PulseDot cx={368} cy={122} loop={loop} />
-        <text x="240" y="286" fill="rgba(255,255,255,0.45)" fontSize="7" textAnchor="middle" fontFamily="monospace">
-          Live projects · Mentors · AI lab
+        <text x="240" y="210" fill="rgba(255,255,255,0.4)" fontSize="8" textAnchor="middle" fontFamily="monospace">
+          90-day trial · sprint velocity · conversion
+        </text>
+      </svg>
+    </HeroBackdrop>
+  )
+}
+
+export function HeroRecruitScene({ loop }: Props) {
+  const stages = [
+    { y: 70, w: 280, label: 'Sourcing pool', count: '84' },
+    { y: 120, w: 210, label: 'Technical screen', count: '19' },
+    { y: 170, w: 140, label: 'Client interviews', count: '6' },
+    { y: 220, w: 80, label: 'Offer', count: '2' },
+  ]
+  const active = useCycleIndex(stages.length, loop, 1400)
+
+  return (
+    <HeroBackdrop label="IT Recruitment Pipeline">
+      <svg viewBox="0 0 480 300" className="w-full h-full">
+        {stages.map((s, i) => (
+          <g key={s.label}>
+            <motion.rect
+              x={(480 - s.w) / 2}
+              y={s.y}
+              width={s.w}
+              height="36"
+              fill={active === i ? 'rgba(8,175,199,0.18)' : 'rgba(8,175,199,0.08)'}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={active === i ? 1.5 : 1}
+              animate={loop ? { opacity: active === i ? [0.85, 1, 0.85] : [0.45, 0.65, 0.45] } : undefined}
+              transition={{ repeat: Infinity, duration: 1.4 }}
+            />
+            <text x="240" y={s.y + 23} fill={active === i ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.7)'} fontSize="8" textAnchor="middle" fontFamily="monospace">
+              {s.label}
+            </text>
+            <text x={(480 + s.w) / 2 - 12} y={s.y + 23} fill={CYAN} fontSize="7" textAnchor="end" fontFamily="monospace">{s.count}</text>
+            {loop && active === i && (
+              <motion.circle r="3" fill={CYAN_BRIGHT}
+                animate={{ cx: [240, 240], cy: [s.y - 8, s.y + 44], opacity: [0, 1, 0] }}
+                transition={{ repeat: Infinity, duration: 1.2, ease: 'linear' }} />
+            )}
+          </g>
+        ))}
+        <text x="240" y="278" fill="rgba(255,255,255,0.35)" fontSize="7" textAnchor="middle" fontFamily="monospace">
+          Engineer-led screens · Shortlists · Offer management
         </text>
       </svg>
     </HeroBackdrop>

@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { HudFrame, Panel, CYAN, CYAN_BRIGHT, DIM, FAINT, GREEN, AMBER, RED, DataStream, StatusLine } from './shared'
+import IllustratedPhotoScene from '../IllustratedPhotoScene'
 
 /* ─── WEB & MOBILE ─── */
 export function WebMobileScene({ loop }: { loop: boolean }) {
@@ -331,7 +333,7 @@ export function DataScene({ loop }: { loop: boolean }) {
 /* ─── TRAINING / INTERNSHIP ─── */
 export function TerminalScene({ loop }: { loop: boolean }) {
   return (
-    <HudFrame label="Corporate Training · OJT" status="SHIPPING CODE">
+    <HudFrame label="Corporate Training · Labs" status="SHIPPING CODE">
       <svg viewBox="0 0 480 280" className="w-full h-full">
         <Panel x={30} y={35} w={280} h={190} title="VS Code · Live Project" loop={loop}>
           <rect x="45" y="55" width="50" height="155" fill="rgba(8,175,199,0.04)" stroke={DIM} />
@@ -352,19 +354,249 @@ export function TerminalScene({ loop }: { loop: boolean }) {
           >+127 lines · merged</motion.text>
           <motion.text x="338" y="96" fill={CYAN} fontSize="6" fontFamily="monospace"
             animate={loop ? { opacity: [0, 1, 1] } : undefined} transition={{ repeat: Infinity, duration: 4, delay: 1 }}
-          >Experience letter ✓</motion.text>
+          >Capability report ✓</motion.text>
         </Panel>
-        <StatusLine loop={loop} y={268} text="6-month OJT · Live projects · Experience letter" />
+        <StatusLine loop={loop} y={268} text="Corporate enablement · Labs · Capstone scorecards" />
       </svg>
     </HudFrame>
   )
 }
 
-/* ─── TALENT OUTSOURCING ─── */
+export function OfficeScene({ loop }: { loop: boolean }) {
+  return (
+    <IllustratedPhotoScene
+      src="/careers-office.png"
+      label="Bengaluru Engineering Floor"
+      caption="Engineers · Mentors · Production delivery"
+      loop={loop}
+    />
+  )
+}
+
+export function LabScene({ loop }: { loop: boolean }) {
+  return (
+    <IllustratedPhotoScene
+      src="/careers-lab.png"
+      label="AI Training Lab"
+      caption="Live projects · Mentors · 6-month residency"
+      loop={loop}
+    />
+  )
+}
+
+export function CapstoneScene({ loop }: { loop: boolean }) {
+  return (
+    <IllustratedPhotoScene
+      src="/internship-lab.png"
+      label="Academic Capstone Studio"
+      caption="Live projects · Mentors · 12-week internship"
+      loop={loop}
+    />
+  )
+}
+
+function useCycleIndex(count: number, loop: boolean, intervalMs = 1400) {
+  const [active, setActive] = useState(0)
+  useEffect(() => {
+    if (!loop || count < 2) return
+    const id = window.setInterval(() => setActive((i) => (i + 1) % count), intervalMs)
+    return () => window.clearInterval(id)
+  }, [loop, count, intervalMs])
+  return active
+}
+
+export function HireScene({ loop }: { loop: boolean }) {
+  const steps = ['Role', 'Screen', 'Trial', 'Review', 'Convert']
+  const active = useCycleIndex(steps.length, loop, 1300)
+
+  return (
+    <HudFrame label="Contract-to-Hire" status="TRIAL SPRINT">
+      <svg viewBox="0 0 480 280" className="w-full h-full">
+        {steps.map((s, i) => (
+          <g key={s}>
+            <motion.circle
+              cx={55 + i * 90}
+              cy={95}
+              r={active === i ? 20 : 16}
+              fill={active === i ? 'rgba(8,175,199,0.2)' : FAINT}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={active === i ? 2 : 1.5}
+              animate={loop ? { scale: active === i ? [1, 1.12, 1] : [1, 1.04, 1] } : undefined}
+              transition={{ repeat: Infinity, duration: 1.2 }}
+            />
+            <text x={55 + i * 90} y={99} fill={active === i ? CYAN_BRIGHT : CYAN} fontSize="6" textAnchor="middle" fontFamily="monospace">{s}</text>
+            {i < steps.length - 1 && (
+              <>
+                <line x1={74 + i * 90} y1="95" x2={126 + i * 90} y2="95" stroke="rgba(255,255,255,0.1)" />
+                <motion.line
+                  x1={74 + i * 90}
+                  y1="95"
+                  x2={126 + i * 90}
+                  y2="95"
+                  stroke={active > i ? CYAN_BRIGHT : DIM}
+                  strokeWidth="1.5"
+                  strokeDasharray="5 4"
+                  animate={loop ? { strokeDashoffset: [0, -18] } : undefined}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: 'linear', delay: i * 0.1 }}
+                />
+              </>
+            )}
+          </g>
+        ))}
+        <Panel x={30} y={145} w={420} h={95} title="90-day conversion track" loop={loop}>
+          <motion.text x="45" y="168" fill="rgba(255,255,255,0.45)" fontSize="6" fontFamily="monospace"
+            animate={loop ? { opacity: [0.4, 1, 0.4] } : undefined} transition={{ repeat: Infinity, duration: 2 }}
+          >Stage {active + 1}: {steps[active]} · velocity & communication scored each sprint</motion.text>
+          <rect x="45" y="182" width="390" height="6" fill="rgba(255,255,255,0.06)" rx="2" />
+          {loop && (
+            <motion.rect x="45" y="182" height="6" fill={CYAN} rx="2" animate={{ width: `${((active + 1) / steps.length) * 390}px` }} transition={{ duration: 0.35 }} />
+          )}
+          <text x="45" y="218" fill={CYAN} fontSize="6" fontFamily="monospace">Trial → performance review → full-time transfer</text>
+        </Panel>
+        <StatusLine loop={loop} y={268} text="Contract-to-hire · Trial sprints · Conversion" />
+      </svg>
+    </HudFrame>
+  )
+}
+
+export function RecruitScene({ loop }: { loop: boolean }) {
+  const stages = [
+    { y: 45, w: 300, label: 'Role intake & sourcing', count: '84 profiles' },
+    { y: 95, w: 230, label: 'Engineer-led technical screen', count: '19 engineers' },
+    { y: 145, w: 160, label: 'Client interviews', count: '6 finalists' },
+    { y: 195, w: 90, label: 'Offer & Day 1', count: '2 joining' },
+  ]
+  const active = useCycleIndex(stages.length, loop, 1400)
+
+  return (
+    <HudFrame label="IT Recruitment" status="PIPELINE LIVE">
+      <svg viewBox="0 0 480 280" className="w-full h-full">
+        {stages.map((s, i) => (
+          <g key={s.label}>
+            <motion.rect
+              x={(480 - s.w) / 2}
+              y={s.y}
+              width={s.w}
+              height="32"
+              fill={active === i ? 'rgba(8,175,199,0.18)' : FAINT}
+              stroke={active === i ? CYAN_BRIGHT : CYAN}
+              strokeWidth={active === i ? 1.5 : 1}
+              animate={loop ? { opacity: active === i ? [0.85, 1, 0.85] : [0.4, 0.6, 0.4] } : undefined}
+              transition={{ repeat: Infinity, duration: 1.3 }}
+            />
+            <text x="240" y={s.y + 20} fill={active === i ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.65)'} fontSize="7" textAnchor="middle" fontFamily="monospace">{s.label}</text>
+            <text x={(480 + s.w) / 2 - 14} y={s.y + 20} fill={CYAN} fontSize="6" textAnchor="end" fontFamily="monospace">{s.count}</text>
+            {loop && active === i && (
+              <motion.circle r="2.5" fill={CYAN_BRIGHT}
+                animate={{ cx: [240, 240], cy: [s.y - 6, s.y + 38], opacity: [0, 1, 0] }}
+                transition={{ repeat: Infinity, duration: 1.1, ease: 'linear' }} />
+            )}
+          </g>
+        ))}
+        <StatusLine loop={loop} y={268} text="Headhunting · Technical screens · Offer management" />
+      </svg>
+    </HudFrame>
+  )
+}
+
+/* ─── DEDICATED ENGINEERING PODS ─── */
+export function PodsScene({ loop }: { loop: boolean }) {
+  const members = [
+    { x: 95, label: 'FE' },
+    { x: 165, label: 'BE' },
+    { x: 235, label: 'QA' },
+    { x: 305, label: 'PM' },
+    { x: 375, label: 'DE' },
+  ]
+  const cols = [
+    { name: 'To do', cards: ['API contract', 'Auth flow'] },
+    { name: 'In progress', cards: ['Invoice OCR'] },
+    { name: 'Done', cards: ['CI pipeline'] },
+  ]
+  const active = useCycleIndex(members.length, loop, 1200)
+
+  return (
+    <HudFrame label="Dedicated Engineering Pods" status="SPRINT ACTIVE">
+      <svg viewBox="0 0 480 280" className="w-full h-full">
+        <ellipse cx="240" cy="95" rx="175" ry="42" fill="none" stroke={FAINT} strokeWidth="1" />
+        <motion.circle cx="240" cy="95" r="18" fill="rgba(8,175,199,0.2)" stroke={CYAN_BRIGHT} strokeWidth="1.5"
+          animate={loop ? { scale: [1, 1.08, 1] } : undefined} transition={{ repeat: Infinity, duration: 2.4 }} />
+        <text x="240" y="99" fill={CYAN_BRIGHT} fontSize="7" textAnchor="middle" fontFamily="monospace">DEV</text>
+        {members.map((m, i) => (
+          <motion.g key={m.label} animate={loop ? { y: active === i ? [0, -3, 0] : [0, 0, 0] } : undefined} transition={{ repeat: Infinity, duration: 1.8 }}>
+            <line x1="240" y1="95" x2={m.x} y2="55" stroke={active === i ? CYAN_BRIGHT : DIM} strokeWidth={active === i ? 1.5 : 1} />
+            <circle cx={m.x} cy={55} r={active === i ? 14 : 11} fill={FAINT} stroke={active === i ? CYAN_BRIGHT : CYAN} strokeWidth="1" />
+            <text x={m.x} y={58} fill={CYAN} fontSize="6" textAnchor="middle" fontFamily="monospace">{m.label}</text>
+            <motion.circle cx={m.x} cy={50} r="2.5" fill={GREEN} animate={loop ? { opacity: [0.3, 1, 0.3] } : undefined} transition={{ repeat: Infinity, duration: 2, delay: i * 0.2 }} />
+          </motion.g>
+        ))}
+        <Panel x={30} y={135} w={420} h={115} title="jira · dedicated pod sprint" loop={loop}>
+          {cols.map((col, ci) => (
+            <g key={col.name} transform={`translate(${45 + ci * 135}, 158)`}>
+              <text x="0" y="0" fill="rgba(255,255,255,0.35)" fontSize="5" fontFamily="monospace">{col.name}</text>
+              {col.cards.map((card, ki) => (
+                <motion.rect key={card} x="0" y={8 + ki * 22} width="115" height="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"
+                  animate={loop && ci === 1 ? { y: [8 + ki * 22, 4 + ki * 22, 8 + ki * 22] } : undefined}
+                  transition={{ repeat: Infinity, duration: 2.6, ease: 'easeInOut' }} />
+              ))}
+              {col.cards.map((card, ki) => (
+                <text key={`${card}-t`} x="6" y={20 + ki * 22} fill="rgba(255,255,255,0.55)" fontSize="5" fontFamily="monospace">{card}</text>
+              ))}
+            </g>
+          ))}
+        </Panel>
+        <StatusLine loop={loop} y={268} text="Cross-functional pod · SLA delivery · Weekly reports" />
+      </svg>
+    </HudFrame>
+  )
+}
+
+/* ─── STAFF AUGMENTATION ─── */
+export function StaffScene({ loop }: { loop: boolean }) {
+  const hubs = [{ x: 240, y: 95, label: 'BLR' }, { x: 110, y: 55, label: 'US' }, { x: 370, y: 50, label: 'UK' }, { x: 375, y: 130, label: 'EU' }, { x: 105, y: 135, label: 'ME' }]
+  const roles = ['Senior FE', 'Platform BE', 'Applied AI', 'Cloud Arch']
+  const active = useCycleIndex(hubs.length, loop, 1500)
+
+  return (
+    <HudFrame label="Staff Augmentation" status="ENGINEERS ONLINE">
+      <svg viewBox="0 0 480 280" className="w-full h-full">
+        {hubs.slice(1).map((h, i) => (
+          <motion.line key={h.label} x1={hubs[0].x} y1={hubs[0].y} x2={h.x} y2={h.y} stroke={active === i + 1 ? CYAN_BRIGHT : DIM} strokeWidth={active === i + 1 ? 1.5 : 1}
+            animate={loop ? { opacity: [0.35, 0.85, 0.35] } : undefined} transition={{ repeat: Infinity, duration: 2.2, delay: i * 0.25 }} />
+        ))}
+        {loop && hubs.slice(1).map((h, i) => (
+          <motion.circle key={`pkt-${h.label}`} r="2.5" fill={CYAN_BRIGHT}
+            animate={{ cx: [hubs[0].x, h.x, hubs[0].x], cy: [hubs[0].y, h.y, hubs[0].y], opacity: [0, 1, 0] }}
+            transition={{ repeat: Infinity, duration: 2.4, delay: i * 0.4, ease: 'easeInOut' }} />
+        ))}
+        {hubs.map((h, i) => (
+          <g key={h.label}>
+            <circle cx={h.x} cy={h.y} r={i === 0 || active === i ? 12 : 9} fill={FAINT} stroke={active === i ? CYAN_BRIGHT : CYAN} strokeWidth={i === 0 ? 2 : 1} />
+            <text x={h.x} y={h.y + 3} fill={CYAN} fontSize="6" textAnchor="middle" fontFamily="monospace">{h.label}</text>
+          </g>
+        ))}
+        <Panel x={30} y={165} w={420} h={85} title="stack filter · matched engineers" loop={loop}>
+          {roles.map((r, i) => (
+            <motion.g key={r} transform={`translate(${55 + i * 100}, 188)`}>
+              <rect x="-38" y="-8" width="76" height="16" fill="rgba(8,175,199,0.05)" stroke={active % roles.length === i ? CYAN_BRIGHT : 'rgba(255,255,255,0.1)'} rx="2" />
+              <text x="0" y="3" fill={active % roles.length === i ? CYAN_BRIGHT : 'rgba(255,255,255,0.45)'} fontSize="5" textAnchor="middle" fontFamily="monospace">{r}</text>
+            </motion.g>
+          ))}
+          <motion.text x="45" y="228" fill={CYAN} fontSize="6" fontFamily="monospace"
+            animate={loop ? { opacity: [0.35, 0.9, 0.35] } : undefined} transition={{ repeat: Infinity, duration: 2 }}
+          >4 engineers active · Sprint integration · Timezone overlap</motion.text>
+        </Panel>
+        <StatusLine loop={loop} y={268} text="Vetted talent · Global delivery · Flexible engagement" />
+      </svg>
+    </HudFrame>
+  )
+}
+
+/* ─── WORKFORCE HUB ─── */
 export function TalentScene({ loop }: { loop: boolean }) {
   const devs = [{ x: 100, label: 'FE' }, { x: 180, label: 'BE' }, { x: 260, label: 'AI' }, { x: 340, label: 'DevOps' }]
   return (
-    <HudFrame label="Staff Augmentation" status="TEAM ONLINE">
+    <HudFrame label="Workforce Solutions" status="TEAM ONLINE">
       <svg viewBox="0 0 480 280" className="w-full h-full">
         <ellipse cx="240" cy="130" rx="160" ry="80" fill="none" stroke={FAINT} strokeWidth="1" />
         {devs.map((d, i) => (

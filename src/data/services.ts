@@ -34,6 +34,7 @@ export interface Service {
   buildSectionTitle?: string
   buildHeadline?: string
   engageSubtext?: string
+  engage?: ProcessStep[]
   relatedHeading?: string
   related?: RelatedServiceLink[]
   application?: ServiceApplication
@@ -101,6 +102,13 @@ export const services: Service[] = [
       { title: 'Sprint Execution', description: 'Agile 2-week sprints, CI/CD builds, pair code reviews.' },
       { title: 'QA & Accessibility Hardening', description: 'E2E automated testing, load audits, WCAG compliance.' },
       { title: 'Production Release & Handover', description: 'Zero-downtime release, monitoring setup, and runbooks.' },
+    ],
+    engage: [
+      { title: 'Discovery & Scoping', description: 'Architecture mapping, user flows, technology selection.' },
+      { title: 'UX & System Architecture', description: 'Figma wireframes, design tokens, API schema definition.' },
+      { title: 'Sprint Development', description: 'Bi-weekly sprint demos, continuous deployment, automated test coverage.' },
+      { title: 'QA & Hardening', description: 'Performance profiling, accessibility compliance, cross-browser validation.' },
+      { title: 'Launch & Governance', description: 'Zero-downtime release, monitoring dashboards, documentation transfer.' },
     ],
     useCases: [
       'Multi-tenant B2B SaaS platforms and executive client portals',
@@ -186,6 +194,13 @@ export const services: Service[] = [
       { title: 'Validation & Deterministic Guardrails', description: 'Benchmarking, edge-case testing, fallback rule integration.' },
       { title: 'Production Rollout & MLOps', description: 'GPU deployment, real-time telemetry, auto-retraining pipelines.' },
     ],
+    engage: [
+      { title: 'Problem Framing & Data Audit', description: 'Data quality assessment, baseline benchmarks, accuracy goals.' },
+      { title: 'Pipeline Architecture', description: 'Data ingestion frameworks, annotation standards, compute selection.' },
+      { title: 'Model Training & Optimization', description: 'Model development, fine-tuning, quantization for low latency.' },
+      { title: 'Validation & Guardrail Testing', description: 'Stress-testing models against noisy inputs and edge cases.' },
+      { title: 'MLOps Deployment & Telemetry', description: 'Production rollout, latency tracking, automated retraining loops.' },
+    ],
     useCases: [
       'Automated inspection of engineering blueprints, CAD files & technical schematics',
       'Autonomous enterprise invoice, contract, and unstructured document ingestion',
@@ -268,6 +283,13 @@ export const services: Service[] = [
       { title: 'Observability & Chaos Testing', description: 'Metric aggregation, alerting rules, automated failover drills.' },
       { title: 'Production Cutover & Handover', description: 'Zero-downtime migration, SLA establishment, runbook transfer.' },
     ],
+    engage: [
+      { title: 'Infrastructure & Cost Audit', description: 'Deep-dive into current topologies, resource bottlenecks, and spending.' },
+      { title: 'Cloud Architecture Blueprint', description: 'Designing target VPCs, security perimeters, and networking.' },
+      { title: 'IaC & Cluster Provisioning', description: 'Codifying all infrastructure with Terraform and Kubernetes manifests.' },
+      { title: 'Pipeline & Security Hardening', description: 'Integrating automated CI/CD gates, secrets management, and scanning.' },
+      { title: 'Telemetry, Cutover & SLAs', description: 'Traffic cutover, metric telemetry activation, runbook documentation.' },
+    ],
     useCases: [
       'Legacy on-premise infrastructure migration to cloud-native platforms',
       'Microservices containerization and Kubernetes orchestration',
@@ -343,6 +365,13 @@ export const services: Service[] = [
       'Incident Response Documentation',
     ],
     process: [
+      { title: 'Security Assessment & Threat Audit', description: 'Infrastructure scanning, architectural vulnerability analysis.' },
+      { title: 'Architecture & IAM Review', description: 'Implementing principle of least privilege, zero-trust network boundaries.' },
+      { title: 'DevSecOps Pipeline Hardening', description: 'Integrating automated SAST/DAST checks into developer workflows.' },
+      { title: 'Validation & Penetration Testing', description: 'Simulated ethical hacking drills and vulnerability remediation.' },
+      { title: 'Ongoing Telemetry & Auditing', description: 'SIEM integration, compliance audit sign-off, monitoring handover.' },
+    ],
+    engage: [
       { title: 'Security Assessment & Threat Audit', description: 'Infrastructure scanning, architectural vulnerability analysis.' },
       { title: 'Architecture & IAM Review', description: 'Implementing principle of least privilege, zero-trust network boundaries.' },
       { title: 'DevSecOps Pipeline Hardening', description: 'Integrating automated SAST/DAST checks into developer workflows.' },
@@ -474,6 +503,13 @@ export const services: Service[] = [
       'CI/CD Integration & Quality Gate Configurations',
     ],
     process: [
+      { title: 'Test Planning & Requirements Mapping', description: 'Scope definition, test matrix design, automation tool selection.' },
+      { title: 'Framework Architecture & Rules', description: 'Setting up Playwright frameworks, configuring CAD validation criteria.' },
+      { title: 'Execution & Suite Automation', description: 'Writing automated test suites, calibrating computer vision detection models.' },
+      { title: 'Defect Management & Stress Testing', description: 'Running load stress drills, logging defects, refining rule accuracy.' },
+      { title: 'Release Validation & CI/CD Gates', description: 'Configuring blocking build gates in CI/CD, publishing quality metrics.' },
+    ],
+    engage: [
       { title: 'Test Planning & Requirements Mapping', description: 'Scope definition, test matrix design, automation tool selection.' },
       { title: 'Framework Architecture & Rules', description: 'Setting up Playwright frameworks, configuring CAD validation criteria.' },
       { title: 'Execution & Suite Automation', description: 'Writing automated test suites, calibrating computer vision detection models.' },
@@ -612,6 +648,13 @@ export const services: Service[] = [
       { title: 'Dashboard & Metric Development', description: 'Building executive BI dashboards, DAX formulas, alerts.' },
       { title: 'Enablement, Governance & Handover', description: 'Data quality checks, user training, operations runbooks.' },
     ],
+    engage: [
+      { title: 'Data Discovery & Source Audit', description: 'Inventorying transactional databases, API payloads, and analytical needs.' },
+      { title: 'Pipeline Design & Data Modeling', description: 'Designing warehouse schemas, star schemas, and transformation logic.' },
+      { title: 'Lakehouse Build & Orchestration', description: 'Implementing cloud warehouses, writing dbt transformation models and DAGs.' },
+      { title: 'Dashboard Development & Metric QA', description: 'Building Power BI/Tableau reports and cross-validating financial totals.' },
+      { title: 'Enablement, Governance & Handover', description: 'Setting up automated data quality gates and training in-house analysts.' },
+    ],
     useCases: [
       'Centralized enterprise data warehouse implementation across distributed operations',
       'Real-time operational KPI tracking, executive dashboards, and margin analytics',
@@ -689,6 +732,13 @@ export const services: Service[] = [
       { title: 'Sprint Kickoff & Rituals', description: 'Backlog ingestion, Git branching standards, standup cadence.' },
       { title: 'Sprint Delivery & CI/CD', description: 'Bi-weekly feature shipping, automated QA gates, burndowns.' },
       { title: 'Quarterly Architecture Review', description: 'Performance audits, velocity tuning, long-term roadmap scaling.' },
+    ],
+    engage: [
+      { title: 'Scope Alignment', description: 'Workstream discovery, sprint goals, SLA baseline setup.' },
+      { title: 'Team Assembly', description: 'Curating cross-functional engineers and dedicated delivery leads.' },
+      { title: 'Kickoff & Tooling', description: 'Jira/Slack/GitHub integration, CI/CD provisioning, security sign-off.' },
+      { title: 'Sprint Delivery', description: 'Bi-weekly production releases, automated test reporting, burndown reviews.' },
+      { title: 'Quarterly Review', description: 'Roadmap re-alignment, capacity scaling, architectural optimization.' },
     ],
     useCases: [
       'Establishing an offshore product engineering center from Bengaluru',
@@ -768,6 +818,13 @@ export const services: Service[] = [
       { title: 'Rapid Onboarding (48h)', description: 'Repository access, environment provisioning, standup integration.' },
       { title: 'Active Sprint Contribution', description: 'Direct commit access, PR reviews, ongoing performance tracking.' },
     ],
+    engage: [
+      { title: 'Role Brief', description: 'Documenting stack requirements, seniority tier, and project timelines.' },
+      { title: 'Technical Screening', description: 'Candidate validation via code challenges and architecture reviews.' },
+      { title: 'Client Interviews', description: 'Direct technical conversations with your engineering leads.' },
+      { title: 'Onboarding', description: 'Tool access, repository cloning, team integration.' },
+      { title: 'Sprint Integration', description: 'Full sprint participation, daily standups, weekly output tracking.' },
+    ],
     useCases: [
       'Scaling sprint capacity rapidly for fixed-deadline product launches',
       'Plugging deep-tech skill gaps (Kubernetes, AI/ML, Rust, Playwright)',
@@ -844,6 +901,13 @@ export const services: Service[] = [
       { title: 'Contract Placement Kickoff', description: 'Candidate joins sprint cycles under a structured contract model.' },
       { title: 'Active Milestone Review', description: 'Evaluating architecture decisions, sprint velocity, and collaboration.' },
       { title: 'Permanent Conversion', description: 'Frictionless transition directly onto client payroll with zero disputes.' },
+    ],
+    engage: [
+      { title: 'Role Definition', description: 'Establishing baseline competencies and 90-day trial milestones.' },
+      { title: 'Screening & Assessment', description: 'Evaluating technical capability through architecture interviews.' },
+      { title: 'Contract Placement', description: 'Embedding candidate into sprint cycles on a trial basis.' },
+      { title: 'Performance Review', description: 'Regular check-ins on code quality, velocity, and communication.' },
+      { title: 'Conversion', description: 'Executing full-time corporate employment transfer.' },
     ],
     useCases: [
       'Hiring critical lead developers and architects without blind offers',
@@ -922,6 +986,13 @@ export const services: Service[] = [
       { title: 'Client Finalist Rounds', description: 'Direct interviews with pre-assessed, high-probability finalists.' },
       { title: 'Offer & Notice Period Management', description: 'Managing counteroffers and tracking onboarding through Day 90.' },
     ],
+    engage: [
+      { title: 'Intake Brief', description: 'Defining technical parameters, culture profile, and compensation benchmarks.' },
+      { title: 'Sourcing', description: 'Targeted headhunting across developer platforms and private networks.' },
+      { title: 'Technical Screen', description: 'Live problem-solving and architectural evaluation by engineers.' },
+      { title: 'Client Interviews', description: 'Facilitating focused executive interviews with top finalists.' },
+      { title: 'Offer & Joining', description: 'Managing negotiations, notice-period checkpoints, and Day 1 onboarding.' },
+    ],
     useCases: [
       'Filling critical senior, lead, and staff engineering seats',
       'Establishing an entire specialized AI or platform engineering unit',
@@ -978,20 +1049,26 @@ export const services: Service[] = [
       'Every enablement program follows a structured delivery model, from skills-gap audit through leadership scorecards.',
     capabilities: [
       'Tailored Curriculum Aligned to Client Tech Stack',
-      'Practitioner-Led Architecture & Code Katas',
       'Sandboxed Cloud Lab Environments',
+      'Hands-On Code Katas from Production Codebases',
+      'On-Site & Remote Delivery',
+      'Live Lab Instruction at Client Headquarters',
       'Production-Mirror Capstone Projects',
-      'Skills Gap Diagnostic & Scorecards',
-      'On-Site, Remote, or Bengaluru Delivery',
     ],
     deliverables: [
       'Diagnostic Skills Gap & Curriculum Blueprint',
       'Dedicated Pre-Configured Lab Environments',
       'Individual & Squad Capstone Deliverables',
       'Capability Benchmarks & Leadership Readout Report',
-      'Post-Workshop Architecture Playbooks',
     ],
     process: [
+      { title: 'Skills Gap Diagnostic', description: 'Auditing current engineering competencies, target stack requirements, and timeline.' },
+      { title: 'Custom Curriculum Architecture', description: 'Structuring syllabi, lab sandboxes, and capstone challenge criteria.' },
+      { title: 'Hands-On Lab Sprints', description: 'Conducting hands-on coding modules and system design katas.' },
+      { title: 'Capstone Architecture Challenge', description: 'Squad-based engineering challenges solving production-style problems.' },
+      { title: 'Executive Assessment & Report', description: 'Grading competencies, publishing scorecards, and leadership readouts.' },
+    ],
+    engage: [
       { title: 'Needs Assessment', description: 'Auditing current skill matrices, target stack requirements, and timeline.' },
       { title: 'Curriculum Architecture', description: 'Structuring syllabi, lab sandboxes, and capstone challenge criteria.' },
       { title: 'Workshops & Live Labs', description: 'Conducting hands-on coding modules and system design katas.' },
@@ -1081,6 +1158,13 @@ export const services: Service[] = [
       { title: 'Active Ticket Delivery (M3–M5)', description: 'Resolving production-adjacent tickets, writing E2E tests, participating in standups.' },
       { title: 'Capstone Audit & Graduation (M6)', description: 'Comprehensive code audit, experience letter issuance, and hiring placement.' },
     ],
+    engage: [
+      { title: 'Intake & Skill Diagnostic', description: 'Coding evaluations, technical interviews, and specialization assignment.' },
+      { title: 'Team Placement', description: 'Pairing with a Senior Tech Lead and integration into a sprint delivery squad.' },
+      { title: 'Foundation Sprints', description: 'Mastering Git workflows, CI/CD pipelines, and defensive coding patterns.' },
+      { title: 'Active Production Delivery', description: 'Writing unit tests, solving real Jira issues, participating in peer code reviews.' },
+      { title: 'Graduation & Certification', description: 'Issuing verified 6-Month Experience Letters and portfolio release.' },
+    ],
     useCases: [
       'Computer science graduates seeking proven commercial software experience',
       'Career switchers bridging the gap between bootcamps and enterprise engineering',
@@ -1155,6 +1239,13 @@ export const services: Service[] = [
       'Structured Evaluation Meeting University Requirements',
     ],
     process: [
+      { title: 'Registration & Onboarding (Week 1)', description: 'Tooling setup, squad assignment, and coding conventions.' },
+      { title: 'Architecture & Tooling Sprint (Week 2)', description: 'Git setup, project scoping, API design, and database modeling.' },
+      { title: 'Core Feature Sprints (Weeks 3–8)', description: 'Implementing APIs, UI frontend development, and weekly PR reviews.' },
+      { title: 'Testing & Deployment (Weeks 9–11)', description: 'Unit testing, bug fixing, and cloud deployment configuration.' },
+      { title: 'Capstone Demo & Certification (Week 12)', description: 'Final live project demo, evaluation rubric, and certificate issuance.' },
+    ],
+    engage: [
       { title: 'Cohort Enrollment', description: 'Registering students, onboarding tooling, and assigning project squads.' },
       { title: 'Sprint 1: Architecture', description: 'Git setup, project scoping, and database design.' },
       { title: 'Sprint 2: Core Engineering', description: 'Implementing APIs, UI frontend development, and weekly PR reviews.' },

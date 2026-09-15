@@ -1,0 +1,48 @@
+# Copy to /etc/nginx/sites-available/girakee and symlink into sites-enabled.
+# Replace api.girakee.com / admin.girakee.com with your domains.
+# Obtain TLS certs first, e.g. certbot --nginx -d api.girakee.com -d admin.girakee.com
+
+upstream girakee_api {
+  server 127.0.0.1:8787;
+  keepalive 32;
+}
+
+server {
+  listen 80;
+  server_name api.girakee.com admin.girakee.com;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl http2;
+  server_name api.girakee.com;
+
+  # ssl_certificate /etc/letsencrypt/live/api.girakee.com/fullchain.pem;
+  # ssl_certificate_key /etc/letsencrypt/live/api.girakee.com/privkey.pem;
+
+  client_max_body_size 12m;
+
+  location / {
+    proxy_pass http://girakee_api;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+
+server {
+  listen 443 ssl http2;
+  server_name admin.girakee.com;
+
+  # ssl_certificate /etc/letsencrypt/live/admin.girakee.com/fullchain.pem;
+  # ssl_certificate_key /etc/letsencrypt/live/admin.girakee.com/privkey.pem;
+
+  root /opt/girakee/admin/dist;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}

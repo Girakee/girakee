@@ -13,9 +13,16 @@ import {
   DataScene,
   TerminalScene,
   TalentScene,
+  PodsScene,
+  StaffScene,
   RobotScene,
   OrbitScene,
   NetworkScene,
+  OfficeScene,
+  LabScene,
+  CapstoneScene,
+  HireScene,
+  RecruitScene,
 } from './live-scenes/allScenes'
 
 interface LiveServiceSceneProps {
@@ -39,7 +46,13 @@ const SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode> = {
   orbit: OrbitScene,
   network: NetworkScene,
   talent: TalentScene,
-  classroom: TerminalScene,
+  pods: PodsScene,
+  staff: StaffScene,
+  classroom: LabScene,
+  office: OfficeScene,
+  capstone: CapstoneScene,
+  hire: HireScene,
+  recruit: RecruitScene,
 }
 
 export default function LiveServiceScene({ scene, className = '', compact = false }: LiveServiceSceneProps) {

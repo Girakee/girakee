@@ -4,6 +4,7 @@ import { X } from 'lucide-react'
 import { useNav } from '../../context/NavContext'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { company } from '../../data/company'
+import { submitCallback } from '../../lib/api'
 
 interface CallbackForm {
   name: string
@@ -25,6 +26,7 @@ export default function CallbackRequestModal() {
   const [form, setForm] = useState<CallbackForm>(initial)
   const [errors, setErrors] = useState<CallbackErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [confirmationSent, setConfirmationSent] = useState(false)
 
   useEffect(() => {
     if (!callbackOpen) {
@@ -54,15 +56,20 @@ export default function CallbackRequestModal() {
     return Object.keys(next).length === 0
   }
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
-    const subject = encodeURIComponent(`Callback request from ${form.name}`)
-    const body = encodeURIComponent(
-      `Request a callback\n\nName: ${form.name}\nEmail: ${form.email}\nNumber: ${form.phone}`,
-    )
-    window.location.href = `mailto:${company.email}?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    try {
+      const result = await submitCallback({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+      })
+      setConfirmationSent(result.candidateEmailSent)
+      setSubmitted(true)
+    } catch {
+      setErrors({ phone: `Unable to submit. Email ${company.email} directly.` })
+    }
   }
 
   const inputClass = (field: keyof CallbackErrors) =>
@@ -112,7 +119,10 @@ export default function CallbackRequestModal() {
 
             {submitted ? (
               <p className="text-sm text-white/55 leading-relaxed">
-                Your mail app should open with the request. If it did not, write to {company.email}.
+                Your callback request was received.
+                {confirmationSent
+                  ? ` A confirmation email was sent to ${form.email}.`
+                  : ` Our team will reach out shortly.`}
               </p>
             ) : (
               <form onSubmit={submit} className="space-y-4" noValidate>

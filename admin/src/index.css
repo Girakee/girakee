@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-deep: #071426;
+  --color-navy-dark: #0b1930;
+  --color-cyan: #08afc7;
+  --color-cyan-bright: #16c6da;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #050d18;
+  color: #e5eef7;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+.admin-shell {
+  background: #050d18;
+}
+
+.admin-sidebar {
+  background:
+    radial-gradient(circle at top, rgba(8, 175, 199, 0.12), transparent 55%),
+    linear-gradient(180deg, #07111d 0%, #050d18 100%);
+}
+
+.admin-main {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    radial-gradient(circle at top right, rgba(8, 175, 199, 0.08), transparent 40%),
+    #050d18;
+  background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.admin-login {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(8, 175, 199, 0.16), transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(22, 198, 218, 0.08), transparent 40%),
+    #050d18;
+}
+
+.admin-nav-link {
+  display: block;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.875rem;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-nav-link-active {
+  color: white;
+  background: rgba(8, 175, 199, 0.1);
+  border-color: rgba(8, 175, 199, 0.18);
+  border-left-color: #08afc7;
+}
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.admin-login-panel {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(5, 13, 24, 0.8);
+  color: white;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(8, 175, 199, 0.55);
+  box-shadow: 0 0 0 3px rgba(8, 175, 199, 0.12);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(8, 175, 199, 0.35);
+  background: rgba(8, 175, 199, 0.15);
+  color: #7de8f4;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(8, 175, 199, 0.24);
+  border-color: rgba(8, 175, 199, 0.55);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+}
+
+.btn-secondary {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.stat-card {
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(8, 175, 199, 0.28);
+  transform: translateY(-1px);
+}

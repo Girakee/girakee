@@ -1,55 +1,75 @@
-import { useState } from 'react'
-import SEO from '../components/seo/SEO'
+import { useEffect, useState } from 'react'
+import SEO, { jobPostingJsonLd } from '../components/seo/SEO'
 import PageHero from '../components/ui/PageHero'
-import { StaggerChildren, StaggerItem } from '../components/animations/StaggerChildren'
 import FinalCTASection from '../components/home/FinalCTASection'
-import { jobs, jobApplyHref, team } from '../data/careers'
+import CareerApplyForm from '../components/forms/CareerApplyForm'
+import { jobs as fallbackJobs, type Job } from '../data/careers'
+import { fetchJobs, type ApiJob } from '../lib/api'
 import { ChevronDown } from 'lucide-react'
 
+function mapApiJob(job: ApiJob): Job {
+  return {
+    id: job.id,
+    title: job.title,
+    location: job.location,
+    type: job.type,
+    summary: job.summary,
+    responsibilities: job.responsibilities,
+    requirements: job.requirements,
+    applySubject: job.applySubject ?? undefined,
+    about: job.about ?? undefined,
+    overview: job.overview ?? undefined,
+    portfolio: job.portfolio ?? undefined,
+    commercial: job.commercial ?? undefined,
+    howToApply: job.howToApply ?? undefined,
+  }
+}
+
 export default function CareersPage() {
-  const [openId, setOpenId] = useState(jobs[0]?.id ?? '')
+  const [jobs, setJobs] = useState<Job[]>([])
+  const [openId, setOpenId] = useState('')
+  const [applyJobId, setApplyJobId] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchJobs()
+      .then((apiJobs) => {
+        setJobs(apiJobs.map(mapApiJob))
+        setOpenId(apiJobs[0]?.id ?? '')
+      })
+      .catch(() => setJobs(fallbackJobs))
+  }, [])
+
+  const jobPostingsJsonLd = jobs.map((job) =>
+    jobPostingJsonLd({
+      id: job.id,
+      title: job.title,
+      description: job.summary,
+      location: job.location,
+      type: job.type,
+    }),
+  )
 
   return (
     <>
       <SEO
         title="Careers"
-        description="Join Girakee in Bengaluru. Open roles with job descriptions, and the people you work with on production software."
+        description="Join Girakee in Bengaluru. Explore open engineering, AI, cloud, QA, and business development roles with transparent job descriptions and online applications."
         path="/careers"
+        keywords={[
+          'Girakee careers',
+          'software jobs Bengaluru',
+          'engineering jobs India',
+          'AI engineer jobs',
+          'cloud DevOps careers',
+        ]}
+        jsonLd={jobPostingsJsonLd}
       />
       <PageHero
         label="Careers"
         title="Build the Future With Girakee"
         subtitle="Join engineers in Bengaluru who ship software, AI, and cloud systems for clients worldwide."
+        scene="office"
       />
-
-      <section className="bg-navy-dark section-py page-px">
-        <div className="max-w-[90rem] mx-auto">
-          <p className="eyebrow eyebrow-dark mb-3">The team</p>
-          <h2 className="editorial-display text-[clamp(1.75rem,4vw,2.75rem)] text-white mb-3">
-            People working here
-          </h2>
-          <p className="text-body text-body-dark max-w-2xl mb-10 md:mb-14">
-            You join a Bengaluru delivery company, not a staffing desk. These are the people
-            on the work: named owners, engineers, and mentors on live projects.
-          </p>
-          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {team.map((person) => (
-              <StaggerItem key={person.initials}>
-                <div className="h-full holographic-panel p-6 md:p-8">
-                  <div className="w-12 h-12 mb-5 flex items-center justify-center border border-cyan/30 text-cyan text-sm font-semibold tracking-wide">
-                    {person.initials}
-                  </div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-cyan/70 mb-2">
-                    {person.role}
-                  </p>
-                  <h3 className="text-lg font-semibold text-white mb-2">{person.name}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{person.focus}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
-        </div>
-      </section>
 
       <section className="bg-navy-deep section-py page-px">
         <div className="max-w-4xl mx-auto">
@@ -58,11 +78,12 @@ export default function CareersPage() {
             Jobs
           </h2>
           <p className="text-body text-body-dark max-w-2xl mb-10">
-            Read the job description, then apply. We review every note that shows real work.
+            Read the job description, then apply online. We review every application that shows real work.
           </p>
           <div className="space-y-4">
             {jobs.map((job) => {
               const open = openId === job.id
+              const applying = applyJobId === job.id
               return (
                 <article key={job.id} className="holographic-panel overflow-hidden">
                   <div className="p-5 md:p-6 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -78,9 +99,16 @@ export default function CareersPage() {
                       </p>
                     </button>
                     <div className="flex items-center gap-3 shrink-0">
-                      <a href={jobApplyHref(job.title, job.applySubject)} className="btn-primary">
+                      <button
+                        type="button"
+                        className="btn-primary"
+                        onClick={() => {
+                          setOpenId(job.id)
+                          setApplyJobId(job.id)
+                        }}
+                      >
                         Apply
-                      </a>
+                      </button>
                       <button
                         type="button"
                         onClick={() => setOpenId(open ? '' : job.id)}
@@ -158,11 +186,21 @@ export default function CareersPage() {
                       {job.howToApply && (
                         <p className="text-sm text-white/55 leading-relaxed mt-6">{job.howToApply}</p>
                       )}
+                      {applying && (
+                        <CareerApplyForm
+                          jobId={job.id}
+                          jobTitle={job.title}
+                          onClose={() => setApplyJobId(null)}
+                        />
+                      )}
                     </div>
                   )}
                 </article>
               )
             })}
+            {!jobs.length && (
+              <p className="text-sm text-white/45">No open roles are published right now. Check back soon.</p>
+            )}
           </div>
         </div>
       </section>

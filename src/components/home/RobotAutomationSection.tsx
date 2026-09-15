@@ -109,15 +109,21 @@ export default function RobotAutomationSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [userSelected, setUserSelected] = useState(false)
-  const { shouldParallax, shouldAnimate, isMobile } = useMotionConfig()
+  const { shouldParallax, shouldAnimate } = useMotionConfig()
 
   useEffect(() => {
-    if (!shouldAnimate || userSelected || isMobile) return
+    if (!shouldAnimate || userSelected) return
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % showcase.length)
     }, 5200)
     return () => clearInterval(interval)
-  }, [shouldAnimate, userSelected, isMobile])
+  }, [shouldAnimate, userSelected])
+
+  useEffect(() => {
+    if (!userSelected || !shouldAnimate) return
+    const resume = window.setTimeout(() => setUserSelected(false), 8000)
+    return () => window.clearTimeout(resume)
+  }, [userSelected, shouldAnimate])
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

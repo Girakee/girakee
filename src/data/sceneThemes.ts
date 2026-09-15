@@ -13,7 +13,13 @@ export type SceneType =
   | 'orbit'
   | 'network'
   | 'talent'
+  | 'pods'
+  | 'staff'
   | 'classroom'
+  | 'office'
+  | 'capstone'
+  | 'hire'
+  | 'recruit'
 
 export const routeScenes: Record<string, SceneType> = {
   '/': 'hero',
@@ -21,20 +27,20 @@ export const routeScenes: Record<string, SceneType> = {
   '/services': 'orbit',
   '/services/engineering': 'orbit',
   '/services/workforce': 'talent',
-  '/services/enablement': 'terminal',
+  '/services/enablement': 'classroom',
   '/services/web-mobile': 'devices',
   '/services/ai-vision': 'neural',
   '/services/cloud-devops': 'cloud',
   '/services/cybersecurity': 'shield',
   '/services/qa-automation': 'pipeline',
   '/services/data-engineering': 'data',
-  '/services/dedicated-pods': 'talent',
-  '/services/staff-augmentation': 'talent',
-  '/services/contract-to-hire': 'talent',
-  '/services/it-recruitment': 'talent',
+  '/services/dedicated-pods': 'pods',
+  '/services/staff-augmentation': 'staff',
+  '/services/contract-to-hire': 'hire',
+  '/services/it-recruitment': 'recruit',
   '/services/corporate-training': 'terminal',
-  '/services/on-job-training': 'terminal',
-  '/services/internship': 'terminal',
+  '/services/on-job-training': 'classroom',
+  '/services/internship': 'capstone',
   '/solutions': 'orbit',
   '/products': 'vision',
   '/products/digital-employees': 'neural',
@@ -42,7 +48,7 @@ export const routeScenes: Record<string, SceneType> = {
   '/industries': 'orbit',
   '/technology': 'orbit',
   '/engagement-models': 'talent',
-  '/careers': 'classroom',
+  '/careers': 'office',
   '/contact': 'network',
 }
 
@@ -56,13 +62,13 @@ export const serviceScenes: Record<string, SceneType> = {
   'software-testing': 'pipeline',
   'intelligent-qa': 'qa-validation',
   'data-analytics': 'data',
-  'staff-augmentation': 'talent',
-  'dedicated-teams': 'talent',
-  'contract-to-hire': 'talent',
-  'it-recruitment': 'talent',
-  internship: 'terminal',
+  'staff-augmentation': 'staff',
+  'dedicated-teams': 'pods',
+  'contract-to-hire': 'hire',
+  'it-recruitment': 'recruit',
+  internship: 'capstone',
   'corporate-training': 'terminal',
-  'on-job-training': 'terminal',
+  'on-job-training': 'classroom',
 }
 
 export function getSceneForRoute(path: string): SceneType {

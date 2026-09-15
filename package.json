@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "dev:server": "npm --prefix server run dev",
+    "dev:admin": "npm --prefix admin run dev",
+    "build": "npm run generate:sitemap && tsc && vite build",
+    "build:admin": "npm --prefix admin run build",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

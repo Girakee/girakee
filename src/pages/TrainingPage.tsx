@@ -18,7 +18,7 @@ export default function TrainingPage() {
       label="Corporate Upskilling & Incubation"
       title="Corporate Upskilling & Incubation"
       subtitle="From tailored corporate engineering bootcamps to structured graduate incubation, Girakee bridges the gap between academic foundations and production-grade software delivery. All programs are mentored by active engineering leads using real-world architectures, continuous integration, and verifiable project outcomes."
-      scene="terminal"
+      scene="classroom"
       introTitle="Training That Looks Like the Job"
       intro={[
         'Girakee training is built around production work. Corporate programs are designed around your stack. The 6-month OJT places graduates inside live delivery with a named mentor. The 3-month internship gives college students a structured, remote path to a verified capstone.',

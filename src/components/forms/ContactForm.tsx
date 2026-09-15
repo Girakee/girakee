@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
-import { company } from '../../data/company'
+import { submitContact } from '../../lib/api'
 
 interface FormData {
   name: string
@@ -45,6 +45,7 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormData>(initialForm)
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [confirmationSent, setConfirmationSent] = useState(false)
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {}
@@ -61,18 +62,24 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
 
-    const subject = encodeURIComponent(
-      `Inquiry from ${form.name}${form.company ? ` (${form.company})` : ''} — Request NDA`,
-    )
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nCompany: ${form.company}\nWork Email: ${form.email}\nPhone / WhatsApp: ${form.phone}\nEngagement Category: ${form.service}\n\nProject Scope & Requirements:\n${form.message}`,
-    )
-    window.location.href = `mailto:${company.email}?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    try {
+      const result = await submitContact({
+        name: form.name,
+        company: form.company,
+        email: form.email,
+        phone: form.phone,
+        service: form.service,
+        message: form.message,
+      })
+      setConfirmationSent(result.candidateEmailSent)
+      setSubmitted(true)
+    } catch {
+      setErrors({ message: 'Unable to submit right now. Please email connect@girakee.com directly.' })
+    }
   }
 
   const update = (field: keyof FormData, value: string) => {
@@ -102,6 +109,7 @@ export default function ContactForm() {
           <p className="text-white/50 max-w-sm text-sm sm:text-base">
             Thank you. All inquiries are protected under mutual NDA standards. We respond within 24
             business hours.
+            {confirmationSent ? ` A confirmation email was sent to ${form.email}.` : ''}
           </p>
         </motion.div>
       </AnimatePresence>
@@ -116,8 +124,7 @@ export default function ContactForm() {
     }`
 
   return (
-    <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
-      <input type="hidden" name="form-name" value="contact" />
+    <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
       <div>
         <label htmlFor="name" className="block text-sm text-white/50 mb-2">Full Name *</label>
         <input

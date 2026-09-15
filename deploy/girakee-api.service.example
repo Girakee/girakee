@@ -1,0 +1,18 @@
+# systemd unit — copy to /etc/systemd/system/girakee-api.service
+# Then: sudo systemctl daemon-reload && sudo systemctl enable --now girakee-api
+
+[Unit]
+Description=Girakee API (Express + SQLite)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/girakee/server
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npm start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

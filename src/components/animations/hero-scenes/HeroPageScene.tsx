@@ -12,10 +12,16 @@ import {
   HeroQAValidationScene,
   HeroDataScene,
   HeroTalentScene,
+  HeroPodsScene,
+  HeroStaffScene,
   HeroTerminalScene,
   HeroOrbitScene,
   HeroNetworkScene,
   HeroClassroomScene,
+  HeroOfficeScene,
+  HeroCapstoneScene,
+  HeroHireScene,
+  HeroRecruitScene,
   HeroDefaultScene,
 } from './scenes'
 
@@ -36,10 +42,16 @@ const HERO_SCENE_MAP: Record<SceneType, (props: { loop: boolean }) => ReactNode>
   'qa-validation': HeroQAValidationScene,
   data: HeroDataScene,
   talent: HeroTalentScene,
+  pods: HeroPodsScene,
+  staff: HeroStaffScene,
   terminal: HeroTerminalScene,
   orbit: HeroOrbitScene,
   network: HeroNetworkScene,
   classroom: HeroClassroomScene,
+  office: HeroOfficeScene,
+  capstone: HeroCapstoneScene,
+  hire: HeroHireScene,
+  recruit: HeroRecruitScene,
 }
 
 export default function HeroPageScene({ scene, className = '' }: HeroPageSceneProps) {

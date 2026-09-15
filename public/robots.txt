@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.girakee.com/sitemap.xml
+
+# Admin panel is hosted separately; block if ever served from the same origin.
+User-agent: *
+Disallow: /admin/

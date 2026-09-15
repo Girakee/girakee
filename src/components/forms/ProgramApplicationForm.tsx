@@ -1,90 +1,134 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import { company } from '../../data/company'
+import { fetchPaymentOptions, submitProgramForm, type ApiPaymentOption } from '../../lib/api'
 
 type ProgramKind = 'internship' | 'ojt'
 
 const config: Record<
   ProgramKind,
   {
-    formName: string
     title: string
     subhead: string
     submitLabel: string
-    includePayment: boolean
     subject: string
   }
 > = {
   internship: {
-    formName: 'internship-apply',
     title: 'Apply Online',
-    subhead: 'Upload your resume and we will receive your application by email.',
-    submitLabel: 'Submit Application & Resume',
-    includePayment: false,
+    subhead: 'Upload your resume and our team will review your application.',
+    submitLabel: 'Submit',
     subject: 'Student Internship Application',
   },
   ojt: {
-    formName: 'ojt-register',
     title: 'Register for Engineering Residency',
-    subhead:
-      'Complete registration below. After review we send a secure payment link so you can confirm your seat.',
-    submitLabel: 'Submit Registration & Request Payment Link',
-    includePayment: true,
+    subhead: 'Complete registration below. When payments are enabled, you will be redirected to Razorpay after submit.',
+    submitLabel: 'Submit',
     subject: 'Graduate Engineering Residency Registration',
   },
 }
+
+const genderOptions = ['Male', 'Female', 'Other', 'Prefer not to say']
+
+const qualificationOptions = [
+  '10th / SSLC',
+  '12th / PUC',
+  'Diploma',
+  "Bachelor's Degree",
+  "Master's Degree",
+  'PhD / Doctorate',
+  'Other',
+]
+
+const domainOptions = [
+  'Full-Stack / Web & Mobile',
+  'Applied AI & Computer Vision',
+  'Cloud & DevOps',
+  'QA Automation',
+  'Data Engineering',
+  'Cybersecurity',
+]
 
 interface ProgramApplicationFormProps {
   kind: ProgramKind
 }
 
+function FormRow({
+  label,
+  htmlFor,
+  required,
+  hint,
+  children,
+}: {
+  label: string
+  htmlFor: string
+  required?: boolean
+  hint?: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="grid md:grid-cols-[minmax(11rem,1fr)_2fr] gap-2 md:gap-6 md:items-start">
+      <label htmlFor={htmlFor} className="block text-sm text-white/55 md:pt-3.5">
+        {label}
+        {required ? ' *' : ''}
+      </label>
+      <div>
+        {children}
+        {hint && <p className="text-xs text-white/35 mt-2 leading-relaxed">{hint}</p>}
+      </div>
+    </div>
+  )
+}
+
 export default function ProgramApplicationForm({ kind }: ProgramApplicationFormProps) {
   const meta = config[kind]
   const [submitted, setSubmitted] = useState(false)
-  const [resumeName, setResumeName] = useState('')
+  const [confirmationSent, setConfirmationSent] = useState(false)
+  const [submittedEmail, setSubmittedEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [paymentsEnabled, setPaymentsEnabled] = useState(false)
+  const [paymentUrl, setPaymentUrl] = useState<string | null>(null)
+  const [paymentOptions, setPaymentOptions] = useState<ApiPaymentOption[]>([])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget
-    const data = new FormData(form)
-    data.set('form-name', meta.formName)
-
-    const name = String(data.get('name') ?? '')
-    const email = String(data.get('email') ?? '')
-    const phone = String(data.get('phone') ?? '')
-    const college = String(data.get('college') ?? '')
-    const track = String(data.get('track') ?? '')
-    const payment = String(data.get('payment') ?? '')
-    const note = String(data.get('message') ?? '')
-    const file = data.get('resume')
-    const fileLabel = file instanceof File && file.name ? file.name : resumeName || 'please attach resume'
-
-    const body = [
-      `${meta.subject}`,
-      '',
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone}`,
-      `College / University: ${college}`,
-      track ? `Preferred track: ${track}` : '',
-      payment ? `Payment preference: ${payment}` : '',
-      `Resume: ${fileLabel}`,
-      '',
-      note,
-      '',
-      'Please attach the resume to this email if it is not included automatically.',
-    ]
-      .filter(Boolean)
-      .join('\n')
-
-    const mailto = `mailto:${company.email}?subject=${encodeURIComponent(meta.subject + (name ? ` — ${name}` : ''))}&body=${encodeURIComponent(body)}`
-
-    fetch('/', { method: 'POST', body: data })
-      .catch(() => undefined)
-      .finally(() => {
-        window.location.href = mailto
-        setSubmitted(true)
+  useEffect(() => {
+    if (kind !== 'ojt') return
+    fetchPaymentOptions()
+      .then((result) => {
+        setPaymentsEnabled(result.paymentsEnabled)
+        setPaymentUrl(result.paymentUrl)
+        setPaymentOptions(result.options)
       })
+      .catch(() => {
+        setPaymentsEnabled(false)
+        setPaymentOptions([])
+      })
+  }, [kind])
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setLoading(true)
+    setError('')
+    const form = event.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const result = await submitProgramForm(kind, data)
+      const redirectUrl = result.redirectToPayment ?? (kind === 'ojt' && paymentsEnabled ? paymentUrl : null)
+
+      if (redirectUrl) {
+        window.location.href = redirectUrl
+        return
+      }
+
+      setSubmittedEmail(String(data.get('email') ?? ''))
+      setConfirmationSent(result.candidateEmailSent)
+      setSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to submit application')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -93,8 +137,11 @@ export default function ProgramApplicationForm({ kind }: ProgramApplicationFormP
         <CheckCircle size={40} className="text-cyan mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-white mb-2">Application received</h3>
         <p className="text-sm text-white/50 max-w-md mx-auto leading-relaxed">
-          Your email client should open with the application details. Attach your resume if it is not
-          included, then send to {company.email}. We respond within 24 business hours.
+          Thank you. Our team will review your application and respond within 24 business hours at the email you provided.
+          {confirmationSent && submittedEmail ? ` A confirmation email was sent to ${submittedEmail}.` : ''}
+          {kind === 'ojt' && paymentsEnabled
+            ? ' After submit you will be redirected to complete payment.'
+            : ''}
         </p>
       </div>
     )
@@ -103,39 +150,36 @@ export default function ProgramApplicationForm({ kind }: ProgramApplicationFormP
   const inputClass =
     'w-full px-4 py-3.5 min-h-[48px] text-base border border-white/10 bg-navy-deep/60 text-white focus:outline-none focus:border-cyan'
 
-  return (
-    <form
-      name={meta.formName}
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      encType="multipart/form-data"
-      onSubmit={handleSubmit}
-      className="space-y-5"
-    >
-      <input type="hidden" name="form-name" value={meta.formName} />
-      <p className="hidden">
-        <label>
-          Don’t fill this out: <input name="bot-field" />
-        </label>
-      </p>
+  const showPaymentSection = kind === 'ojt' && paymentsEnabled
 
+  return (
+    <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-5">
       <div>
         <h3 className="editorial-display text-2xl text-white mb-2">{meta.title}</h3>
         <p className="text-sm text-white/45 leading-relaxed">{meta.subhead}</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor={`${kind}-name`} className="block text-sm text-white/50 mb-2">
-            Full Name *
-          </label>
-          <input id={`${kind}-name`} name="name" required autoComplete="name" className={inputClass} />
-        </div>
-        <div>
-          <label htmlFor={`${kind}-email`} className="block text-sm text-white/50 mb-2">
-            Email *
-          </label>
+      <div className="space-y-5">
+        <FormRow label="First name" htmlFor={`${kind}-firstName`} required>
+          <input
+            id={`${kind}-firstName`}
+            name="firstName"
+            required
+            autoComplete="given-name"
+            className={inputClass}
+          />
+        </FormRow>
+
+        <FormRow label="Last name" htmlFor={`${kind}-lastName`}>
+          <input
+            id={`${kind}-lastName`}
+            name="lastName"
+            autoComplete="family-name"
+            className={inputClass}
+          />
+        </FormRow>
+
+        <FormRow label="Email" htmlFor={`${kind}-email`} required>
           <input
             id={`${kind}-email`}
             name="email"
@@ -144,75 +188,136 @@ export default function ProgramApplicationForm({ kind }: ProgramApplicationFormP
             autoComplete="email"
             className={inputClass}
           />
-        </div>
-      </div>
+        </FormRow>
 
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor={`${kind}-phone`} className="block text-sm text-white/50 mb-2">
-            Phone / WhatsApp *
-          </label>
-          <input id={`${kind}-phone`} name="phone" type="tel" required autoComplete="tel" className={inputClass} />
-        </div>
-        <div>
-          <label htmlFor={`${kind}-college`} className="block text-sm text-white/50 mb-2">
-            College / University *
-          </label>
-          <input id={`${kind}-college`} name="college" required className={inputClass} />
-        </div>
-      </div>
+        <FormRow label="Phone" htmlFor={`${kind}-phone`} required>
+          <input
+            id={`${kind}-phone`}
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            className={inputClass}
+          />
+        </FormRow>
 
-      <div>
-        <label htmlFor={`${kind}-track`} className="block text-sm text-white/50 mb-2">
-          Preferred track
-        </label>
-        <select id={`${kind}-track`} name="track" className={inputClass} defaultValue="">
-          <option value="">Select a track</option>
-          <option>Full-Stack / Web & Mobile</option>
-          <option>Applied AI & Computer Vision</option>
-          <option>Cloud & DevOps</option>
-          <option>QA Automation</option>
-        </select>
-      </div>
+        <FormRow label="Date of birth" htmlFor={`${kind}-dateOfBirth`} required>
+          <input
+            id={`${kind}-dateOfBirth`}
+            name="dateOfBirth"
+            type="date"
+            required
+            className={inputClass}
+          />
+        </FormRow>
 
-      <div>
-        <label htmlFor={`${kind}-resume`} className="block text-sm text-white/50 mb-2">
-          Resume (PDF, DOC, DOCX) *
-        </label>
-        <input
-          id={`${kind}-resume`}
-          name="resume"
-          type="file"
-          required
-          accept=".pdf,.doc,.docx,application/pdf"
-          className={`${inputClass} file:mr-4 file:py-1 file:px-3 file:border-0 file:bg-cyan/20 file:text-cyan`}
-          onChange={(e) => setResumeName(e.target.files?.[0]?.name ?? '')}
-        />
-      </div>
-
-      {meta.includePayment && (
-        <div className="p-5 border border-cyan/20 bg-cyan/[0.04] space-y-4">
-          <p className="text-sm font-semibold text-white">Payment option</p>
-          <p className="text-xs text-white/50 leading-relaxed">
-            Program fees are collected after application review. Choose how you want to pay; we will
-            email a Razorpay / UPI payment link to confirm your residency seat.
-          </p>
-          <label htmlFor={`${kind}-payment`} className="block text-sm text-white/50 mb-2">
-            Payment preference *
-          </label>
-          <select id={`${kind}-payment`} name="payment" required className={inputClass} defaultValue="">
-            <option value="">Select payment option</option>
-            <option>Send me a Razorpay payment link</option>
-            <option>UPI / bank transfer details by email</option>
-            <option>Corporate / sponsored cohort — invoice my employer</option>
+        <FormRow label="Gender" htmlFor={`${kind}-gender`} required>
+          <select id={`${kind}-gender`} name="gender" required className={inputClass} defaultValue="">
+            <option value="">Select</option>
+            {genderOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
+        </FormRow>
+
+        <FormRow label="Highest qualification" htmlFor={`${kind}-highestQualification`} required>
+          <select
+            id={`${kind}-highestQualification`}
+            name="highestQualification"
+            required
+            className={inputClass}
+            defaultValue=""
+          >
+            <option value="">Select</option>
+            {qualificationOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </FormRow>
+
+        <FormRow label="College / University" htmlFor={`${kind}-college`} required>
+          <input id={`${kind}-college`} name="college" required className={inputClass} />
+        </FormRow>
+
+        <FormRow label="Current city" htmlFor={`${kind}-currentCity`} required>
+          <input
+            id={`${kind}-currentCity`}
+            name="currentCity"
+            required
+            autoComplete="address-level2"
+            className={inputClass}
+          />
+        </FormRow>
+
+        <FormRow label="Domain interested" htmlFor={`${kind}-domainInterested`} required>
+          <select
+            id={`${kind}-domainInterested`}
+            name="domainInterested"
+            required
+            className={inputClass}
+            defaultValue=""
+          >
+            <option value="">Select</option>
+            {domainOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </FormRow>
+
+        <FormRow
+          label="Business developer code"
+          htmlFor={`${kind}-businessDeveloperCode`}
+          required
+          hint="If no business developer, kindly mention &quot;NONE&quot;."
+        >
+          <input
+            id={`${kind}-businessDeveloperCode`}
+            name="businessDeveloperCode"
+            required
+            placeholder="NONE"
+            className={inputClass}
+          />
+        </FormRow>
+
+        <FormRow label="Resume (PDF, DOC, DOCX)" htmlFor={`${kind}-resume`} required>
+          <input
+            id={`${kind}-resume`}
+            name="resume"
+            type="file"
+            required
+            accept=".pdf,.doc,.docx,application/pdf"
+            className={`${inputClass} file:mr-4 file:py-1 file:px-3 file:border-0 file:bg-cyan/20 file:text-cyan`}
+          />
+        </FormRow>
+      </div>
+
+      {showPaymentSection && (
+        <div className="p-5 border border-cyan/20 bg-cyan/[0.04] space-y-4">
+          <p className="text-sm font-semibold text-white">Payment</p>
+          <p className="text-xs text-white/50 leading-relaxed">
+            After you submit this registration, you will be redirected to our secure Razorpay payment page to confirm your residency seat.
+          </p>
+          {paymentOptions.length > 0 && (
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-cyan/70">Available payment options</p>
+              {paymentOptions.map((option) => (
+                <div key={option.id} className="px-4 py-3 border border-white/[0.08] bg-white/[0.03]">
+                  <p className="text-sm text-white">{option.label}</p>
+                  <p className="text-xs text-white/45 mt-1 leading-relaxed">{option.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
-      <div>
-        <label htmlFor={`${kind}-message`} className="block text-sm text-white/50 mb-2">
-          Note (optional)
-        </label>
+      <FormRow label="Note (optional)" htmlFor={`${kind}-message`}>
         <textarea
           id={`${kind}-message`}
           name="message"
@@ -220,14 +325,21 @@ export default function ProgramApplicationForm({ kind }: ProgramApplicationFormP
           className={`${inputClass} resize-none min-h-[100px]`}
           placeholder="Graduation year, GitHub, or anything we should know."
         />
+      </FormRow>
+
+      {error && <p className="text-sm text-red-400">{error}</p>}
+
+      <div className="flex flex-wrap gap-3 pt-2">
+        <button type="submit" className="btn-primary min-w-[120px]" disabled={loading}>
+          {loading ? 'Submitting…' : meta.submitLabel}
+        </button>
+        <button type="reset" className="btn-secondary min-w-[120px]" disabled={loading}>
+          Reset
+        </button>
       </div>
 
-      <button type="submit" className="btn-primary w-full sm:w-auto">
-        {meta.submitLabel}
-      </button>
       <p className="text-xs text-white/35">
-        Submissions go to {company.email}. Attach your resume in the email if the file does not travel
-        automatically.
+        Submissions are stored securely and emailed to {company.email}.
       </p>
     </form>
   )

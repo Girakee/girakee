@@ -428,32 +428,48 @@ function TrainingPreview({
   months = 6,
   title = 'ojt · 6 month residency',
   outcome = 'Official Experience Letter & Portfolio Release at Month 6',
+  image,
 }: {
   months?: number
   title?: string
   outcome?: string
+  image?: string
 }) {
   const { shouldAnimate } = useMotionConfig()
   const labels = Array.from({ length: months }, (_, i) => `M${i + 1}`)
   return (
     <Window title={title}>
-      <p className="text-[11px] text-white/50 mb-4">
-        {months === 3 ? 'Milestone track: web, Python, cloud fundamentals' : 'Live project: production engineering residency'}
-      </p>
-      <div className={`grid gap-1.5 mb-5`} style={{ gridTemplateColumns: `repeat(${months}, minmax(0, 1fr))` }}>
-        {labels.map((m, i) => (
-          <motion.div
-            key={m}
-            className="h-16 border border-white/[0.08] flex items-end justify-center pb-1 text-[9px] text-white/40"
-            animate={shouldAnimate ? { backgroundColor: ['rgba(8,175,199,0)', 'rgba(8,175,199,0.25)', 'rgba(8,175,199,0.08)'] } : undefined}
-            transition={{ repeat: Infinity, duration: 4, delay: i * 0.35 }}
-          >
-            {m}
-          </motion.div>
-        ))}
+      {image && (
+        <div className="absolute inset-3 sm:inset-4 overflow-hidden border border-white/[0.08]">
+          <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-35" />
+          {shouldAnimate && (
+            <motion.div
+              className="absolute left-0 right-0 h-px bg-cyan/70"
+              animate={{ top: ['8%', '92%', '8%'] }}
+              transition={{ duration: 5.2, repeat: Infinity, ease: 'linear' }}
+            />
+          )}
+        </div>
+      )}
+      <div className="relative z-10">
+        <p className="text-[11px] text-white/70 mb-4">
+          {months === 3 ? 'Milestone track: web, Python, cloud fundamentals' : 'Live project: production engineering residency'}
+        </p>
+        <div className={`grid gap-1.5 mb-5`} style={{ gridTemplateColumns: `repeat(${months}, minmax(0, 1fr))` }}>
+          {labels.map((m, i) => (
+            <motion.div
+              key={m}
+              className="h-16 border border-white/[0.12] bg-[#07111d]/70 flex items-end justify-center pb-1 text-[9px] text-white/55"
+              animate={shouldAnimate ? { backgroundColor: ['rgba(8,175,199,0.08)', 'rgba(8,175,199,0.32)', 'rgba(8,175,199,0.1)'] } : undefined}
+              transition={{ repeat: Infinity, duration: 4, delay: i * 0.35 }}
+            >
+              {m}
+            </motion.div>
+          ))}
+        </div>
+        <Bar delay={0.2} width={months === 3 ? '100%' : '83%'} />
+        <p className="text-[10px] text-cyan/80 mt-2">{outcome}</p>
       </div>
-      <Bar delay={0.2} width={months === 3 ? '100%' : '83%'} />
-      <p className="text-[10px] text-cyan/70 mt-2">{outcome}</p>
     </Window>
   )
 }
@@ -474,6 +490,37 @@ function WorkshopPreview() {
   )
 }
 
+function RecruitPreview() {
+  const { shouldAnimate } = useMotionConfig()
+  const stages = [
+    { label: 'Intake', count: '12 roles' },
+    { label: 'Sourced', count: '84 profiles' },
+    { label: 'Screened', count: '19 engineers' },
+    { label: 'Shortlist', count: '6 finalists' },
+    { label: 'Offer', count: '2 joining' },
+  ]
+  return (
+    <Window title="recruitment · live pipeline">
+      <div className="space-y-2.5">
+        {stages.map((s, i) => (
+          <div key={s.label} className="flex items-center gap-3">
+            <span className="w-16 text-[10px] font-mono text-white/40">{s.label}</span>
+            <div className="flex-1 h-7 bg-white/[0.05] overflow-hidden">
+              <motion.div
+                className="h-full bg-cyan/50"
+                initial={{ width: 0 }}
+                animate={shouldAnimate ? { width: `${100 - i * 16}%` } : { width: `${100 - i * 16}%` }}
+                transition={{ delay: i * 0.25, duration: 1.1, repeat: Infinity, repeatDelay: 2.4 }}
+              />
+            </div>
+            <span className="text-[10px] text-white/55 w-20 text-right">{s.count}</span>
+          </div>
+        ))}
+      </div>
+    </Window>
+  )
+}
+
 const PREVIEWS: Record<string, () => ReactElement> = {
   'web-mobile': WebPreview,
   'ai-ml': AiPreview,
@@ -486,12 +533,13 @@ const PREVIEWS: Record<string, () => ReactElement> = {
   'staff-augmentation': TalentPreview,
   'dedicated-teams': TeamPreview,
   'contract-to-hire': HirePreview,
-  'it-recruitment': TalentPreview,
+  'it-recruitment': RecruitPreview,
   internship: () => (
     <TrainingPreview
       months={3}
       title="internship · 3 month track"
       outcome="Internship Certificate & Capstone Evaluation"
+      image="/internship-lab.png"
     />
   ),
   'corporate-training': WorkshopPreview,
@@ -500,6 +548,7 @@ const PREVIEWS: Record<string, () => ReactElement> = {
       months={6}
       title="ojt · 6 month residency"
       outcome="Official Experience Letter & Portfolio Release at Month 6"
+      image="/careers-lab.png"
     />
   ),
 }
