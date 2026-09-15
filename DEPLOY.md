@@ -4,8 +4,9 @@ Split deployment:
 
 | App | Host | URL |
 |-----|------|-----|
-| **Website** | Netlify (from Git) | `https://www.girakee.com` |
-| **API + admin** | Your VM **`200.234.39.88`** | `https://api.girakee.com`, `https://admin.girakee.com` |
+| **Website** | Netlify (from Git, repo root) | `https://www.girakee.com` |
+| **Admin** | Netlify (from Git, `admin/` folder) | `https://admin.girakee.com` or your Netlify URL |
+| **API** | Your VM **`200.234.39.88`** | `https://api.girakee.com` |
 
 ---
 
@@ -202,6 +203,40 @@ npm run build
 ```
 
 nginx serves `admin/dist` at `admin.girakee.com` (see `deploy/nginx-girakee.conf.example`).
+
+---
+
+## 3b. Deploy admin to Netlify (recommended)
+
+Use a **second Netlify site** from the same GitHub repo.
+
+1. Netlify → **Add new site** → **Import from Git** → select `Girakee/girakee`
+2. **Site configuration → Build settings:**
+   - **Base directory:** `admin`
+   - **Build command:** `npm run build` (from `admin/netlify.toml`)
+   - **Publish directory:** `admin/dist`
+3. **Environment variables:**
+
+   | Key | Value |
+   |-----|-------|
+   | `VITE_API_URL` | `https://api.girakee.com` |
+
+4. Deploy → open **`https://YOUR-ADMIN-SITE.netlify.app/login`**
+5. Optional: **Domain settings** → add `admin.girakee.com` (CNAME to Netlify)
+
+**Update VM API CORS** (`/opt/girakee/server/.env`):
+
+```env
+CORS_ORIGINS=https://www.girakee.com,https://girakee.com,https://YOUR-ADMIN-SITE.netlify.app,https://admin.girakee.com
+```
+
+Then restart API:
+
+```bash
+pm2 restart girakee-api
+```
+
+Login uses `ADMIN_EMAIL` / `ADMIN_PASSWORD` from `server/.env` on the VM.
 
 ---
 
