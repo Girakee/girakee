@@ -4,8 +4,15 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Set in Netlify UI → Site settings → Environment variables:
-  # VITE_API_URL = https://api.girakee.com
+  # Leave VITE_API_URL unset to proxy /api/* to the VM (see redirects below).
+  # When api.girakee.com is live with SSL, set: VITE_API_URL = https://api.girakee.com
+
+# Proxy API calls through Netlify → VM (avoids HTTPS→HTTP browser block without a domain).
+[[redirects]]
+  from = "/api/*"
+  to = "http://200.234.39.88:8787/api/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/*"

@@ -219,7 +219,11 @@ Use a **second Netlify site** from the same GitHub repo.
 
    | Key | Value |
    |-----|-------|
-   | `VITE_API_URL` | `https://api.girakee.com` |
+   | `VITE_API_URL` | *(leave empty)* — uses Netlify proxy to VM |
+
+   The `admin/netlify.toml` proxies `/api/*` → `http://200.234.39.88:8787/api/*` so admin works **without a domain/SSL on the API yet**.
+
+   When `api.girakee.com` has HTTPS, set `VITE_API_URL=https://api.girakee.com` and remove the proxy redirect.
 
 4. Deploy → open **`https://YOUR-ADMIN-SITE.netlify.app/login`**
 5. Optional: **Domain settings** → add `admin.girakee.com` (CNAME to Netlify)
