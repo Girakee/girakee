@@ -7,10 +7,10 @@
   # Leave VITE_API_URL unset to proxy /api/* to the VM (see redirects below).
   # When api.girakee.com is live with SSL, set: VITE_API_URL = https://api.girakee.com
 
-# Proxy API calls through Netlify → VM nginx on port 80 (8787 is not public).
+# Proxy API calls through Netlify → VM nginx (mnxstore already uses /api/ on port 80).
 [[redirects]]
   from = "/api/*"
-  to = "http://200.234.39.88/api/:splat"
+  to = "http://200.234.39.88/girakee-api/:splat"
   status = 200
   force = true
 
