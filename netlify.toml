@@ -4,8 +4,14 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Set VITE_API_URL in Netlify UI → Site settings → Environment variables
-  # Example: VITE_API_URL = https://api.girakee.com
+  VITE_API_URL = ""
+
+# Proxy form/API calls to VPS backend (same as admin site).
+[[redirects]]
+  from = "/api/*"
+  to = "http://200.234.39.88/girakee-api/:splat"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/web-mobile-development"

@@ -1,4 +1,11 @@
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8787'
+function resolveApiUrl() {
+  const configured = import.meta.env.VITE_API_URL?.trim()
+  if (import.meta.env.DEV) return configured || 'http://localhost:8787'
+  if (configured?.startsWith('https://')) return configured
+  return ''
+}
+
+const API_URL = resolveApiUrl()
 
 export interface ApiJob {
   id: string

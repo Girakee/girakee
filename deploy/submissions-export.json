@@ -1,0 +1,145 @@
+[
+  {
+    "id": "038a7273-acd9-471e-abd4-b75a7f5815c9",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"company\":\"Waterlabs.ai\",\"phone\":\"+919390872628\",\"service\":\"Software Engineering (Web, AI, Cloud, QA, Data)\",\"message\":\"provide the details \"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 0,
+    "created_at": "2026-09-15 07:50:33",
+    "admin_email_sent": 0,
+    "candidate_email_sent": 0
+  },
+  {
+    "id": "8cff94e0-b5e0-4740-a683-1b988e588dcb",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"company\":\"Girakee\",\"phone\":\"+919390872628\",\"service\":\"Software Engineering (Web, AI, Cloud, QA, Data)\",\"message\":\"about the sales \"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 0,
+    "created_at": "2026-09-15 08:16:09",
+    "admin_email_sent": 0,
+    "candidate_email_sent": 0
+  },
+  {
+    "id": "735dff43-1e06-453b-931e-106d1b8f9674",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"company\":\"Girakee\",\"phone\":\"+919390872628\",\"service\":\"Software Engineering (Web, AI, Cloud, QA, Data)\",\"message\":\"about the sales \"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 0,
+    "created_at": "2026-09-15 08:16:12",
+    "admin_email_sent": 0,
+    "candidate_email_sent": 0
+  },
+  {
+    "id": "c78b11eb-8d07-4b7a-a243-2feca734c5b1",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"company\":\"Girakee\",\"phone\":\"+919390872628\",\"service\":\"Software Engineering (Web, AI, Cloud, QA, Data)\",\"message\":\"about the sales \"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 0,
+    "created_at": "2026-09-15 08:16:13",
+    "admin_email_sent": 0,
+    "candidate_email_sent": 0
+  },
+  {
+    "id": "f8152f71-647e-461e-8a8f-8acf57b9f133",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Email Test\",\"email\":\"notifications@girakee.com\",\"company\":\"Girakee\",\"phone\":\"9999999999\",\"service\":\"web-mobile\",\"message\":\"Testing email after fix\"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 1,
+    "created_at": "2026-09-15 08:40:47",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "a9ab6041-bd88-4272-83e0-075a49a6e110",
+    "form_type": "callback",
+    "payload": "{\"name\":\"Hemanth Pulaganti\",\"email\":\"rhagavsurya123@gmail.com\",\"phone\":\"+919347783227\"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 1,
+    "created_at": "2026-09-15 08:44:42",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "e144c059-7c6e-4b71-8ed2-215fa0a7e6be",
+    "form_type": "contact",
+    "payload": "{\"name\":\"Hemanth Pulaganti\",\"email\":\"hpulaganti@gmail.com\",\"company\":\"Hemanth Pulaganti\",\"phone\":\"+919347783227\",\"service\":\"Software Engineering (Web, AI, Cloud, QA, Data)\",\"message\":\"look for  software development \"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 1,
+    "created_at": "2026-09-15 08:46:17",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "307909bd-7e57-4ef9-a15a-12fcd3485f29",
+    "form_type": "ojt",
+    "payload": "{\"firstName\":\"Hemanth Pulaganti\",\"lastName\":\"hemanth\",\"name\":\"Hemanth Pulaganti hemanth\",\"email\":\"pulagantibhargav@gmail.com\",\"phone\":\"+919347783227\",\"dateOfBirth\":\"2000-11-28\",\"gender\":\"Male\",\"highestQualification\":\"Bachelor's Degree\",\"college\":\"sv university\",\"currentCity\":\"Madhanapalli\",\"domainInterested\":\"Full-Stack / Web & Mobile\",\"businessDeveloperCode\":\"collage\"}",
+    "resume_path": "C:\\Users\\hpula\\girakee\\server\\data\\uploads\\1789462534558-152e7cbd-8c35-4f39-9de8-e67a3c0e16cd.pdf",
+    "resume_original_name": "SMA-1004-25-26-MNX-1004-invoice.pdf",
+    "email_sent": 1,
+    "created_at": "2026-09-15 08:55:34",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "48281e9c-b921-432a-9149-33b564ae3d1a",
+    "form_type": "ojt",
+    "payload": "{\"firstName\":\"Hemanth Pulaganti\",\"lastName\":\"hemanth\",\"name\":\"Hemanth Pulaganti hemanth\",\"email\":\"pulagantibhargav@gmail.com\",\"phone\":\"+919347783227\",\"dateOfBirth\":\"2000-11-28\",\"gender\":\"Male\",\"highestQualification\":\"Diploma\",\"college\":\"sv university\",\"currentCity\":\"Madhanapalli\",\"domainInterested\":\"Full-Stack / Web & Mobile\",\"businessDeveloperCode\":\"collage\"}",
+    "resume_path": "C:\\Users\\hpula\\girakee\\server\\data\\uploads\\1789462910735-04dbb516-5481-4618-a944-758d66a2b43f.pdf",
+    "resume_original_name": "SMA-1004-25-26-MNX-1004-invoice.pdf",
+    "email_sent": 1,
+    "created_at": "2026-09-15 09:01:50",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "c2504e62-15c3-4738-b4c6-3b8765150fd7",
+    "form_type": "ojt",
+    "payload": "{\"firstName\":\"Hemanth Pulaganti\",\"lastName\":\"hemanth\",\"name\":\"Hemanth Pulaganti hemanth\",\"email\":\"pulagantibhargav@gmail.com\",\"phone\":\"+919347783227\",\"dateOfBirth\":\"2000-11-28\",\"gender\":\"Male\",\"highestQualification\":\"12th / PUC\",\"college\":\"sv university\",\"currentCity\":\"Madhanapalli\",\"domainInterested\":\"Applied AI & Computer Vision\",\"businessDeveloperCode\":\"collage\"}",
+    "resume_path": "C:\\Users\\hpula\\girakee\\server\\data\\uploads\\1789463046904-acb2a950-a6d4-4e90-9b66-19f0e660ec6c.pdf",
+    "resume_original_name": "AI Services.pdf",
+    "email_sent": 1,
+    "created_at": "2026-09-15 09:04:06",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "9abc492a-ef3e-4774-af49-5a1400ac913f",
+    "form_type": "career",
+    "payload": "{\"name\":\"Hemanth Pulaganti\",\"email\":\"hpulaganti@gmail.com\",\"phone\":\"+919347783227\",\"jobId\":\"bd-partner-uae\",\"jobTitle\":\"Business Development Partner – Middle East (Enterprise Tech & AI Solutions)\",\"linkedin\":\"\",\"message\":\"Send your professional profile or LinkedIn credentials to connect@girakee.com with the subject line \\\"BD Partner – UAE Application\\\".\"}",
+    "resume_path": "C:\\Users\\hpula\\girakee\\server\\data\\uploads\\1789463374981-d7f3bb2b-d0a8-44e5-a0d5-5f6866a08682.pdf",
+    "resume_original_name": "AI Services (1).pdf",
+    "email_sent": 1,
+    "created_at": "2026-09-15 09:09:35",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "feb54ff5-6bac-493e-b497-ffbe7e5ae78e",
+    "form_type": "ojt",
+    "payload": "{\"firstName\":\"Rhagav\",\"lastName\":\"Surya\",\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"phone\":\"+919390872628\",\"dateOfBirth\":\"2000-11-28\",\"gender\":\"Male\",\"highestQualification\":\"10th / SSLC\",\"college\":\"Sv university\",\"currentCity\":\"bangalore\",\"domainInterested\":\"Full-Stack / Web & Mobile\",\"businessDeveloperCode\":\"none\"}",
+    "resume_path": "C:\\Users\\hpula\\girakee\\server\\data\\uploads\\1789733005778-3620709a-782f-4941-88f9-8a97fc98ae27.pdf",
+    "resume_original_name": "Tejas_Sagar_Group_Lead_Resume_Final.pdf",
+    "email_sent": 1,
+    "created_at": "2026-09-18 12:03:25",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  },
+  {
+    "id": "70c92e2f-98f4-4ef9-8a22-05471329509a",
+    "form_type": "callback",
+    "payload": "{\"name\":\"Rhagav Surya\",\"email\":\"rhagavsurya123@gmail.com\",\"phone\":\"9390872628\"}",
+    "resume_path": null,
+    "resume_original_name": null,
+    "email_sent": 1,
+    "created_at": "2026-09-18 18:37:47",
+    "admin_email_sent": 1,
+    "candidate_email_sent": 1
+  }
+]
