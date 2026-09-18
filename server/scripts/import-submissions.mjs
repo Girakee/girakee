@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-/** Import submissions-export.json into VPS SQLite. Run on VM from repo root. */
+/** Import deploy/submissions-export.json into SQLite. Run: npm --prefix server run import:submissions */
 import Database from 'better-sqlite3'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const exportPath = path.resolve(__dirname, 'submissions-export.json')
-const dbPath = path.resolve(__dirname, '../server/data/girakee.sqlite')
+const exportPath = path.resolve(__dirname, '../../deploy/submissions-export.json')
+const dbPath = path.resolve(__dirname, '../data/girakee.sqlite')
 
 if (!fs.existsSync(exportPath)) {
-  console.error('Missing deploy/submissions-export.json — run export locally first.')
+  console.error('Missing deploy/submissions-export.json')
   process.exit(1)
 }
 
