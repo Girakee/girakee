@@ -92,8 +92,16 @@ export const adminApi = {
       body: JSON.stringify({ paymentUrl }),
     })
   },
-  getSubmissions() {
-    return request<{ submissions: Submission[] }>('/api/admin/submissions')
+  getSubmissions(filters?: { formType?: string; from?: string; to?: string }) {
+    const params = new URLSearchParams()
+    if (filters?.formType && filters.formType !== 'all') params.set('formType', filters.formType)
+    if (filters?.from) params.set('from', filters.from)
+    if (filters?.to) params.set('to', filters.to)
+    const query = params.toString()
+    return request<{ submissions: Submission[] }>(`/api/admin/submissions${query ? `?${query}` : ''}`)
+  },
+  deleteSubmission(id: string) {
+    return request<{ ok: boolean }>(`/api/admin/submissions/${id}`, { method: 'DELETE' })
   },
   async downloadResume(submissionId: string, filename: string) {
     const token = getToken()

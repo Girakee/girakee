@@ -2,12 +2,40 @@ import { Router } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import fs from 'node:fs'
+import path from 'node:path'
 import { v4 as uuid } from 'uuid'
 import { config } from '../config.js'
 import { getDb, mapJob, mapPaymentOption, paymentsEnabled, setSetting, getPaymentUrl } from '../db.js'
 import { requireAdmin, type AuthRequest } from '../middleware/auth.js'
 
 const router = Router()
+
+const allowedFormTypes = new Set(['contact', 'callback', 'internship', 'ojt', 'career-application'])
+
+function resolveResumePath(storedPath: string | null | undefined) {
+  if (!storedPath) return null
+  const trimmed = String(storedPath).trim()
+  if (!trimmed) return null
+  if (fs.existsSync(trimmed)) return trimmed
+  const basename = path.basename(trimmed)
+  const candidate = path.join(config.uploadDir, basename)
+  if (fs.existsSync(candidate)) return candidate
+  return null
+}
+
+function mapSubmissionRow(row: Record<string, unknown>) {
+  return {
+    id: String(row.id),
+    formType: String(row.form_type),
+    payload: JSON.parse(String(row.payload)),
+    hasResume: Boolean(row.resume_path),
+    resumeOriginalName: row.resume_original_name ? String(row.resume_original_name) : null,
+    emailSent: Number(row.email_sent) === 1,
+    adminEmailSent: Number(row.admin_email_sent ?? row.email_sent) === 1,
+    candidateEmailSent: Number(row.candidate_email_sent) === 1,
+    createdAt: String(row.created_at),
+  }
+}
 
 router.post('/login', (req, res) => {
   const { email, password } = req.body ?? {}
@@ -200,24 +228,60 @@ router.patch('/settings/payment-url', requireAdmin, (req, res) => {
   return res.json({ paymentUrl })
 })
 
-router.get('/submissions', requireAdmin, (_req, res) => {
-  const rows = getDb()
-    .prepare('SELECT * FROM submissions ORDER BY created_at DESC LIMIT 200')
-    .all() as Record<string, unknown>[]
+router.get('/submissions', requireAdmin, (req, res) => {
+  const formType = String(req.query.formType ?? '').trim()
+  const from = String(req.query.from ?? '').trim()
+  const to = String(req.query.to ?? '').trim()
+
+  let sql = 'SELECT * FROM submissions WHERE 1=1'
+  const params: unknown[] = []
+
+  if (formType && formType !== 'all') {
+    if (!allowedFormTypes.has(formType)) {
+      return res.status(400).json({ error: 'Invalid form type filter' })
+    }
+    sql += ' AND form_type = ?'
+    params.push(formType)
+  }
+  if (from) {
+    sql += ' AND date(created_at) >= date(?)'
+    params.push(from)
+  }
+  if (to) {
+    sql += ' AND date(created_at) <= date(?)'
+    params.push(to)
+  }
+
+  sql += ' ORDER BY created_at DESC LIMIT 500'
+
+  const rows = getDb().prepare(sql).all(...params) as Record<string, unknown>[]
 
   res.json({
-    submissions: rows.map((row) => ({
-      id: String(row.id),
-      formType: String(row.form_type),
-      payload: JSON.parse(String(row.payload)),
-      hasResume: Boolean(row.resume_path),
-      resumeOriginalName: row.resume_original_name ? String(row.resume_original_name) : null,
-      emailSent: Number(row.email_sent) === 1,
-      adminEmailSent: Number(row.admin_email_sent ?? row.email_sent) === 1,
-      candidateEmailSent: Number(row.candidate_email_sent) === 1,
-      createdAt: String(row.created_at),
-    })),
+    submissions: rows.map(mapSubmissionRow),
   })
+})
+
+router.delete('/submissions/:id', requireAdmin, (req, res) => {
+  const row = getDb()
+    .prepare('SELECT resume_path FROM submissions WHERE id = ?')
+    .get(req.params.id) as { resume_path?: string | null } | undefined
+
+  if (!row) {
+    return res.status(404).json({ error: 'Submission not found' })
+  }
+
+  const filePath = resolveResumePath(row.resume_path)
+  getDb().prepare('DELETE FROM submissions WHERE id = ?').run(req.params.id)
+
+  if (filePath) {
+    try {
+      fs.unlinkSync(filePath)
+    } catch {
+      // Ignore missing files after DB row is removed.
+    }
+  }
+
+  return res.json({ ok: true })
 })
 
 router.get('/submissions/:id/resume', requireAdmin, (req, res) => {
@@ -229,8 +293,8 @@ router.get('/submissions/:id/resume', requireAdmin, (req, res) => {
     return res.status(404).json({ error: 'Resume not found for this submission' })
   }
 
-  const filePath = String(row.resume_path)
-  if (!fs.existsSync(filePath)) {
+  const filePath = resolveResumePath(row.resume_path)
+  if (!filePath) {
     return res.status(404).json({ error: 'Resume file is missing on the server' })
   }
 

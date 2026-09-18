@@ -138,6 +138,11 @@ button {
   color: #fca5a5;
 }
 
+.btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
 .btn-secondary {
   border-color: rgba(255, 255, 255, 0.12);
   background: transparent;
