@@ -33,6 +33,10 @@ app.use('/uploads', express.static(config.uploadDir))
 app.use('/api', publicRoutes)
 app.use('/api/admin', adminRoutes)
 
+app.get('/api/health', (_req, res) => {
+  res.json({ ok: true, service: 'girakee-api', time: new Date().toISOString() })
+})
+
 app.use((error: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(error)
   res.status(500).json({ error: error.message || 'Internal server error' })
