@@ -20,6 +20,10 @@ app.use(
         callback(null, true)
         return
       }
+      if (origin.endsWith('.netlify.app')) {
+        callback(null, true)
+        return
+      }
       callback(new Error('Not allowed by CORS'))
     },
     credentials: true,
