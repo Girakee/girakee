@@ -4,8 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Leave VITE_API_URL unset to proxy /api/* to the VM (see redirects below).
-  # When api.girakee.com is live with SSL, set: VITE_API_URL = https://api.girakee.com
+  VITE_API_URL = ""
+  # Proxy /api/* to VM — do not set http:// IP here (browser blocks HTTPS → HTTP).
 
 # Proxy API calls through Netlify → VM nginx (mnxstore already uses /api/ on port 80).
 [[redirects]]

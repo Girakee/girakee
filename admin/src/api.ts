@@ -1,6 +1,12 @@
-const API_URL =
-  import.meta.env.VITE_API_URL ??
-  (import.meta.env.DEV ? '' : '')
+function resolveApiUrl() {
+  const configured = import.meta.env.VITE_API_URL?.trim()
+  if (import.meta.env.DEV) return configured || ''
+  // Production: only use explicit HTTPS API URLs; otherwise proxy via Netlify (/api/*).
+  if (configured?.startsWith('https://')) return configured
+  return ''
+}
+
+const API_URL = resolveApiUrl()
 const TOKEN_KEY = 'girakee_admin_token'
 
 export function getToken() {
