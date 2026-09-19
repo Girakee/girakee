@@ -1,12 +1,14 @@
 # Deploy Girakee
 
+**One GitHub repo:** [github.com/Girakee/girakee](https://github.com/Girakee/girakee) — website (root), admin (`admin/`), API (`server/`).
+
 Split deployment:
 
-| App | Host | URL |
-|-----|------|-----|
-| **Website** | Netlify (from Git, repo root) | `https://www.girakee.com` |
-| **Admin** | Netlify (from Git, `admin/` folder) | `https://admin.girakee.com` or your Netlify URL |
-| **API** | Your VM **`200.234.39.88`** | `https://api.girakee.com` |
+| App | Host | Git path | URL |
+|-----|------|----------|-----|
+| **Website** | Netlify site #1 | repo root | `https://www.girakee.com` |
+| **Admin** | Netlify site #2 | `admin/` base directory | `https://girakeeadmin.netlify.app` or custom domain |
+| **API** | VM **`200.234.39.88`** | `server/` on VPS | `http://200.234.39.88/girakee-api/` |
 
 ---
 
@@ -206,15 +208,17 @@ nginx serves `admin/dist` at `admin.girakee.com` (see `deploy/nginx-girakee.conf
 
 ---
 
-## 3b. Deploy admin to Netlify (recommended)
+## 3b. Deploy admin to Netlify (same repo as website)
 
-Use a **second Netlify site** from the same GitHub repo.
+Admin code lives in **`admin/`** inside this repo — not a separate GitHub project.
 
-1. Netlify → **Add new site** → **Import from Git** → select `Girakee/girakee`
+Use a **second Netlify site** linked to **`Girakee/girakee`**:
+
+1. Netlify → **Add new site** → **Import from Git** → select **`Girakee/girakee`**
 2. **Site configuration → Build settings:**
-   - **Base directory:** `admin`
+   - **Base directory:** `admin` ← required
    - **Build command:** `npm run build` (from `admin/netlify.toml`)
-   - **Publish directory:** `admin/dist`
+   - **Publish directory:** `dist` (Netlify resolves this inside `admin/`)
 3. **Environment variables:**
 
    | Key | Value |

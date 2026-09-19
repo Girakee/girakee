@@ -1,9 +1,9 @@
 # Girakee Backend & Admin
 
-This repository now includes:
+This monorepo includes:
 
 - `server/` — Express + SQLite API for careers jobs, payment options, form submissions, and email notifications
-- `admin/` — separate React admin panel for managing jobs, payments, and viewing submissions
+- `admin/` — React admin panel (same repo) for managing jobs, payments, and viewing submissions
 
 ## Quick start (local)
 

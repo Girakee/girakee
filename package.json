@@ -3,12 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "admin",
+    "server"
+  ],
   "scripts": {
     "dev": "vite",
-    "dev:server": "npm --prefix server run dev",
-    "dev:admin": "npm --prefix admin run dev",
+    "dev:server": "npm run dev -w girakee-server",
+    "dev:admin": "npm run dev -w girakee-admin",
     "build": "npm run generate:sitemap && tsc && vite build",
-    "build:admin": "npm --prefix admin run build",
+    "build:admin": "npm run build -w girakee-admin",
+    "build:all": "npm run build && npm run build:admin",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview"
   },
