@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { adminApi, type Submission } from '../api'
+import { formatIndiaDateTime } from '../lib/datetime'
 
 const FORM_TYPE_OPTIONS = [
   { value: 'all', label: 'All types' },
@@ -178,7 +179,7 @@ export default function SubmissionsPage() {
                   <span className="text-xs uppercase tracking-widest text-cyan/70">
                     {formatFormType(submission.formType)}
                   </span>
-                  <span className="text-xs text-white/40">{new Date(submission.createdAt).toLocaleString()}</span>
+                  <span className="text-xs text-white/40">{formatIndiaDateTime(submission.createdAt)} IST</span>
                   <span
                     className={`text-xs px-2 py-1 border ${submission.adminEmailSent ? 'border-emerald-400/30 text-emerald-300' : 'border-amber-400/30 text-amber-200'}`}
                   >

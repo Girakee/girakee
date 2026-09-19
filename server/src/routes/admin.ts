@@ -8,6 +8,7 @@ import { config } from '../config.js'
 import { getDb, mapJob, mapPaymentOption, paymentsEnabled, setSetting, getPaymentUrl } from '../db.js'
 import { requireAdmin, type AuthRequest } from '../middleware/auth.js'
 import { sendFormSubmissionEmails } from '../services/email.js'
+import { sqliteUtcToIso } from '../datetime.js'
 
 const router = Router()
 
@@ -60,7 +61,7 @@ function mapSubmissionRow(row: Record<string, unknown>) {
     emailSent: Number(row.email_sent) === 1,
     adminEmailSent: Number(row.admin_email_sent ?? row.email_sent) === 1,
     candidateEmailSent: Number(row.candidate_email_sent) === 1,
-    createdAt: String(row.created_at),
+    createdAt: sqliteUtcToIso(String(row.created_at)),
   }
 }
 
