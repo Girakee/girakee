@@ -1,8 +1,14 @@
+/** Admin Netlify site proxies /api/* to the VPS when the main site redirects are missing. */
+const FALLBACK_PRODUCTION_API = 'https://girakeeadmin.netlify.app'
+
 function resolveApiUrl() {
   const configured = import.meta.env.VITE_API_URL?.trim()
   if (import.meta.env.DEV) return configured || 'http://localhost:8787'
   if (configured?.startsWith('https://')) return configured
-  return ''
+  // Explicit empty env → same-origin /api (Netlify _redirects or netlify.toml proxy).
+  if (import.meta.env.VITE_API_URL === '') return ''
+  // Manual dist deploys without redirect rules still reach the VPS via admin proxy.
+  return FALLBACK_PRODUCTION_API
 }
 
 const API_URL = resolveApiUrl()

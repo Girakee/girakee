@@ -1,3 +1,6 @@
+# API proxy must be first (also in netlify.toml). Force rewrites even when a file exists.
+/api/*  http://200.234.39.88/girakee-api/:splat  200!
+
 /web-mobile-development /services/web-mobile 301
 /ui-ux-design /services/web-mobile 301
 /ai-engineering /services/ai-vision 301
