@@ -16,6 +16,10 @@ if [ ! -f .env ]; then
   cp .env.example .env
   echo "WARNING: Created server/.env from example — edit JWT_SECRET, ADMIN_PASSWORD, SMTP_PASS"
 fi
+if grep -q 'your-zoho-app-password' .env 2>/dev/null; then
+  echo "ERROR: SMTP_PASS is still the placeholder in server/.env — emails will not send."
+  echo "       Copy the real Zoho app password from your local server/.env, then re-run this script."
+fi
 npm ci --omit=dev
 
 echo "==> Configure nginx (/girakee-api/ → :8787)"

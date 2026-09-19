@@ -11,6 +11,7 @@ import { getSceneForService } from '../../data/sceneThemes'
 import { processTitle, services, type Service } from '../../data/services'
 import { ArrowRight, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import HashLink from '../ui/HashLink'
 
 interface ServiceLandingPageProps {
   serviceId: string
@@ -88,10 +89,13 @@ export default function ServiceLandingPage({ serviceId, seoTitle, seoDescription
               <p className="text-body text-body-dark leading-relaxed mb-8 text-base">
                 {service.detailedOverview}
               </p>
-              <Link to={service.application ? `#${applyAnchor}` : '/contact'} className="btn-primary inline-flex">
+              <HashLink
+                to={service.application ? `${service.path}#${applyAnchor}` : '/contact'}
+                className="btn-primary inline-flex"
+              >
                 {service.inSectionCta ?? service.ctaLabel}
                 <ArrowRight size={15} strokeWidth={1.75} />
-              </Link>
+              </HashLink>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={0.1}>
               <ServiceScenePanel scene={scene} title={service.shortTitle} />

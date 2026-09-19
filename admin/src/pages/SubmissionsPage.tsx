@@ -30,6 +30,7 @@ export default function SubmissionsPage() {
   const [error, setError] = useState('')
   const [resumeError, setResumeError] = useState('')
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [resendingId, setResendingId] = useState<string | null>(null)
 
   const loadSubmissions = useCallback(async () => {
     setLoading(true)
@@ -78,6 +79,30 @@ export default function SubmissionsPage() {
     }
   }
 
+  const handleResendEmails = async (submission: Submission) => {
+    setResendingId(submission.id)
+    setError('')
+    try {
+      const result = await adminApi.resendSubmissionEmails(submission.id)
+      setSubmissions((current) =>
+        current.map((item) =>
+          item.id === submission.id
+            ? {
+                ...item,
+                emailSent: result.adminEmailSent,
+                adminEmailSent: result.adminEmailSent,
+                candidateEmailSent: result.candidateEmailSent,
+              }
+            : item,
+        ),
+      )
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to resend emails')
+    } finally {
+      setResendingId(null)
+    }
+  }
+
   const handleDelete = async (submission: Submission) => {
     const label = formatFormType(submission.formType)
     const confirmed = window.confirm(`Delete this ${label} submission? This cannot be undone.`)
@@ -109,6 +134,7 @@ export default function SubmissionsPage() {
       </div>
 
       <div className="panel p-5 space-y-4">
+        <p className="text-xs uppercase tracking-widest text-white/45">Filters</p>
         <div className="flex flex-wrap items-end gap-4">
           <div className="min-w-[180px]">
             <label className="block text-xs uppercase tracking-widest text-white/45 mb-2">Form type</label>
@@ -164,14 +190,26 @@ export default function SubmissionsPage() {
                     Candidate email: {submission.candidateEmailSent ? 'sent' : 'pending'}
                   </span>
                 </div>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  disabled={deletingId === submission.id}
-                  onClick={() => handleDelete(submission)}
-                >
-                  {deletingId === submission.id ? 'Removing…' : 'Delete'}
-                </button>
+                <div className="flex flex-wrap gap-2 justify-end">
+                  {(!submission.adminEmailSent || !submission.candidateEmailSent) && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      disabled={resendingId === submission.id}
+                      onClick={() => handleResendEmails(submission)}
+                    >
+                      {resendingId === submission.id ? 'Sending…' : 'Resend emails'}
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    disabled={deletingId === submission.id}
+                    onClick={() => handleDelete(submission)}
+                  >
+                    {deletingId === submission.id ? 'Removing…' : 'Delete'}
+                  </button>
+                </div>
               </div>
               <div className="grid md:grid-cols-2 gap-3 text-sm">
                 {Object.entries(submission.payload).map(([key, value]) => (

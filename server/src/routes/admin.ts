@@ -7,6 +7,7 @@ import { v4 as uuid } from 'uuid'
 import { config } from '../config.js'
 import { getDb, mapJob, mapPaymentOption, paymentsEnabled, setSetting, getPaymentUrl } from '../db.js'
 import { requireAdmin, type AuthRequest } from '../middleware/auth.js'
+import { sendFormSubmissionEmails } from '../services/email.js'
 
 const router = Router()
 
@@ -21,6 +22,32 @@ function resolveResumePath(storedPath: string | null | undefined) {
   const candidate = path.join(config.uploadDir, basename)
   if (fs.existsSync(candidate)) return candidate
   return null
+}
+
+function candidateNameFromPayload(payload: Record<string, unknown>) {
+  if (payload.name) return String(payload.name)
+  const first = String(payload.firstName ?? '').trim()
+  const last = String(payload.lastName ?? '').trim()
+  return [first, last].filter(Boolean).join(' ') || 'Applicant'
+}
+
+function buildSubmissionSubject(formType: string, payload: Record<string, unknown>) {
+  const name = candidateNameFromPayload(payload)
+  switch (formType) {
+    case 'contact':
+      return `Website inquiry — ${name}${payload.company ? ` (${payload.company})` : ''}`
+    case 'callback':
+      return `Callback request — ${name}`
+    case 'internship':
+      return `Student Internship Application — ${name}`
+    case 'ojt':
+      return `Graduate Engineering Residency Registration — ${name}`
+    case 'career':
+    case 'career-application':
+      return `Career Application — ${payload.jobTitle ?? 'Role'} — ${name}`
+    default:
+      return `Form submission — ${name}`
+  }
 }
 
 function mapSubmissionRow(row: Record<string, unknown>) {
@@ -259,6 +286,46 @@ router.get('/submissions', requireAdmin, (req, res) => {
   res.json({
     submissions: rows.map(mapSubmissionRow),
   })
+})
+
+router.post('/submissions/:id/resend-emails', requireAdmin, async (req, res) => {
+  const row = getDb()
+    .prepare('SELECT * FROM submissions WHERE id = ?')
+    .get(req.params.id) as Record<string, unknown> | undefined
+
+  if (!row) {
+    return res.status(404).json({ error: 'Submission not found' })
+  }
+
+  const payload = JSON.parse(String(row.payload)) as Record<string, unknown>
+  const candidateEmail = String(payload.email ?? '').trim()
+  if (!candidateEmail) {
+    return res.status(400).json({ error: 'Submission has no candidate email' })
+  }
+
+  const formType = String(row.form_type)
+  const emailFormType = formType === 'career-application' ? 'career' : formType
+  const resumePath = resolveResumePath(row.resume_path as string | null | undefined)
+
+  const result = await sendFormSubmissionEmails({
+    formType: emailFormType,
+    subject: buildSubmissionSubject(formType, payload),
+    payload,
+    candidateEmail,
+    candidateName: candidateNameFromPayload(payload),
+    resumePath,
+    resumeOriginalName: row.resume_original_name ? String(row.resume_original_name) : null,
+  })
+
+  getDb()
+    .prepare(
+      `UPDATE submissions
+       SET email_sent = ?, admin_email_sent = ?, candidate_email_sent = ?
+       WHERE id = ?`,
+    )
+    .run(result.adminSent ? 1 : 0, result.adminSent ? 1 : 0, result.candidateSent ? 1 : 0, req.params.id)
+
+  return res.json({ ok: true, ...result })
 })
 
 router.delete('/submissions/:id', requireAdmin, (req, res) => {

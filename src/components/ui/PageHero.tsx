@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import HashLink from './HashLink'
 import { useMotionConfig } from '../../hooks/useMotionConfig'
 import { pickVariants } from '../../animations/motionConfig'
 import { slideUpSubtle } from '../../animations/variants'
@@ -65,10 +66,10 @@ export default function PageHero({
             {(cta || secondaryCta) && (
               <motion.div {...reveal(0.28)} className="mt-7 flex flex-wrap gap-3">
                 {cta && (
-                  <Link to={cta.to} className="btn-primary inline-flex">
+                  <HashLink to={cta.to} className="btn-primary inline-flex">
                     {cta.label}
                     <ArrowRight size={15} strokeWidth={1.75} />
-                  </Link>
+                  </HashLink>
                 )}
                 {secondaryCta && (
                   secondaryCta.external ? (

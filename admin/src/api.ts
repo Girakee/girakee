@@ -103,6 +103,12 @@ export const adminApi = {
   deleteSubmission(id: string) {
     return request<{ ok: boolean }>(`/api/admin/submissions/${id}`, { method: 'DELETE' })
   },
+  resendSubmissionEmails(id: string) {
+    return request<{ ok: boolean; adminEmailSent: boolean; candidateEmailSent: boolean }>(
+      `/api/admin/submissions/${id}/resend-emails`,
+      { method: 'POST' },
+    )
+  },
   async downloadResume(submissionId: string, filename: string) {
     const token = getToken()
     const response = await fetch(`${API_URL}/api/admin/submissions/${submissionId}/resume`, {

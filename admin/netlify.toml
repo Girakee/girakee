@@ -1,3 +1,4 @@
+# Deploy note: rebuild after admin UI changes (2026-09-19)
 [build]
   command = "npm run build"
   publish = "dist"
