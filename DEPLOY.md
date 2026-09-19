@@ -6,8 +6,8 @@ Split deployment:
 
 | App | Host | Git path | URL |
 |-----|------|----------|-----|
-| **Website** | Netlify site #1 | repo root | `https://www.girakee.com` |
-| **Admin** | Netlify site #2 | `admin/` base directory | `https://girakeeadmin.netlify.app` or custom domain |
+| **Website** | Netlify (repo root) | repo root | `https://www.girakee.com` |
+| **Admin** | Same Netlify site | `/admin/` path | `https://www.girakee.com/admin/` |
 | **API** | VM **`200.234.39.88`** | `server/` on VPS | `http://200.234.39.88/girakee-api/` |
 
 ---
