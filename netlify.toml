@@ -1,4 +1,4 @@
-# Deploy note: rebuild after form/API changes (2026-09-19)
+# Deploy note: website + admin at /admin/ (2026-09-19)
 [build]
   command = "npm run build"
   publish = "dist"
@@ -13,6 +13,17 @@
   to = "http://200.234.39.88/girakee-api/:splat"
   status = 200
   force = true
+
+# Admin SPA — must come before the public site catch-all.
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
 
 [[redirects]]
   from = "/web-mobile-development"

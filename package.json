@@ -11,9 +11,10 @@
     "dev": "vite",
     "dev:server": "npm run dev -w girakee-server",
     "dev:admin": "npm run dev -w girakee-admin",
-    "build": "npm run generate:sitemap && tsc && vite build",
+    "build": "node scripts/build-production.mjs",
+    "build:site": "npm run generate:sitemap && tsc && vite build",
     "build:admin": "npm run build -w girakee-admin",
-    "build:all": "npm run build && npm run build:admin",
+    "build:all": "npm run build",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview"
   },

@@ -18,8 +18,8 @@ girakee/
 
 | App | Local dev | Production |
 |-----|-----------|------------|
-| Website | `npm run dev` → :5173 | Netlify (repo root) |
-| Admin | `npm run dev:admin` → :5174 | Netlify (`admin/` base directory) |
+| Website | `npm run dev` → :5173 | Netlify (repo root) → `/` |
+| Admin | `npm run dev:admin` → :5174 **`/admin/`** | Same Netlify site → **`/admin/`** |
 | API | `npm run dev:server` → :8787 | VPS `200.234.39.88` via PM2 |
 
 ## Quick start
@@ -45,9 +45,14 @@ Default admin login (change in `server/.env`):
 
 ## Deploy from one GitHub repo
 
-Both Netlify sites use **the same repository** (`Girakee/girakee`), branch `main`:
+**One Netlify site** serves both the public website and admin panel:
 
-### 1. Public website (Netlify site #1)
+| URL | App |
+|-----|-----|
+| `https://yoursite.netlify.app/` | Public website |
+| `https://yoursite.netlify.app/admin/` | Admin login & dashboard |
+
+### Netlify build settings (single site)
 
 | Setting | Value |
 |---------|-------|
@@ -55,24 +60,13 @@ Both Netlify sites use **the same repository** (`Girakee/girakee`), branch `main
 | Build command | `npm run build` |
 | Publish directory | `dist` |
 
-Uses root `netlify.toml`. Leave `VITE_API_URL` empty (proxies `/api/*` to the VPS).
+Uses root `netlify.toml`. The build outputs admin to `dist/admin/`. Leave `VITE_API_URL` empty on both apps (same-origin `/api/*` proxy to VPS).
 
-### 2. Admin panel (Netlify site #2)
+After deploy, open **`https://YOUR-SITE.netlify.app/admin/`** to sign in.
 
-| Setting | Value |
-|---------|-------|
-| Base directory | **`admin`** |
-| Build command | `npm run build` |
-| Publish directory | **`dist`** (relative to `admin/`) |
+### Optional: separate admin Netlify site
 
-Uses `admin/netlify.toml`. Leave `VITE_API_URL` empty.
-
-If admin was previously connected to a **separate repo**, reconnect it:
-
-1. Netlify → your admin site → **Site configuration → Build & deploy → Continuous deployment**
-2. **Link repository** → choose `Girakee/girakee`
-3. Set **Base directory** to `admin` (important)
-4. **Clear cache and deploy site**
+You can still deploy `admin/` as a second Netlify site (base directory `admin`) if you prefer a subdomain like `admin.girakee.com`. See [DEPLOY.md](./DEPLOY.md).
 
 ### 3. API (VPS)
 
