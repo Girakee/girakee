@@ -325,7 +325,11 @@ router.post('/submissions/:id/resend-emails', requireAdmin, async (req, res) => 
     )
     .run(result.adminSent ? 1 : 0, result.adminSent ? 1 : 0, result.candidateSent ? 1 : 0, req.params.id)
 
-  return res.json({ ok: true, ...result })
+  return res.json({
+    ok: true,
+    adminEmailSent: result.adminSent,
+    candidateEmailSent: result.candidateSent,
+  })
 })
 
 router.delete('/submissions/:id', requireAdmin, (req, res) => {
